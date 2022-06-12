@@ -2,12 +2,16 @@
 
 const { Schema, model } = require('mongoose');
 
-const userSchema = Schema({
+
+
+const userSchema = mongoose.Schema({
     firstName: {
-        type: String
+        type: String,
+        required: true
     },
     lastName: {
-        type: String
+        type: String,
+        required: true
     },
     nickName: {
         type: String,
@@ -62,6 +66,9 @@ const userSchema = Schema({
     status: {
         type: Boolean,
         default: true
+    },
+    wallet: {
+        type: String
     }
 });
 
