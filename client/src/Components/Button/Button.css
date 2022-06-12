@@ -1,0 +1,13 @@
+.UI-button {
+    all: initial;
+    background: #266FB6;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-family: inherit;
+}
+
+.UI-button:hover {
+    background: #3977b5;
+    cursor: pointer;
+}
