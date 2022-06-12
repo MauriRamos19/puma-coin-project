@@ -1,7 +1,12 @@
-import React from 'react'
+import { Outlet } from 'react-router-dom';
+import './App.css';
+import Header from './Layouts/Header/Header';
 
-export const App = () => {
-  return (
-    <div>App</div>
-  )
+function App() {
+	return (
+		<div className="App">
+			<Header />
+			<Outlet />
+		</div>
+	);
 }
