@@ -5,6 +5,7 @@
     border-radius: 8px;
     padding: 10px 18px;
     font-family: inherit;
+    text-align: center;
 }
 
 .UI-button:hover {
