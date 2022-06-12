@@ -1,4 +1,7 @@
-const { default: mongoose, model } = require("mongoose");
+
+
+const { Schema, model } = require('mongoose');
+
 
 
 const userSchema = mongoose.Schema({
@@ -14,46 +17,42 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    gender : {
-        type: String,
-        required: true,
-        enum: ['Male', 'Female']
-    },
     email: {
         type: String,
-        unique: true,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true
     },
-    firstAddress: {
+    sex: {
         type: String,
-        required: true
-    },
-    secondAdress: {
-        type: String,
-    },
-    city: {
-        type: String,
-        required: true
-    },
-    country: {
-        type: String,
-        required: true
-    },
-    postalCode: {
-        type: String,
-        required: true
-    },
-    department: {
-        type: String,
-        required: true
+        enum: ["male", "female"]
     },
     phone: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    address2: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    country: {
+        type: String
+    },
+    department: {
+        type: String
+    },
+    zipCode: {
+        type: String
+    },
+    wallet: {
         type: String,
-        required: true
     },
     img: {
         type: String
@@ -69,8 +68,7 @@ const userSchema = mongoose.Schema({
         default: true
     },
     wallet: {
-        type: String,
-        required: true
+        type: String
     }
 });
 
@@ -82,4 +80,4 @@ userSchema.methods.toJSON = function() {
 }
 
 
-module.exports = model( 'User', userSchema );
+module.exports = model('User', userSchema);

@@ -1,14 +1,7 @@
 const { response } = require("express");
-const User = require("../models/user");
-const bcrypt = require('bcryptjs');
+const User = require('../models/user');
 
 
-
-const getUsers = async(req, res=response) => {
-    res.json({
-        msg: 'Hello World!'
-    })
-}
 
 const getUser = async(req, res=response) => {
     
@@ -29,22 +22,6 @@ const getUser = async(req, res=response) => {
 
 }
 
-const postUser = async(req, res=response) => {
-    
-    const { password, img, rol, status, ...body} = req.body;
-
-    const user = new User(body);
-
-    var salt = bcrypt.genSaltSync(10);
-    user.password = bcrypt.hashSync(password, salt);
-    
-
-    await user.save();
-
-    res.status(201).json({  user });
-
-
-}
 
 
 const putUser = async(req, res=response) => {
@@ -68,10 +45,7 @@ const deleteUser = async(req, res=response) => {
     res.status(201).json({  user });
 }
 
+
 module.exports = {
-    getUsers,
-    getUser,
-    postUser,
-    putUser,
-    deleteUser
+    getUser
 }
