@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import './Register.css'
 import Button from '../../Components/Button/Button'
 import InputContainer from '../../Components/InputContainer/InputContainer'
 import AuthBlueSquare from '../../Layouts/AuthBlueSquare/AuthBlueSquare'
-import './Register.css'
 import { register as registerService } from '../../services/auth'
+import { registerForm as initialDataForm } from '../../Utils/initialData'
 
 const Register = (props) => {
 
-    const [form, setForm] = useState({
-        email: '',
-        nickName: '',
-        password: '',
-        password2: ''
-    });
+    const [form, setForm] = useState(initialDataForm);
 
     const onSubmitHandler = ((evt) => {
         evt.preventDefault();
         console.log(form)
         registerService(form)
+        console.log('asd')
     })
 
     const onChangeHanlder = (evt) => {
