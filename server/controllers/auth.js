@@ -108,13 +108,17 @@ const register = async(req, res) => {
 
         const salt = bcrypt.genSaltSync(10);
         user.password = bcrypt.hashSync(password, salt);
+
+        const token = await generateJWT(user.id);
         
         await user.save();
 
+        
 
         res.json({
             ok: true,
-            user
+            user,
+            token
         });
     } catch (error) {
         res.status(500).json({

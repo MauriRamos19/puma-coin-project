@@ -6,10 +6,10 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = Schema({
     firstName: {
-        type: String,
+        type: String
     },
     lastName: {
-        type: String,
+        type: String
     },
     nickName: {
         type: String,
