@@ -9,6 +9,7 @@ import Login from './Pages/Login/Login';
 import Trade from './Pages/Trade/Trade';
 import Support from './Pages/Support/Support';
 import Home from './Pages/Home/Home';
+import FinishRegister from './Pages/FinishRegister/FinishRegister';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,6 +23,7 @@ root.render(
 				</Route>
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="finish-register" element={<FinishRegister />} />
 			</Routes>
 		</Router>
 	</React.StrictMode>
