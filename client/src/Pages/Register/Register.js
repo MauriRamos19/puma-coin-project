@@ -4,19 +4,21 @@ import Button from '../../Components/Button/Button'
 import InputContainer from '../../Components/InputContainer/InputContainer'
 import AuthBlueSquare from '../../Layouts/AuthBlueSquare/AuthBlueSquare'
 import './Register.css'
+import { register as registerService } from '../../services/auth'
 
 const Register = (props) => {
 
     const [form, setForm] = useState({
         email: '',
-        username: '',
+        nickName: '',
         password: '',
-        confirmPassword: ''
+        password2: ''
     });
 
     const onSubmitHandler = ((evt) => {
         evt.preventDefault();
-        
+        console.log(form)
+        registerService(form)
     })
 
     const onChangeHanlder = (evt) => {
@@ -48,12 +50,12 @@ const Register = (props) => {
                             onChange={onChangeHanlder} />
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='username'>Username</label>
+                        <label htmlFor='nickName'>Nickname</label>
                         <input 
                             type='text' 
-                            name='username' 
-                            id='username' 
-                            value={form.username}
+                            name='nickName' 
+                            id='nickName' 
+                            value={form.nickName}
                             onChange={onChangeHanlder} />
                     </InputContainer>
                     <InputContainer>
@@ -66,12 +68,12 @@ const Register = (props) => {
                             onChange={onChangeHanlder} />
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='confirmPassword'>Confirm Password</label>
+                        <label htmlFor='password2'>Confirm Password</label>
                         <input 
                             type='password' 
-                            name='confirmPassword' 
-                            id='confirmPassword' 
-                            value={form.confirmPassword}
+                            name='password2' 
+                            id='password2' 
+                            value={form.password2}
                             onChange={onChangeHanlder} />
                     </InputContainer>
                     <Button type='submit'>Register!</Button>
