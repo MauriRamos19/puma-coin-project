@@ -35,7 +35,7 @@
 }
 
 .Register__header a {
-    color: #266FB6;
+    color: #266fb6;
 }
 
 .Register__form {
@@ -45,7 +45,11 @@
     display: flex;
     flex-flow: column;
     gap: 2rem;
-} 
+}
+
+.Register__form .error-field {
+    color: #cc0f35;
+}
 
 @media screen and (max-width: 700px) {
     .Register > :nth-child(2) {
