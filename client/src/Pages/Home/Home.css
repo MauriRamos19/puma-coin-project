@@ -1,0 +1,159 @@
+.Home {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.Home > div {
+    flex: 1 1 50%;
+}
+
+.Home > :nth-child(1) {
+    min-width: 400px;
+    overflow: auto;
+}
+
+.Home > :nth-child(2) {
+    flex-basis: 40%;
+    max-width: 550px;
+}
+
+.Home__first_column_wrapper {
+    display: flex;
+    flex-flow: column;
+    padding: 50px;
+
+    gap: 2rem;
+
+    position: relative;
+}
+
+.Home__first_column_wrapper_size{
+    font-size: 23px;
+}
+
+.Home__title_column_size{
+    font-size: 25px;
+}
+
+.Home__box_title {
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+
+    position: relative;
+}
+
+.Home__first_column_button{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    margin-top: 40px;
+}
+
+.Home__first_column_buttonP{
+    justify-content: center;
+    font-size: 25px;
+    line-height: 35px;
+    text-align: center;
+    width: 230px;
+    height: 34px;
+}
+
+  .myDIV {
+    width: 357px;
+    height: 393px;
+    background-color: white;
+    color: black;
+    animation: mymove 5s infinite;
+  }
+  
+  @keyframes mymove {
+    0% {box-shadow: 2px 4px 6px #174571;}
+    50% {box-shadow: 10px 20px 30px #174571;}
+    100% {box-shadow: 2px 4px 6px #174571;}
+  }
+
+.Home__column_wrapper {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    position: relative;
+}
+
+.Home__header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.Home__target {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    position: relative;
+
+}
+
+.Home__header a {
+    color: #266FB6;
+}
+
+.Home__form {
+    width: 100%;
+    max-width: 680px;
+    padding: 0 clamp(20px, 10%, 100px);
+    display: flex;
+    flex-flow: column;
+    gap: 2rem;
+} 
+
+@media screen and (max-width: 700px) {
+    .Home > :nth-child(2) {
+        display: none;
+    }
+}
+
+
+
+.InputContainerA {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 0.5rem;
+}
+
+.InputContainer > div {
+    display: flex;
+    gap: 1rem;
+}
+
+.InputContainerCoin input {
+    width: 70%;
+    padding: 10px 10px;
+    font-size: 1.1rem;
+    background: #eeeeee;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-flow: row;
+}
+
+.InputShort input {
+    display: flex;
+    flex-flow: column;
+    width: 30%;
+    font-size: 1.1rem;
+    background: #eeeeee;
+    border: none;
+    border-radius: 8px;
+}
+
