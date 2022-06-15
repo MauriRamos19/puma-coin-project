@@ -10,7 +10,7 @@ const Home = (props) => {
 			<div className="Home__first_column_wrapper">
 				<div className="Home__title_column_size">
 					<h1>
-						Bitcoin confiable y seguro!
+						Crypto confiable y seguro!
 					</h1>
 				</div>
 				<div className="Home__first_column_wrapper_size">
