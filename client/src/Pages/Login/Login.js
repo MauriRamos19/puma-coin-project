@@ -35,7 +35,7 @@ const Login = (props) => {
       <div className="Login__form_wrapper">
         <div className="Login__header">
           <p>
-            New Here? <Link to="/register">Sign up!</Link>
+            New Here? <Link to="/register">Register!</Link>
           </p>
         </div>
         <h1>Login</h1>

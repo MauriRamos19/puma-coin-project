@@ -2,20 +2,17 @@
     width: 100%;
     height: 100vh;
     display: flex;
+    padding: 0px 40px;
 }
 
 .Home > div {
     flex: 1 1 50%;
+    align-items: center;
 }
 
 .Home > :nth-child(1) {
     min-width: 400px;
     overflow: auto;
-}
-
-.Home > :nth-child(2) {
-    flex-basis: 40%;
-    max-width: 550px;
 }
 
 .Home__first_column_wrapper {
@@ -28,12 +25,14 @@
     position: relative;
 }
 
-.Home__first_column_wrapper_size{
+.Home__first_column_wrapper_size {
     font-size: 23px;
+    font-weight: 300;
 }
 
-.Home__title_column_size{
+.Home__title_column_size {
     font-size: 25px;
+    width: 100%;
 }
 
 .Home__box_title {
@@ -44,7 +43,7 @@
     position: relative;
 }
 
-.Home__first_column_button{
+.Home__first_column_button {
     display: flex;
     flex-flow: column;
     justify-content: center;
@@ -53,7 +52,7 @@
     margin-top: 40px;
 }
 
-.Home__first_column_buttonP{
+.Home__first_column_buttonP {
     justify-content: center;
     font-size: 25px;
     line-height: 35px;
@@ -62,19 +61,26 @@
     height: 34px;
 }
 
-  .myDIV {
+.myDIV {
     width: 357px;
     height: 393px;
     background-color: white;
     color: black;
+    border-radius: 8px;
     animation: mymove 5s infinite;
-  }
-  
-  @keyframes mymove {
-    0% {box-shadow: 2px 4px 6px #174571;}
-    50% {box-shadow: 10px 20px 30px #174571;}
-    100% {box-shadow: 2px 4px 6px #174571;}
-  }
+}
+
+@keyframes mymove {
+    0% {
+        box-shadow: 2px 4px 6px #174571;
+    }
+    50% {
+        box-shadow: 10px 20px 30px #174571;
+    }
+    100% {
+        box-shadow: 2px 4px 6px #174571;
+    }
+}
 
 .Home__column_wrapper {
     display: flex;
@@ -100,11 +106,10 @@
     gap: 2rem;
 
     position: relative;
-
 }
 
 .Home__header a {
-    color: #266FB6;
+    color: #266fb6;
 }
 
 .Home__form {
@@ -114,15 +119,18 @@
     display: flex;
     flex-flow: column;
     gap: 2rem;
-} 
+}
+
+.Home__form__input {
+    gap: 10px;
+    align-items: center;
+}
 
 @media screen and (max-width: 700px) {
     .Home > :nth-child(2) {
         display: none;
     }
 }
-
-
 
 .InputContainerA {
     width: 100%;
@@ -156,4 +164,3 @@
     border: none;
     border-radius: 8px;
 }
-
