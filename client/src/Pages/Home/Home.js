@@ -21,7 +21,7 @@ const Home = (props) => {
 				</div>
 				<div className="Home__first_column_wrapper_size">
 					<p>
-						Primera plataforma en Honduras facil y segura para realizar
+						Primera plataforma en Honduras fácil y segura para realizar
 						transacciones, vender y comprar productos en tus tiendas de
 						conveniencia
 					</p>
