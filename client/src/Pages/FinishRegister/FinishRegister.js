@@ -96,26 +96,28 @@ const FinishRegister = (props) => {
                         </InputWithLabel>
 
                         <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="City">
-                                <input
-                                    type="text"
-                                    name="city"
-                                    placeholder="wirte your city" />
-                            </InputWithLabel>
                             <InputWithLabel label="Country">
                                 <input
                                     type="text"
                                     name="country"
                                     placeholder="wirte your country" />
                             </InputWithLabel>
-                        </WrapperDirection>
-                        
-                        <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Department">
                                 <input
                                     type="text"
                                     name="department"
                                     placeholder="wirte your department" />
+                            </InputWithLabel>
+                            
+                            
+                        </WrapperDirection>
+                        
+                        <WrapperDirection direction="horizontal">
+                            <InputWithLabel label="City">
+                                <input
+                                    type="text"
+                                    name="city"
+                                    placeholder="wirte your city" />
                             </InputWithLabel>
                             <InputWithLabel label="Zip Code">
                                 <input

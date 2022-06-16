@@ -5,6 +5,23 @@ import Button from '../../Components/Button/Button'
 import './Header.css'
 
 const Header = (props) => {
+
+    const isLoggedIn = () => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        window.location.reload();
+    }
+
+
+
     return (
         <div className='Header'>
             <Link 
@@ -22,23 +39,34 @@ const Header = (props) => {
                         <li><Link to='/support'>Support</Link></li>
                     </ul>
                 </nav>
-                <div className='Header__account'>
-                    <Link
-                        to='/login'
-                        className='Header__account__login'
-                    >
-                        Login
-                    </Link>
-                    <Link
-                        to='/register'
-                        className='Header__account__register'
-                    >
-                        <Button>
-                            Register
-
+                
+                {isLoggedIn() ?
+                    <div className='Header__account'>
+                        <Link to='/'/>
+                        <Button onClick={logout}>
+                            Logout
                         </Button>
-                    </Link>
-                </div>
+                    </div>
+                    :
+                    <div className='Header__account'>
+                        <Link
+                            to='/login'
+                            className='Header__account__login'
+                        >
+                            Login
+                        </Link>
+                        <Link
+                            to='/register'
+                            className='Header__account__register'
+                        >
+                            <Button>
+                                Register
+
+                            </Button>
+                        </Link>
+                    </div>
+                }           
+                
             </div>
         </div>
     )
