@@ -23,7 +23,7 @@ const Home = (props) => {
 					<p>
 						Primera plataforma en Honduras fácil y segura para realizar
 						transacciones, vender y comprar productos en tus tiendas de
-						conveniencia
+						conveniencia.
 					</p>
 				</div>
 				<div className="Home__first_column_button">
