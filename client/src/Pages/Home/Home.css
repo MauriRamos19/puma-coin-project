@@ -3,6 +3,7 @@
     height: 100vh;
     display: flex;
     padding: 0px 40px;
+    overflow: hidden;
 }
 
 .Home > div {
@@ -163,4 +164,37 @@
     background: #eeeeee;
     border: none;
     border-radius: 8px;
+}
+
+.Home__image {
+    display: flex;
+    position: fixed;
+    align-items: center;
+}
+
+.Home__img_coin {
+    position: fixed;
+    display: flex;
+    width: auto;
+    height: 202px;
+    top: 13%;
+    left: 84%;
+}
+
+.Home__img_logoIS {
+    position: fixed;
+    display: flex;
+    width: auto;
+    height: 272px;
+    top: 78%;
+    left: 64%;
+}
+
+.Home__img_card {
+    position: fixed;
+    display: flex;
+    width: auto;
+    height: 250px;
+    top: 66%;
+    left: -10%;
 }
