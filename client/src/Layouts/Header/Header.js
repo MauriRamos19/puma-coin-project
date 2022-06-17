@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
 import './Header.css'
 
 const Header = (props) => {
+
+    const navigate = useNavigate();
 
     const isLoggedIn = () => {
         const token = localStorage.getItem('token')
@@ -17,7 +19,8 @@ const Header = (props) => {
 
     const logout = () => {
         localStorage.removeItem('token');
-        window.location.reload();
+        // window.location.reload();
+        navigate('/')
     }
 
 
@@ -42,8 +45,9 @@ const Header = (props) => {
                 
                 {isLoggedIn() ?
                     <div className='Header__account'>
-                        <Link to='/'/>
-                        <Button onClick={logout}>
+                        <Button 
+                            className='Header__account__logout'
+                            onClick={logout}>
                             Logout
                         </Button>
                     </div>
