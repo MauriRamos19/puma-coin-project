@@ -57,3 +57,12 @@
     align-items: center;
     gap: 1rem;
 }
+
+.Header__account .Header__account__logout {
+    background: #feecf0;
+    color: #f14668 ;
+}
+
+.Header__account__logout:hover {
+    background: #fddce3;
+}
