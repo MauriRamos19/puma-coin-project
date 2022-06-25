@@ -7,10 +7,10 @@ const register = async (user) => {
         const response = await axios.post(uri + '/auth/register', user);
         return response.data;
 
-    } catch ({ response: { data: { ok, err } } }) {
-        
+    } catch ({ response: { data: { errors } } }) {
+
         return {
-            error: err.message
+            error: errors[0].msg
         };
 
     }
