@@ -2,7 +2,7 @@ const express = require('express');
 var cors = require('cors')
 const { dbConnection } = require('../database/config')
 
-
+var cookieParser = require('cookie-parser')
 class Server {
 
     constructor() {
@@ -10,7 +10,8 @@ class Server {
         this.port = process.env.PORT
         this.paths = {
             users: "/api/users",
-            auth: "/api/auth"
+            auth: "/api/auth",
+            passwordReset: "/api/password-reset"
         }
 
         this.dbConnect();
@@ -27,11 +28,13 @@ class Server {
     middlewares () {
         this.app.use(cors());
         this.app.use( express.json() )
+        this.app.use(cookieParser());
     }
 
     routes = () => {
         this.app.use(this.paths.users,require('../routes/users'));
         this.app.use(this.paths.auth,require('../routes/auth'));
+        this.app.use(this.paths.passwordReset,require('../routes/passwordReset'));
     }
 
     listen () {

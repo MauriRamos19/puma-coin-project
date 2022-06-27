@@ -5,8 +5,10 @@ const { generateJWT } = require("../helpers/generateJWT");
 const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
 
+const mongoose = require('mongoose');
+const { request, response } = require('express');
 
-const login = async(req, res) => {
+const login = async(req=request, res=response) => {
     const { email, password } = req.body;
 
     try {
@@ -46,11 +48,21 @@ const login = async(req, res) => {
 
         const token = await generateJWT(userDB.id);
 
-        res.json({
-            ok: true,
+        const userId = mongoose.Types.ObjectId(userDB.id);
+
+    
+
+         return res
+        .cookie("access_token", token, {
+            httpOnly: true,
+            sameSite: 'strict',
+        })
+        .status(200)
+        .json({ 
             user: userDB,
             token
         });
+
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -130,6 +142,10 @@ const register = async(req, res) => {
 }
 
 
+const logout = (req, res=response) => {
+    res.clearCookie("access_token").status(200).json({ message: "ok" });
+}
+
 const renewToken = async(req, res) => {
     const userId = req.user.id;
     const token = await generateJWT(userId);
@@ -141,8 +157,11 @@ const renewToken = async(req, res) => {
 
 
 
+
+
 module.exports = {
     login,
     register,
-    renewToken
+    renewToken,
+    logout
 }
