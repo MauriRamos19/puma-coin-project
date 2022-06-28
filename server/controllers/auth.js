@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const User  = require('../models/user');
 const { generateJWT } = require("../helpers/generateJWT");
+const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
 
 
@@ -60,7 +61,7 @@ const login = async(req, res) => {
 }
 
 const register = async(req, res) => {
-    const { nickName, email, password } = req.body;
+    const { nickName, email, password, password2 } = req.body;
 
     try {
         const userDB = await User.findOne({ email });
@@ -74,18 +75,50 @@ const register = async(req, res) => {
                 }
             });
         }
+        
+        if(password.length < 6) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'password must be at least 6 characters'
+                }
+            });
+        }
+        
+        if(isValidEmail(email) === false) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'email is not valid'
+                }
+            });
+        }
+
+        if(isValidPassword(password, password2) === false) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'password must be equal to confirm password'
+                }
+            });
+        }
+        
 
         const user = new User({ nickName, email, password });
 
         const salt = bcrypt.genSaltSync(10);
         user.password = bcrypt.hashSync(password, salt);
+
+        const token = await generateJWT(user.id);
         
         await user.save();
 
+        
 
         res.json({
             ok: true,
-            user
+            user,
+            token
         });
     } catch (error) {
         res.status(500).json({
@@ -110,5 +143,6 @@ const renewToken = async(req, res) => {
 
 module.exports = {
     login,
-    register
+    register,
+    renewToken
 }

@@ -4,14 +4,12 @@ const { Schema, model } = require('mongoose');
 
 
 
-const userSchema = mongoose.Schema({
+const userSchema = Schema({
     firstName: {
-        type: String,
-        required: true
+        type: String
     },
     lastName: {
-        type: String,
-        required: true
+        type: String
     },
     nickName: {
         type: String,
