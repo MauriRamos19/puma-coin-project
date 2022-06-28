@@ -26,7 +26,7 @@ const AppRouter = () => {
                     <Route path="/support" element={<Support />} />
                 </Route>
                 <Route path="/register" element={<Register dispatchModal={dispatchModal}/>} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login dispatchModal={dispatchModal}/>} />
                 <Route path="finish-register" element={<FinishRegister />} />
             </Routes>
             <ModalManagment {...modal} dispatchModal={dispatchModal} />

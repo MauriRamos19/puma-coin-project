@@ -45,7 +45,11 @@
     display: flex;
     flex-flow: column;
     gap: 2rem;
-} 
+}
+
+.Change__password {
+    color: #266FB6;
+}
 
 @media screen and (max-width: 700px) {
     .Login > :nth-child(2) {

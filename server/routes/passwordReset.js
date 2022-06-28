@@ -17,13 +17,13 @@ router.post("/", async (req, res=response) => {
         const token = req.cookies.access_token
 
      
-        if(!token) {
+        /* if(!token) {
             const accessToken = await generateJWT(user.id)
             token = await new Token({
                 userId: user.id,
                 token: accessToken,
             }).save();
-        }
+        } */
 
         
         const link = `${process.env.BASE_URL}/password-reset/${user.id}/${token.token}`;
