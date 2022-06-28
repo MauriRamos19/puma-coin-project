@@ -11,7 +11,7 @@ import Message from '../../Components/Message/Message'
 import LoaderEllipsis from '../../Components/Loaders/Ellipsis/LoaderEllipsis'
 
 
-const Register = (props) => {
+const Register = ({ dispatchModal }) => {
 
     const [form, setForm] = useState(initialDataForm)
     const [message, setMessage] = useState({ active: false });
@@ -41,7 +41,9 @@ const Register = (props) => {
         }
 
         localStorage.setItem("token", token);
-        navigate('/finish-register');
+        navigate('/');
+
+        dispatchModal({ type: "completeRegister" });
     })
 
     const onChangeHanlder = (evt) => {
