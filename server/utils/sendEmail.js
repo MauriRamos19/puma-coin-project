@@ -1,20 +1,25 @@
 const nodemailer = require('nodemailer');
 
 
+
 const sendEmail = async (email, subject, text) => {
     const transporter = nodemailer.createTransport({
-        host: 'puma-coin@protonmail.com',
-        port: 465,
-        secure : true,
-        service: 'protonmail',
+        host: "smtp-mail.outlook.com",
+        secureConnection: false,
+        port: 587,
+        tls: {
+            ciphers:'SSLv3'
+        },
         auth: {
-            user: 'puma-coin@protonmail.com',
-            pass: 'Pr0t0nm41l_Ms3v41'
+            user: "pumacoin1847@outlook.com",
+            pass: "Pum4c01nms3v41",
         }
-    });
+    }
+    
+    );
 
     const mailOptions = {
-        from: 'puma-coin@protonmail.com',
+        from: 'pumacoin1847@outlook.com',
         to: email,
         subject: subject,
         text: text
@@ -27,8 +32,9 @@ const sendEmail = async (email, subject, text) => {
             console.log('Email sent: ' + info.response);
         }
     });
-
 }
+
+
 
 
 module.exports = { 
