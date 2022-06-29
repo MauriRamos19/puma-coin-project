@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -10,9 +11,9 @@ import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection
 import './FinishRegister.css'
 
 const sexOptions = [
-    { id: "m", value: "Male" },
-    { id: "f", value: "Female" },
-    { id: "o", value: "Other" }
+    { id: "m", value: "Masculino" },
+    { id: "f", value: "Femenino" },
+    { id: "o", value: "Otro" }
 ]
 
 const departmentsOptions = [
@@ -40,97 +41,21 @@ const FinishRegister = (props) => {
         <div className="FinishRegister">
             <form className="FinishRegister__form">
                 <div className="FinishRegister__header">
-                    <h1>Almost There!</h1>
-                    <p>we need a little more info about yourself just to protect your account.</p>
-                </div>
-                <div className="FinishRegister__photo">
-                    <InputFileWithPreview
-                        name="profilePhoto"
-                        alt="profilePhoto"
-                        imagePlaceHolder={imagePlaceHolder}
-                    />
-                </div>
-                <div className="FinishRegister__inputs">
-                    <WrapperDirection direction="vertical">
-                        <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="First Name">
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    placeholder="Write your first name" />
-                            </InputWithLabel>
-                            <InputWithLabel label="Last Name">
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    placeholder="Write your last name" />
-                            </InputWithLabel>
-                        </WrapperDirection>
+                    <h1>Tipo de Cuenta</h1>
+                    <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
 
-                        <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="Sex">
-                                <Select
-                                    options={sexOptions}
-                                    name="sex" />
-                            </InputWithLabel>
-                            <InputWithLabel label="Phone">
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    placeholder="Write your phone" />
-                            </InputWithLabel>
-                        </WrapperDirection>
-
-                        <InputWithLabel label="Address 1">
-                            <input
-                                type="text"
-                                name="address1"
-                                placeholder="Write your address 1" />
-                        </InputWithLabel>
-
-                        <InputWithLabel label="Address 2">
-                            <input
-                                type="text"
-                                name="address2"
-                                placeholder="Write your address 2" />
-                        </InputWithLabel>
-
-                        <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="Country">
-                                <input
-                                    type="text"
-                                    name="country"
-                                    placeholder="wirte your country" />
-                            </InputWithLabel>
-                            <InputWithLabel label="Department">
-                                <input
-                                    type="text"
-                                    name="department"
-                                    placeholder="wirte your department" />
-                            </InputWithLabel>
-                            
-                            
-                        </WrapperDirection>
-                        
-                        <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="City">
-                                <input
-                                    type="text"
-                                    name="city"
-                                    placeholder="wirte your city" />
-                            </InputWithLabel>
-                            <InputWithLabel label="Zip Code">
-                                <input
-                                    type="text"
-                                    name="zipCode"
-                                    placeholder="wirte your zip Code" />
-                            </InputWithLabel>
-                        </WrapperDirection>
-                    </WrapperDirection>
+                    <Link
+                    to='finish-register-persona'
+                    className='Header__account__register'
+                    >
+                    <Button>
+                        Persona
+                    </Button>
+                </Link>
                 </div>
-                <div className="FinishRegister__submit-button">
-                    <Button type="submit">Finish!</Button>
-                </div>
+                
+                
+                
             </form>
         </div>
     )
