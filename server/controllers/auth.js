@@ -21,7 +21,7 @@ const login = async(req=request, res=response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'email/password incorrect'
+                    message: 'Correo/contraseña incorrectas'
                 }
             });
         }
@@ -32,7 +32,7 @@ const login = async(req=request, res=response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'password incorrect'
+                    message: 'La contraseña es incorrecta'
                 }
             });
         }
@@ -42,7 +42,7 @@ const login = async(req=request, res=response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'user is not active'
+                    message: 'El usuario no esta activo, por favor verifique su correo'
                 }
             });
         }
@@ -52,13 +52,14 @@ const login = async(req=request, res=response) => {
         const userId = mongoose.Types.ObjectId(userDB.id);
 
          return res
-        .cookie("access_token", token, {
-            maxAge: 60*60*100,
-            httpOnly: true,
-            sameSite: 'strict',
-        })
+        //  .cookie("access_token", token, {
+        //     maxAge: 60*60*100,
+        //     httpOnly: true,
+        //     sameSite: 'strict',
+        // })
         .status(200)
-        .json({ 
+        .json({
+            ok: true,
             user: userDB,
             token
         });
@@ -73,7 +74,7 @@ const login = async(req=request, res=response) => {
 }
 
 const register = async(req, res) => {
-    const { nickName, email, password, password2 } = req.body;
+    const { email, password, password2 } = req.body;
 
     try {
         const userDB = await User.findOne({ email });
@@ -83,7 +84,7 @@ const register = async(req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'user already exists'
+                    message: 'El usuario ya existe'
                 }
             });
         }
@@ -92,7 +93,7 @@ const register = async(req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'password must be at least 6 characters'
+                    message: 'La contraseña debe tener al menos 6 caracteres'
                 }
             });
         }
@@ -101,7 +102,7 @@ const register = async(req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'email is not valid'
+                    message: 'El correo no es valido'
                 }
             });
         }
@@ -110,20 +111,20 @@ const register = async(req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'password must be equal to confirm password'
+                    message: 'Las contraseñas no coinciden'
                 }
             });
         }
         
 
-        const user = new User({ nickName, email, password });
+        const user = new User({ email, password });
 
         const salt = bcrypt.genSaltSync(10);
         user.password = bcrypt.hashSync(password, salt);
 
         const token = await generateJWT(user.id);
 
-        const link = `${process.env.BASE_URL}/finish-register/`;
+        const link = `${process.env.BASE_URL}/finish-register?id=${user.id}`;
         await sendEmail(user.email, "Welcome to the app", link);
         
         await user.save();
@@ -160,7 +161,7 @@ const forgotPassword = async(req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'email not found'
+                    message: 'El correo no existe'
                 }
             });
         }
@@ -168,7 +169,7 @@ const forgotPassword = async(req, res) => {
         const token = await generateJWT(userDB.id);
 
         
-        const link = `${process.env.BASE_URL}/password-reset/${userDB.id}/${token}`;
+        const link = `${process.env.BASE_URL}/password-reset?id=${userDB.id}&token=${token}`;
         await sendEmail(userDB.email, "Password reset", link);
 
         res.cookie("access_token", token, {
@@ -177,8 +178,82 @@ const forgotPassword = async(req, res) => {
             sameSite: 'strict',
         }).status(200).json({
             ok: true,
-            message: "email sent"
+            message: "Email enviado"
         });
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            err: error
+        });
+    }
+}
+
+
+const finishRegister = async(req, res) => {
+    const { id, userType } = req.query;
+    const body = req.body;
+    try {
+        const userDB = await User.findById(id);
+
+        if (!userDB) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'El usuario no existe'
+                }
+            });
+        }
+        
+
+
+        if(userType === 'company') {
+            
+            const { address2, img, wallet, ...rest } = body;
+
+            for(const param in rest) {
+                if(rest[param] === '') {
+                    res.status(400).json({
+                        msg: 'Los campos no pueden estar vacios'
+                    })
+                }
+            }
+
+            const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
+           
+            await user.save()
+
+            return res.status(200).json({
+                ok: true,
+                user: userDB
+            });
+            
+        } else if(userType === 'natural') {
+            
+            const { address2, img, wallet, ...rest } = body;
+
+
+     
+            for(const param in rest) {
+                if(rest[param] === '') {
+                    res.status(400).json({
+                        msg: 'Los campos no pueden estar vacios'
+                    })
+                }
+            }
+
+            const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
+           
+            await user.save()
+
+            return res.status(200).json({
+                ok: true,
+                user: userDB
+            });
+
+        }
+
+        
+    
     } catch (error) {
         res.status(500).json({
             ok: false,
@@ -196,13 +271,13 @@ const resetPassword = async (req, res=response) => {
         const user = await User.findById(id);
        
         if (!user)
-            return res.status(400).send("user with given id doesn't exist");
+            return res.status(400).send("Usuario no encontrado");
 
         const tokenCookie = req.cookies.access_token;
        
         
         if(!(token == tokenCookie) && (token == null)) {
-            return res.status(400).send("invalid token");
+            return res.status(400).send("Token no valido");
             
         }
 
@@ -210,7 +285,7 @@ const resetPassword = async (req, res=response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'password must be equal to confirm password'
+                    message: 'Las contraseñas no coinciden'
                 }
             });
             
@@ -222,7 +297,7 @@ const resetPassword = async (req, res=response) => {
         await user.save(); 
         res.status(200).json({
             ok: true,
-            message: "password changed"
+            message: "Contraseña actualizada"
         });
      
     } catch(error) {
@@ -254,5 +329,6 @@ module.exports = {
     renewToken,
     logout,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    finishRegister
 }
