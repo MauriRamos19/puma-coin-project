@@ -157,7 +157,7 @@ const register = async(req, res) => {
 
 const forgotPassword = async(req, res) => {
     const { email } = req.body;
-
+    //console.log(email,"12345");
     try {
         const userDB = await User.findOne({ email });
 

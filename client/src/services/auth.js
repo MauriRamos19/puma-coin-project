@@ -43,11 +43,45 @@ const logoutUser = async () => {
         return {
             error: err.message
 
-        };  
+        };
+    }
+}
+
+const sendEmail = async (email) => {
+
+    //console.log(email);
+    try {
+
+        const response = await axios.post(uri + '/auth/sendEmail', {email});
+        return response.data;
+
+    } catch (error) {
+
+        console.log(error);
+        return {
+            error: "Aqui hay problemas"
+        };
 
     }
 }
 
-
-
 export { register, login, logoutUser };
+const resetPassword = async (id, token, password, password2) => {
+
+    console.log(uri + `/auth/${id}/${token}`);
+    try {
+
+        const response = await axios.put("http://localhost:8899/api" + `/password-reset/${id}/${token}`, {password, password2});
+        return response.data;
+
+    } catch (error) {
+
+        console.log(error);
+        return {
+            error: "Aqui hay problemas"
+        };
+
+    }
+}
+
+export { register, login, sendEmail, resetPassword };
