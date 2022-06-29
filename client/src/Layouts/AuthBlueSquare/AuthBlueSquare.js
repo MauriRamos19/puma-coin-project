@@ -18,9 +18,9 @@ const AuthBlueSquare = (props) => {
                     <h2 className='AuthBlueSquare__logo__name'>PumaCoin</h2>
                 </Link>
                 <div className='AuthBlueSquare__advertising'>
-                    <p>First ones in <span className='Honduras'>Honduras</span></p>
-                    <p>First ones in <span className='Pocket'>Pocket</span></p>
-                    <p>First ones in <span className='Heart'>Heart</span></p>
+                    <p>Primeros en <span className='Honduras'>Honduras</span></p>
+                    <p>Primeros en tu <span className='Pocket'>Billetera</span></p>
+                    <p>Primeros en tu <span className='Heart'>Corazón</span></p>
                 </div>
             </div>
         </div>

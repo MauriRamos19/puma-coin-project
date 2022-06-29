@@ -60,11 +60,11 @@ const Register = ({ dispatchModal }) => {
 
                 <div className='Register__header'>
                     <p>
-                        Have an account? <Link to='/login'>Login!</Link>
+                        ¿Ya tienes cuenta? <Link to='/login'>¡Inicia sesión!</Link>
                     </p>
                 </div>
 
-                <h1>Register</h1>
+                <h1>Registro</h1>
 
                 <form className='Register__form' onSubmit={onSubmitHandler}>
 
@@ -75,7 +75,7 @@ const Register = ({ dispatchModal }) => {
                     }
 
                     <InputContainer>
-                        <label htmlFor='email'>Email</label>
+                        <label htmlFor='email'>Correo</label>
                         <input
                             type='email'
                             name='email'
@@ -86,7 +86,7 @@ const Register = ({ dispatchModal }) => {
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='password'>Password</label>
+                        <label htmlFor='password'>Contraseña</label>
                         <input
                             type='password'
                             name='password'
@@ -97,7 +97,7 @@ const Register = ({ dispatchModal }) => {
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='password2'>Confirm Password</label>
+                        <label htmlFor='password2'>Confirmar Contraseña</label>
                         <input
                             type='password'
                             name='password2'
@@ -107,7 +107,7 @@ const Register = ({ dispatchModal }) => {
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
-                    <Button type='submit'>Register!</Button>
+                    <Button type='submit'>¡Registrarse!</Button>
                 </form>
             </div>
             <AuthBlueSquare />

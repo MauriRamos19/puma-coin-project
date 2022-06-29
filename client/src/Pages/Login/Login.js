@@ -58,10 +58,10 @@ const Login = (props) => {
 			<div className="Login__form_wrapper">
 				<div className="Login__header">
 					<p>
-						New Here? <Link to="/register">Register!</Link>
+						¿Eres nuevo aquí? <Link to="/register">¡Regístrate!</Link>
 					</p>
 				</div>
-				<h1>Login</h1>
+				<h1>Iniciar Sesión</h1>
 				<form className="Login__form" onSubmit={onSubmitHandler}>
 
 					{message.active &&
@@ -71,7 +71,7 @@ const Login = (props) => {
 					}
 
 					<InputContainer>
-						<label htmlFor="email">Email</label>
+						<label htmlFor="email">Correo</label>
 						<input
 							type="email"
 							name="email"
@@ -81,7 +81,7 @@ const Login = (props) => {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password">Contraseña</label>
 						<input
 							type="password"
 							name="password"
@@ -90,7 +90,7 @@ const Login = (props) => {
 							onChange={onChangeHanlder}
 						/>
 					</InputContainer>
-					<Button type="submit">Login!</Button>
+					<Button type="submit">¡Ingresar!</Button>
 				</form>
 			</div>
 			<AuthBlueSquare />

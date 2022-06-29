@@ -10,9 +10,9 @@ import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection
 import './FinishRegister.css'
 
 const sexOptions = [
-    { id: "m", value: "Male" },
-    { id: "f", value: "Female" },
-    { id: "o", value: "Other" }
+    { id: "m", value: "Masculino" },
+    { id: "f", value: "Femenino" },
+    { id: "o", value: "Otro" }
 ]
 
 const departmentsOptions = [
@@ -40,8 +40,8 @@ const FinishRegister = (props) => {
         <div className="FinishRegister">
             <form className="FinishRegister__form">
                 <div className="FinishRegister__header">
-                    <h1>Almost There!</h1>
-                    <p>we need a little more info about yourself just to protect your account.</p>
+                    <h1>¡Ya casi finalizamos!</h1>
+                    <p>Necesitamos tu información para tú seguridad, así podrás adquirir tus PUMA</p>
                 </div>
                 <div className="FinishRegister__photo">
                     <InputFileWithPreview
@@ -53,83 +53,83 @@ const FinishRegister = (props) => {
                 <div className="FinishRegister__inputs">
                     <WrapperDirection direction="vertical">
                         <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="First Name">
+                            <InputWithLabel label="Nombre">
                                 <input
                                     type="text"
                                     name="firstName"
-                                    placeholder="Write your first name" />
+                                    placeholder="Escribe tu nombre" />
                             </InputWithLabel>
-                            <InputWithLabel label="Last Name">
+                            <InputWithLabel label="Apellido">
                                 <input
                                     type="text"
                                     name="lastName"
-                                    placeholder="Write your last name" />
+                                    placeholder="Escribe tus apellidos" />
                             </InputWithLabel>
                         </WrapperDirection>
 
                         <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="Sex">
+                            <InputWithLabel label="Sexo">
                                 <Select
                                     options={sexOptions}
                                     name="sex" />
                             </InputWithLabel>
-                            <InputWithLabel label="Phone">
+                            <InputWithLabel label="Teléfono">
                                 <input
                                     type="text"
                                     name="phone"
-                                    placeholder="Write your phone" />
+                                    placeholder="Escribe tu teléfono" />
                             </InputWithLabel>
                         </WrapperDirection>
 
-                        <InputWithLabel label="Address 1">
+                        <InputWithLabel label="Dirección Principal">
                             <input
                                 type="text"
                                 name="address1"
-                                placeholder="Write your address 1" />
+                                placeholder="Escribe tu dirección principal" />
                         </InputWithLabel>
 
-                        <InputWithLabel label="Address 2">
+                        <InputWithLabel label="Dirección 2">
                             <input
                                 type="text"
                                 name="address2"
-                                placeholder="Write your address 2" />
+                                placeholder="Escribe tu dirección, casa, lote, ave." />
                         </InputWithLabel>
 
                         <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="Country">
+                            <InputWithLabel label="País">
                                 <input
                                     type="text"
                                     name="country"
-                                    placeholder="wirte your country" />
+                                    placeholder="Escribe tu país" />
                             </InputWithLabel>
-                            <InputWithLabel label="Department">
+                            <InputWithLabel label="Departamento">
                                 <input
                                     type="text"
                                     name="department"
-                                    placeholder="wirte your department" />
+                                    placeholder="Escribe tu Departamento" />
                             </InputWithLabel>
                             
                             
                         </WrapperDirection>
                         
                         <WrapperDirection direction="horizontal">
-                            <InputWithLabel label="City">
+                            <InputWithLabel label="Ciudad">
                                 <input
                                     type="text"
                                     name="city"
-                                    placeholder="wirte your city" />
+                                    placeholder="Escribe tu ciudad" />
                             </InputWithLabel>
-                            <InputWithLabel label="Zip Code">
+                            <InputWithLabel label="Código Postal">
                                 <input
                                     type="text"
                                     name="zipCode"
-                                    placeholder="wirte your zip Code" />
+                                    placeholder="Ingresa el código postal" />
                             </InputWithLabel>
                         </WrapperDirection>
                     </WrapperDirection>
                 </div>
                 <div className="FinishRegister__submit-button">
-                    <Button type="submit">Finish!</Button>
+                    <Button type="submit">¡Finalizar!</Button>
                 </div>
             </form>
         </div>

@@ -16,7 +16,7 @@ const Home = (props) => {
 
 				<div className="Home__title_column_size">
 					<h1>
-						Crypto confiable y seguro!
+						¡Crypto confiable y seguro!
 					</h1>
 				</div>
 				<div className="Home__first_column_wrapper_size">
@@ -50,7 +50,7 @@ const Home = (props) => {
 							<InputWithLabel label="Recibes">
 								<WrapperDirection className="Home__form__input">
 									<input type="text" name="getClient" id="getClient" />
-									<span>Puma</span>
+									<span>PUMA</span>
 								</WrapperDirection>
 							</InputWithLabel>
 

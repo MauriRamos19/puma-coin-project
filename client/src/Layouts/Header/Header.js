@@ -37,9 +37,9 @@ const Header = (props) => {
             <div className='Header__navigation__wrapper'>
                 <nav className='Header__navigation'>
                     <ul>
-                        <li><Link to='/'>Home</Link></li>
-                        <li><Link to='/trade'>Trade</Link></li>
-                        <li><Link to='/support'>Support</Link></li>
+                        <li><Link to='/'>Inicio</Link></li>
+                        <li><Link to='/trade'>Cambiar</Link></li>
+                        <li><Link to='/support'>Soporte</Link></li>
                     </ul>
                 </nav>
                 
@@ -48,7 +48,7 @@ const Header = (props) => {
                         <Button 
                             className='Header__account__logout'
                             onClick={logout}>
-                            Logout
+                            Cerrar Sesión
                         </Button>
                     </div>
                     :
@@ -57,14 +57,14 @@ const Header = (props) => {
                             to='/login'
                             className='Header__account__login'
                         >
-                            Login
+                            Iniciar Sesión
                         </Link>
                         <Link
                             to='/register'
                             className='Header__account__register'
                         >
                             <Button>
-                                Register
+                                Registro
 
                             </Button>
                         </Link>
