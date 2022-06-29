@@ -41,7 +41,7 @@ const Register = (props) => {
         }
 
         localStorage.setItem("token", token);
-        navigate('/finish-register');
+        navigate('/');
     })
 
     const onChangeHanlder = (evt) => {
@@ -81,17 +81,6 @@ const Register = (props) => {
                             name='email'
                             id='email'
                             value={form.email.value}
-                            onChange={onChangeHanlder}
-                            required />
-                        <span className='error-field'>{form.email.errorMsg}</span>
-                    </InputContainer>
-                    <InputContainer>
-                        <label htmlFor='nickName'>Nickname</label>
-                        <input
-                            type='text'
-                            name='nickName'
-                            id='nickName'
-                            value={form.nickName.value}
                             onChange={onChangeHanlder}
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
