@@ -11,6 +11,7 @@ import FinishRegister from '../Pages/FinishRegister/FinishRegister';
 import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
+import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
 
 
 const AppRouter = () => {
@@ -31,7 +32,7 @@ const AppRouter = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/finish-register" element={<FinishRegister />} />
                 <Route path="/finish-register-persona" element={<FinishRegisterPersona />} />
-                <Route path="/finish-register-company" element={<FinishRegister />} />
+                <Route path="/finish-register-company" element={<FinishRegisterCompany />} />
             </Routes>
             <ModalManagment {...modal} dispatchModal={dispatchModal} />
         </Router>

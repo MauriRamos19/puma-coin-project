@@ -9,6 +9,7 @@ import InputWithLabel from '../../Components/InputWithLabel/InputWithLabel'
 import Select from '../../Components/Select/Select'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
 import './FinishRegister.css'
+import moneda from '../../Assets/images/moneda.png'
 
 const sexOptions = [
     { id: "m", value: "Masculino" },
@@ -39,21 +40,54 @@ const departmentsOptions = [
 const FinishRegister = (props) => {
     return (
         <div className="FinishRegister">
-            <form className="FinishRegister__form">
+            <div className="FinishRegister__form">
                 <div className="FinishRegister__header">
-                    <h1>Tipo de Cuenta</h1>
-                    <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
+                <div className="Home__first_column_wrapper">
 
-                    <Link
-                        to='/finish-register-persona'
-                        className='Header__account__register'
-                    >
-                        <Button>
-                            Persona
-                        </Button>
-                    </Link>
-                </div>
-            </form>
+                    <div className="FinishRegister__image">
+						<img className='FinishRegister__img_coin' src={moneda} />
+					</div>
+                    
+				<div className="myDIVRegister">
+					<div className="FinishRegister__box_title">
+						<h1>Tipo de Cuenta</h1> 
+                        <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>                                            
+					</div>                    
+					<div>
+						<div className="FinishRegister__form">
+                            <WrapperDirection direction="vertical">
+                                <WrapperDirection direction="horizontal">   
+                                    <Link
+                                        to='/finish-register-persona'
+                                        className='Header__account__register'
+                                    >
+                                        <Button>
+                                            Personal
+                                        </Button>
+
+                                    </Link>
+                                </WrapperDirection> 
+                            </WrapperDirection> 
+							
+                            <WrapperDirection direction="vertical">
+                                <WrapperDirection direction="horizontal">   
+                                    <Link
+                                        to='/finish-register-Company'
+                                        className='Header__account__register'
+                                    >
+                                        <Button>
+                                            Empresarial 
+                                        </Button>
+                                    </Link>
+                                </WrapperDirection>
+                        </WrapperDirection> 
+							
+						</div>
+					</div>
+				</div>
+			</div> 
+            </div>
+            </div>
         </div>
     )
 }

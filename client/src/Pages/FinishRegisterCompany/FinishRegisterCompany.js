@@ -7,7 +7,7 @@ import InputFileWithPreview from '../../Components/InputFileWithPreview/InputFil
 import InputWithLabel from '../../Components/InputWithLabel/InputWithLabel'
 import Select from '../../Components/Select/Select'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
-import './FinishRegister.css'
+import './FinishRegisterCompany.css'
 
 const sexOptions = [
     { id: "m", value: "Masculino" },
@@ -35,7 +35,7 @@ const departmentsOptions = [
     { id: "Yoro", value: "Yoro" },
 ]
 
-const FinishRegister = (props) => {
+const FinishRegisterCompany = (props) => {
     return (
         <div className="FinishRegister">
             <form className="FinishRegister__form">
@@ -131,4 +131,4 @@ const FinishRegister = (props) => {
     )
 }
 
-export default FinishRegister
+export default FinishRegisterCompany
