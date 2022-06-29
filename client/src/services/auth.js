@@ -65,7 +65,6 @@ const sendEmail = async (email) => {
     }
 }
 
-export { register, login, logoutUser };
 const resetPassword = async (id, token, password, password2) => {
 
     console.log(uri + `/auth/${id}/${token}`);
@@ -84,4 +83,4 @@ const resetPassword = async (id, token, password, password2) => {
     }
 }
 
-export { register, login, sendEmail, resetPassword };
+export { register, login, sendEmail, resetPassword, logoutUser };

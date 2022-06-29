@@ -42,6 +42,8 @@ const Register = ({ dispatchModal }) => {
 
         localStorage.setItem("token", token);
         navigate('/');
+
+        dispatchModal({ type: "completeRegister" });
     })
 
     const onChangeHanlder = (evt) => {
@@ -60,7 +62,7 @@ const Register = ({ dispatchModal }) => {
 
                 <div className='Register__header'>
                     <p>
-                        ¿Ya tienes cuenta? <Link to='/login'>¡Inicia sesión!</Link>
+                        ¿Ya tienes una cuenta? <Link to='/login'>Iniciar sesión</Link>
                     </p>
                 </div>
 
@@ -75,23 +77,12 @@ const Register = ({ dispatchModal }) => {
                     }
 
                     <InputContainer>
-                        <label htmlFor='email'>Correo</label>
+                        <label htmlFor='email'>Correo Electrónico</label>
                         <input
                             type='email'
                             name='email'
                             id='email'
                             value={form.email.value}
-                            onChange={onChangeHanlder}
-                            required />
-                        <span className='error-field'>{form.email.errorMsg}</span>
-                    </InputContainer>
-                    <InputContainer>
-                        <label htmlFor='nickName'>Nombre de Usuario</label>
-                        <input
-                            type='text'
-                            name='nickName'
-                            id='nickName'
-                            value={form.nickName.value}
                             onChange={onChangeHanlder}
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
@@ -108,7 +99,7 @@ const Register = ({ dispatchModal }) => {
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='password2'>Confirmar Contraseña</label>
+                        <label htmlFor='password2'>Confirmar de contraseña</label>
                         <input
                             type='password'
                             name='password2'
@@ -118,7 +109,7 @@ const Register = ({ dispatchModal }) => {
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
-                    <Button type='submit'>¡Registrarse!</Button>
+                    <Button type='submit'>Registrate</Button>
                 </form>
             </div>
             <AuthBlueSquare />
