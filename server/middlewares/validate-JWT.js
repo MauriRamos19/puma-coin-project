@@ -1,9 +1,10 @@
+const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const validateJWT = async(req, res, next) => {
+const validateJWT = async(req, res=response, next) => {
 
-    const token = req.headers['x-token'];
+    const token = req.cookies.access_token;
     
     if(!token) {
         
