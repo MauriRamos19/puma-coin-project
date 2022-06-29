@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -45,17 +45,14 @@ const FinishRegister = (props) => {
                     <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
 
                     <Link
-                    to='finish-register-persona'
-                    className='Header__account__register'
+                        to='/finish-register-persona'
+                        className='Header__account__register'
                     >
-                    <Button>
-                        Persona
-                    </Button>
-                </Link>
+                        <Button>
+                            Persona
+                        </Button>
+                    </Link>
                 </div>
-                
-                
-                
             </form>
         </div>
     )

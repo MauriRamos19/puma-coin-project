@@ -36,7 +36,6 @@ const departmentsOptions = [
 ]
 
 const FinishRegisterPersona = (props) => {
-    console.log(16)
     return (
         <div className="FinishRegister">
             <form className="FinishRegister__form">
@@ -109,10 +108,10 @@ const FinishRegisterPersona = (props) => {
                                     name="departamento"
                                     placeholder="Escriba su Departamento" />
                             </InputWithLabel>
-                            
-                            
+
+
                         </WrapperDirection>
-                        
+
                         <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Ciudad">
                                 <input

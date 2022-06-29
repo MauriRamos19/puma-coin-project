@@ -12,6 +12,7 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 
+
 const AppRouter = () => {
 
     const [modal, dispatchModal] = useReducer(modalReducer, {
@@ -26,12 +27,11 @@ const AppRouter = () => {
                     <Route path="/trade" element={<Trade />} />
                     <Route path="/support" element={<Support />} />
                 </Route>
-                <Route path="/register" element={<Register dispatchModal={dispatchModal}/>} />
+                <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/finish-register" element={<FinishRegister />} >
-                    <Route path="finish-register-persona" element={<strong >/> </strong>} />
-                    <Route path="finish-register-Company" element={<FinishRegister />} />
-                </Route>
+                <Route path="/finish-register" element={<FinishRegister />} />
+                <Route path="/finish-register-persona" element={<FinishRegisterPersona />} />
+                <Route path="/finish-register-company" element={<FinishRegister />} />
             </Routes>
             <ModalManagment {...modal} dispatchModal={dispatchModal} />
         </Router>
