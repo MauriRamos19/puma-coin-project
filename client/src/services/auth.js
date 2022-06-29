@@ -31,4 +31,23 @@ const login = async (user) => {
     }
 }
 
-export { register, login };
+
+const logoutUser = async () => {
+    try {
+        
+        const response = await axios.get(uri + '/auth/logout');
+        return response.data;
+
+    } catch ({ response: { data: { ok, err } } }) {
+        
+        return {
+            error: err.message
+
+        };  
+
+    }
+}
+
+
+
+export { register, login, logoutUser };
