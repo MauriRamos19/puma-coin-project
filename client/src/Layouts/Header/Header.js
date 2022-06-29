@@ -2,14 +2,25 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
+import { logoutUser } from '../../services/auth'
+import { useCookies, withCookies } from 'react-cookie';
+import Cookies from 'universal-cookie'
 import './Header.css'
+
+
+
 
 const Header = (props) => {
 
     const navigate = useNavigate();
+    
+    const { cookies } = props
+  
 
     const isLoggedIn = () => {
-        const token = localStorage.getItem('token')
+       
+        const token = cookies.get('access_token')
+
         if (token) {
             return true
         } else {
@@ -17,13 +28,14 @@ const Header = (props) => {
         }
     }
 
+
+    
+
     const logout = () => {
-        localStorage.removeItem('token');
-        // window.location.reload();
-        navigate('/')
+            cookies.remove('access_token')
+            // window.location.reload();
+          
     }
-
-
 
     return (
         <div className='Header'>
@@ -76,4 +88,5 @@ const Header = (props) => {
     )
 }
 
-export default Header
+export default withCookies(Header)
+

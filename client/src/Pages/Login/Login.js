@@ -7,11 +7,18 @@ import "./Login.css";
 import { login as loginService } from "../../services/auth";
 import Message from "../../Components/Message/Message";
 
+
+import { withCookies, Cookies } from 'react-cookie';
+
+
 const Login = (props) => {
 
 	const [message, setMessage] = useState({ active: false });
 	const navigate = useNavigate();
 
+	const {  cookies } = props
+
+	
 	const [form, setForm] = useState({
 		email: "",
 		password: "",
@@ -21,7 +28,7 @@ const Login = (props) => {
 
 		evt.preventDefault();
 
-		const { token, error } = await loginService(form);;
+		const { token, error } = await loginService(form);
 
 		if (error || !token) {
 
@@ -34,7 +41,17 @@ const Login = (props) => {
 			return;
 		}
 
-		localStorage.setItem("token", token);
+		const options = {
+			domain: 'localhost',
+			path: '/',
+			maxAge: 1,
+			HttpOnly: true,
+			secure:true,
+			sameSite: 'strict'
+			
+		}
+
+		cookies.set('access_token', token, options);
 		navigate('/');
 	})
 
@@ -96,6 +113,9 @@ const Login = (props) => {
 			<AuthBlueSquare />
 		</div>
 	);
+
 };
 
-export default Login;
+
+
+export default withCookies(Login);
