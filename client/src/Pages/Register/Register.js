@@ -88,17 +88,6 @@ const Register = ({ dispatchModal }) => {
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
                     <InputContainer>
-                        <label htmlFor='nickName'>Nickname</label>
-                        <input
-                            type='text'
-                            name='nickName'
-                            id='nickName'
-                            value={form.nickName.value}
-                            onChange={onChangeHanlder}
-                            required />
-                        <span className='error-field'>{form.email.errorMsg}</span>
-                    </InputContainer>
-                    <InputContainer>
                         <label htmlFor='password'>Password</label>
                         <input
                             type='password'
