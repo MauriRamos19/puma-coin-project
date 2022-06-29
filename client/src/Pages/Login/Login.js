@@ -7,10 +7,13 @@ import "./Login.css";
 import { login as loginService } from "../../services/auth";
 import { sendEmail } from "../../services/auth";
 import Message from "../../Components/Message/Message";
+import { withCookies, Cookies } from "react-cookie";
 
-const Login = ({ dispatchModal }) => {
+const Login = ({ withCookies, cookies, dispatchModal }) => {
   const [message, setMessage] = useState({ active: false });
   const navigate = useNavigate();
+
+  //const Login = (props) => {
 
   const [form, setForm] = useState({
     email: "",
@@ -32,6 +35,19 @@ const Login = ({ dispatchModal }) => {
       return;
     }
 
+    //const { token, error } = await loginService(form);
+
+    const options = {
+      domain: "localhost",
+      path: "/",
+      maxAge: 1,
+      HttpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    };
+
+    cookies.set("access_token", token, options);
+    //navigate('/');
     localStorage.setItem("token", token);
     navigate("/");
   };
@@ -52,11 +68,25 @@ const Login = ({ dispatchModal }) => {
 
   const onSubmitTest = (evt) => {
     //evt.preventDefault()
-    sendEmail(evt.currentTarget.email.value).then(response=>{console.log(response)});
-    //evt.setState({ showModal: false});
+    sendEmail(evt.currentTarget.email.value).then((response) => {
+      console.log(response);
+    });
     navigate("/");
-    
   };
+  
+  /* const options = {
+			domain: 'localhost',
+			path: '/',
+			maxAge: 1,
+			HttpOnly: true,
+			secure:true,
+			sameSite: 'strict'
+			
+		}
+
+		cookies.set('access_token', token, options);
+		navigate('/');
+	}) */
 
   const openModal = (evt) => {
     dispatchModal({
@@ -125,4 +155,5 @@ const Login = ({ dispatchModal }) => {
   );
 };
 
-export default Login;
+//export default Login;
+export default withCookies(Login);

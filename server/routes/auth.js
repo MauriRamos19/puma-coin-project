@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { login, register, renewToken, logout, forgotPassword } = require("../controllers/auth");
+const { login, register, renewToken, logout, forgotPassword, finishRegister } = require("../controllers/auth");
 const { check } = require('express-validator');
 const { isValidPassword, existEmail } = require("../helpers/db-validators");
 const { validateFields} = require("../middlewares/validate-fields");
@@ -10,7 +10,7 @@ const router =  Router();
 
 router.post('/login',[
     check('email', 'Email is required').isEmail(),
-    check('password', 'Password is required').not().isEmpty(),
+    check('password', 'La contraseña es obligatoria').not().isEmpty(),
     validateFields
 ], login);
 
@@ -21,7 +21,6 @@ router.post('/sendEmail',[
 ],forgotPassword);
 
 router.post('/register',[
-    check('nickName', 'El nombre es obligatorio').not().isEmpty(),
     check('email', 'El correo es obligatorio').isEmail(),
     check('password','La contraseña es obligatoria').not().isEmpty(),
     check('password','La contraseña debe tener al menos 6 caracteres').isLength({min:6}),
@@ -31,24 +30,9 @@ router.post('/register',[
 ],register);
 
 
+router.put('/finish-register',finishRegister);
 
-// router.get('/logout',[
-//     authorization
-// ], logout);
-
-
-// router.get('/',[authorization], (req, res) => {
-//     const token = req.cookies.access_token;
-
-//     if(!token) {
-//         return res.sendStatus(403);
-//     }
-
-//     return res.json({
-//         token
-//     })
-// });
-
+// router.get('/logout',validateJWT,logout);
 
 
 

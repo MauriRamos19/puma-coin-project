@@ -31,6 +31,21 @@ const login = async (user) => {
     }
 }
 
+const logoutUser = async () => {
+    try {
+        
+        const response = await axios.get(uri + '/auth/logout');
+        return response.data;
+
+    } catch ({ response: { data: { ok, err } } }) {
+        
+        return {
+            error: err.message
+
+        };  
+    }
+}
+
 const sendEmail = async (email) => {
 
     //console.log(email);
@@ -67,4 +82,6 @@ const resetPassword = async (id, token, password, password2) => {
     }
 }
 
-export { register, login, sendEmail, resetPassword };
+export { register, login, logoutUser, sendEmail, resetPassword };
+
+//export { register, login, logoutUser };

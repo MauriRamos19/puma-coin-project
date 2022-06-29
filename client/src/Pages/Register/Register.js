@@ -87,17 +87,19 @@ const Register = ({ dispatchModal }) => {
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
-                    <InputContainer>
+
+                    {/* <InputContainer>
                         <label htmlFor='nickName'>Nombre de Usuario</label>
                         <input
                             type='text'
-                            name='nickName'
+                            name='nickName' 
                             id='nickName'
                             value={form.nickName.value}
                             onChange={onChangeHanlder}
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
-                    </InputContainer>
+                    </InputContainer> */}
+
                     <InputContainer>
                         <label htmlFor='password'>Contraseña</label>
                         <input

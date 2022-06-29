@@ -1,6 +1,7 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
-const sendEmail = async (email, subject, text) => {
+
+const sendEmail = async (user, subject, html) => {
     const transporter = nodemailer.createTransport({
         host: "smtp-mail.outlook.com",
         secureConnection: false,
@@ -17,12 +18,12 @@ const sendEmail = async (email, subject, text) => {
     );
 
     const mailOptions = {
-        from: 'pumacoin1847@outlook.com',
-        to: email,
+        from: 'Puma Anonimo <pumacoin1847@outlook.com>',
+        to: user.email,
         subject: subject,
-        text: text
+        html: html
     };
-
+    
     transporter.sendMail(mailOptions,  (error, info) => {
         if (error) {
             console.log(error);

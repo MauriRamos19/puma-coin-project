@@ -1,5 +1,3 @@
-import InputContainer from "../Components/InputContainer/InputContainer";
-import Button from "../Components/Button/Button";
 import "./modal.css";
 
 //const
