@@ -11,10 +11,10 @@ const userSchema = Schema({
     lastName: {
         type: String
     },
-    nickName: {
+    /* nickName: {
         type: String,
         required: true
-    },
+    }, */
     email: {
         type: String,
         required: true,
