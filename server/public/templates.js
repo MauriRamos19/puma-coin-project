@@ -63,6 +63,13 @@ const templatePasswordReset = (email,link) => `<div style="
             </tr>
             <tr>
                 <td>
+                    <p style="color: #424242; margin: 10px 0 40px 0;">
+                        <b>Si no has sido tu, puedes ignorar este correo.</b>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <table>
                         <tbody>
                             <tr>
