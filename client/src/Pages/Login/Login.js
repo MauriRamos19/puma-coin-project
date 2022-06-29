@@ -5,6 +5,7 @@ import InputContainer from "../../Components/InputContainer/InputContainer";
 import AuthBlueSquare from "../../Layouts/AuthBlueSquare/AuthBlueSquare";
 import "./Login.css";
 import { login as loginService } from "../../services/auth";
+import { sendEmail } from "../../services/auth";
 import Message from "../../Components/Message/Message";
 
 const Login = ({ dispatchModal }) => {
@@ -33,8 +34,6 @@ const Login = ({ dispatchModal }) => {
 
     localStorage.setItem("token", token);
     navigate("/");
-
-    dispatchModal({ type: "emailChangePassword" });
   };
 
   const onChangeHanlder = (evt) => {
@@ -49,6 +48,36 @@ const Login = ({ dispatchModal }) => {
     );
 
     setMessage({ active: false });
+  };
+
+  const onSubmitTest = (evt) => {
+    //evt.preventDefault()
+    sendEmail(evt.currentTarget.email.value).then(response=>{console.log(response)});
+    //evt.setState({ showModal: false});
+    navigate("/");
+    
+  };
+
+  const openModal = (evt) => {
+    dispatchModal({
+      type: "emailChangePassword",
+      data: {
+        content: (
+          <form className="Login__form" onSubmit={onSubmitTest}>
+            <InputContainer>
+              <label htmlFor="email"></label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Correo Electrónico"
+              />
+            </InputContainer>
+            <Button type="submit">Enviar</Button>
+          </form>
+        ),
+      },
+    });
   };
 
   return (
@@ -87,14 +116,9 @@ const Login = ({ dispatchModal }) => {
           </InputContainer>
           <Button type="submit">Ingresa</Button>
         </form>
-        {/* {dispatchModal({ type: "completeRegister" })}; */}
-        {/* <div className="Change__password">
-					<p> */}
-        <Link className="Change__password" to="/register">
+        <Link className=" Change__password" to="" onClick={openModal}>
           ¿Has olvidado tu contraseña?
         </Link>
-        {/* </p>
-				</div> */}
       </div>
       <AuthBlueSquare />
     </div>

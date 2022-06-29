@@ -31,4 +31,22 @@ const login = async (user) => {
     }
 }
 
-export { register, login };
+const sendEmail = async (email) => {
+
+    //console.log(email);
+    try {
+
+        const response = await axios.post(uri + '/auth/sendEmail', {email});
+        return response.data;
+
+    } catch (error) {
+
+        console.log(error);
+        return {
+            error: "Aqui hay problemas"
+        };
+
+    }
+}
+
+export { register, login, sendEmail };

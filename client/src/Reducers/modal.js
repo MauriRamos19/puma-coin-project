@@ -1,3 +1,9 @@
+import InputContainer from "../Components/InputContainer/InputContainer";
+import Button from "../Components/Button/Button";
+import "./modal.css";
+
+//const
+
 const modalReducer = function (prev, action) {
   const dynamicCustomData = {
     isActive: true,
@@ -22,7 +28,7 @@ const modalReducer = function (prev, action) {
         type: "info",
         title: "Restablecer contraseña",
         description:
-          "Enviamos un correo a tu direccion de email para finalizar el proceso de registro.",
+          "Enviaremos un correo a tu direccion de email asociada a tu cuenta de usuario. Por favor, ingresa tu correo electronico",
         ...dynamicCustomData,
       };
 
@@ -41,12 +47,3 @@ const modalReducer = function (prev, action) {
 };
 
 export default modalReducer;
-
-{
-  /* <formGroup>
-            <label for = 'email'>
-            "Ingresa el correo electronico asociado a tu cuenta de usuario. Enviaremos un email para que restablezcas tu contraseña."
-            </label>
-             <input type = "text" id ='email'></input>
-        </formGroup> */
-}
