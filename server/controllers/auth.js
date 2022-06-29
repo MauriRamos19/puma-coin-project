@@ -123,7 +123,7 @@ const register = async(req, res) => {
 
         
 
-        const link = `${process.env.BASE_URL}/finish-register?id=${user.id}`;
+        const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
 
         const hmtl=`<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
             <p>Entra al siguiente enlace para completar tu registro:</p>
@@ -173,7 +173,7 @@ const forgotPassword = async(req, res) => {
         const token = await generateJWT(userDB.id);
 
         
-        const link = `${process.env.BASE_URL}/password-reset?id=${userDB.id}&token=${token}`;
+        const link = `${process.env.BASE_URL}/password-reset/${userDB.id}/${token}`;
 
         const html = (templatePasswordReset(email, link));
         await sendEmail(userDB, "Password reset", html);
@@ -247,7 +247,8 @@ const resetPassword = async (req, res=response) => {
         const { password, password2 } = req.body;
         
         const user = await User.findById(id);
-       
+        
+        console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");
 
