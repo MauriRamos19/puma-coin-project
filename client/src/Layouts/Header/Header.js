@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
 import { logoutUser } from '../../services/auth'
@@ -37,15 +37,15 @@ const Header = (props) => {
                 to='/'
                 className='Header__logo'
             >
-                <img className='Header__logo__img' src={logoImg} />
+                <img className='Header__logo__img' src={logoImg} alt="" />
                 <h2 className='Header__logo__name'>PumaCoin</h2>
             </Link>
             <div className='Header__navigation__wrapper'>
                 <nav className='Header__navigation'>
                     <ul>
-                        <li><Link to='/'>Principal</Link></li>
-                        <li><Link to='/trade'>Trade</Link></li>
-                        <li><Link to='/support'>Soporte</Link></li>
+                        <li><NavLink to='/'>Principal</NavLink></li>
+                        <li><NavLink to='/trade'>Trade</NavLink></li>
+                        <li><NavLink to='/support'>Soporte</NavLink></li>
                     </ul>
                 </nav>
                 
