@@ -26,7 +26,9 @@ class Server {
     }
 
     middlewares () {
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: process.env.BASE_URL
+        }));
         this.app.use( express.json() )
         this.app.use(cookieParser());
     }
@@ -38,7 +40,9 @@ class Server {
     }
 
     listen () {
-        this.app.listen(this.port);
+        this.app.listen(this.port, ()=>{
+            console.log("Server up on port: ", this.port)
+        });
     }
 
 }

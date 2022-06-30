@@ -23,7 +23,8 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
   const onSubmitHandler = async (evt) => {
     evt.preventDefault();
 
-    const { token, error } = await loginService(form);
+	const onSubmitHandler = async (evt) => {
+		evt.preventDefault();
 
     if (error || !token) {
       setMessage({
@@ -87,72 +88,138 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		cookies.set('access_token', token, options);
 		navigate('/');
 	}) */
+		const { token, error } = await loginService(form);
 
-  const openModal = (evt) => {
-    dispatchModal({
-      type: "emailChangePassword",
-      data: {
-        content: (
-          <form className="Login__form" onSubmit={onSubmitTest}>
-            <InputContainer>
-              <label htmlFor="email"></label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Correo Electrónico"
-              />
-            </InputContainer>
-            <Button type="submit">Enviar</Button>
-          </form>
-        ),
-      },
-    });
-  };
+		if (error || !token) {
+			setMessage({
+				active: true,
+				type: "error",
+				message: error,
+			});
 
-  return (
-    <div className="Login">
-      <div className="Login__form_wrapper">
-        <div className="Login__header">
-          <p>
-            ¿Eres nuevo? <Link to="/register">¡Registrate Aquí!</Link>
-          </p>
-        </div>
-        <h1>Iniciar sesión</h1>
-        <form className="Login__form" onSubmit={onSubmitHandler}>
-          {message.active && (
-            <Message type={message.type} message={message.message} />
-          )}
+			return;
+		}
 
-          <InputContainer>
-            <label htmlFor="email">Correo Electrónico</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={form.email}
-              onChange={onChangeHanlder}
-            />
-          </InputContainer>
-          <InputContainer>
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={form.password}
-              onChange={onChangeHanlder}
-            />
-          </InputContainer>
-          <Button type="submit">Ingresa</Button>
-        </form>
-        <Link className=" Change__password" to="" onClick={openModal}>
-          ¿Has olvidado tu contraseña?
-        </Link>
-      </div>
-      <AuthBlueSquare />
-    </div>
-  );
+		//const { token, error } = await loginService(form);
+
+		const options = {
+			domain: "localhost",
+			path: "/",
+			maxAge: 1,
+			HttpOnly: true,
+			secure: true,
+			sameSite: "strict",
+		};
+
+		cookies.set("access_token", token, options);
+		//navigate('/');
+		localStorage.setItem("token", token);
+		navigate("/");
+	};
+
+	const onChangeHanlder = (evt) => {
+		setForm((prev) =>
+			Object.assign(
+				{},
+				{
+					...prev,
+					[evt.target.name]: evt.target.value,
+				}
+			)
+		);
+
+		setMessage({ active: false });
+	};
+
+	const onSubmitTest = (evt) => {
+
+		evt.preventDefault()
+
+		const emailToResetPassword = evt.target.email.value;
+		const isEmailSent = sendEmail(emailToResetPassword);
+
+		if (isEmailSent === true) navigate("/");
+	};
+
+	/* const options = {
+			  domain: 'localhost',
+			  path: '/',
+			  maxAge: 1,
+			  HttpOnly: true,
+			  secure:true,
+			  sameSite: 'strict'
+		  	
+		  }
+  
+		  cookies.set('access_token', token, options);
+		  navigate('/');
+	  }) */
+
+	const openModal = (evt) => {
+		dispatchModal({
+			type: "emailChangePassword",
+			data: {
+				content: (
+					<form className="Login__form" onSubmit={onSubmitTest}>
+						<InputContainer>
+							<label htmlFor="email"></label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								placeholder="Correo Electrónico"
+							/>
+						</InputContainer>
+						<Button type="submit">Enviar</Button>
+					</form>
+				),
+			},
+		});
+	};
+
+	return (
+		<div className="Login">
+			<div className="Login__form_wrapper">
+				<div className="Login__header">
+					<p>
+						¿Eres nuevo? <Link to="/register">¡Registrate Aquí!</Link>
+					</p>
+				</div>
+				<h1>Iniciar sesión</h1>
+				<form className="Login__form" onSubmit={onSubmitHandler}>
+					{message.active && (
+						<Message type={message.type} message={message.message} />
+					)}
+
+					<InputContainer>
+						<label htmlFor="email">Correo Electrónico</label>
+						<input
+							type="email"
+							name="email"
+							id="email"
+							value={form.email}
+							onChange={onChangeHanlder}
+						/>
+					</InputContainer>
+					<InputContainer>
+						<label htmlFor="password">Contraseña</label>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							value={form.password}
+							onChange={onChangeHanlder}
+						/>
+					</InputContainer>
+					<Button type="submit">Ingresa</Button>
+				</form>
+				<Link className=" Change__password" to="" onClick={openModal}>
+					¿Has olvidado tu contraseña?
+				</Link>
+			</div>
+			<AuthBlueSquare />
+		</div>
+	);
 };
 
 //export default Login;

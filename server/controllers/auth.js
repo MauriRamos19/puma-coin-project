@@ -1,6 +1,6 @@
 
 const bcrypt = require('bcrypt');
-const User  = require('../models/user');
+const User = require('../models/user');
 const { generateJWT } = require("../helpers/generateJWT");
 const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
@@ -10,14 +10,14 @@ const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
 const templatePasswordReset = require('../public/templates');
 
-const login = async(req=request, res=response) => {
+const login = async (req = request, res = response) => {
     const { email, password } = req.body;
 
     try {
-        
+
 
         const userDB = await User.findOne({ email });
-            
+
         if (!userDB) {
             return res.status(400).json({
                 ok: false,
@@ -39,7 +39,7 @@ const login = async(req=request, res=response) => {
         }
 
 
-        if(!userDB.status) {
+        if (!userDB.status) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -50,15 +50,15 @@ const login = async(req=request, res=response) => {
 
         const token = await generateJWT(userDB.id);
 
-    
 
-         return res
-        .status(200)
-        .json({
-            ok: true,
-            user: userDB,
-            token
-        });
+
+        return res
+            .status(200)
+            .json({
+                ok: true,
+                user: userDB,
+                token
+            });
 
     } catch (error) {
         res.status(500).json({
@@ -66,17 +66,17 @@ const login = async(req=request, res=response) => {
             err: error
         });
     }
-    
+
 }
 
-const register = async(req, res) => {
+const register = async (req, res) => {
     const { email, password, password2 } = req.body;
 
     try {
         const userDB = await User.findOne({ email });
 
 
-        if(userDB) {
+        if (userDB) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -84,8 +84,8 @@ const register = async(req, res) => {
                 }
             });
         }
-        
-        if(password.length < 6) {
+
+        if (password.length < 6) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -93,8 +93,8 @@ const register = async(req, res) => {
                 }
             });
         }
-        
-        if(isValidEmail(email) === false) {
+
+        if (isValidEmail(email) === false) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -103,7 +103,7 @@ const register = async(req, res) => {
             });
         }
 
-        if(isValidPassword(password, password2) === false) {
+        if (isValidPassword(password, password2) === false) {
             return res.status(400).json({
                 ok: false,
                 err: {
@@ -111,7 +111,7 @@ const register = async(req, res) => {
                 }
             });
         }
-        
+
 
         const user = new User({ email, password });
 
@@ -121,19 +121,19 @@ const register = async(req, res) => {
         const token = await generateJWT(user.id);
 
 
-        
+
 
         const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
 
-        const hmtl=`<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
+        const hmtl = `<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
             <p>Entra al siguiente enlace para completar tu registro:</p>
             <a href="${link}">${link}</a>`;
 
         await sendEmail(user, "Bienvenido a Puma Coin", hmtl);
-        
+
         await user.save();
 
-        
+
 
         res.json({
             ok: true,
@@ -146,7 +146,7 @@ const register = async(req, res) => {
             err: error
         });
     }
-    
+
 }
 
 
@@ -155,9 +155,10 @@ const register = async(req, res) => {
 // }
 
 
-const forgotPassword = async(req, res) => {
+const forgotPassword = async (req, res) => {
+
     const { email } = req.body;
-    //console.log(email,"12345");
+
     try {
         const userDB = await User.findOne({ email });
 
@@ -172,23 +173,25 @@ const forgotPassword = async(req, res) => {
 
         const token = await generateJWT(userDB.id);
 
-        
+
         const link = `${process.env.BASE_URL}/password-reset/${userDB.id}/${token}`;
 
         const html = (templatePasswordReset(email, link));
         await sendEmail(userDB, "Password reset", html);
 
         res
-        .cookie("access_token", token, {
-            maxAge: 60*60*100,
-            httpOnly: true,
-            sameSite: 'strict',
-        })
-        .status(200).json({
-            ok: true,
-            message: "Email enviado"
-        });
+            .cookie("access_token", token, {
+                maxAge: 60 * 60 * 100,
+                httpOnly: true,
+                sameSite: 'strict',
+            })
+            .status(200).json({
+                ok: true,
+                message: "Email enviado"
+            });
+
     } catch (error) {
+        
         res.status(500).json({
             ok: false,
             err: error
@@ -197,11 +200,16 @@ const forgotPassword = async(req, res) => {
 }
 
 
-const finishRegister = async(req, res) => {
-    const { id, userType } = req.query;
+const finishRegister = async (req, res) => {
+
+    const { id } = req.params;
     const body = req.body;
+    console.log("FinishRegister: body - ", body)
+    console.log("FinishRegister: id - ", id)
+
     try {
         const userDB = await User.findById(id);
+        console.log("FinishRegister: userDB - ", userDB)
 
         if (!userDB) {
             return res.status(400).json({
@@ -211,18 +219,25 @@ const finishRegister = async(req, res) => {
                 }
             });
         }
-        
+
         const { address2, img, wallet, ...rest } = body;
 
-        for(const param in rest) {
-            if(rest[param] === '') {
-                res.status(400).json({
-                    msg: 'Los campos no pueden estar vacios'
-                })
-            }
+        const emptyFields = (
+            Object.entries(rest)
+                .reduce((emptyfields, [key, value]) => [...emptyfields, !value && key], [])
+                .filter(field => typeof field === 'string')
+        );
+
+        if (emptyFields.length > 0) {
+            res.status(400).json({
+                ok: false,
+                msg: 'Los campos no pueden estar vacios',
+                fields: emptyFields
+            })
         }
 
-        const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
+        const user = await User.findByIdAndUpdate(id, { ...body }, { new: true });
+        console.log("FinishRegister: user - ", user)
 
         await user.save()
 
@@ -231,8 +246,11 @@ const finishRegister = async(req, res) => {
             user: userDB
         });
 
-    
+
     } catch (error) {
+
+        console.error(error);
+
         res.status(500).json({
             ok: false,
             err: error
@@ -241,45 +259,45 @@ const finishRegister = async(req, res) => {
 }
 
 
-const resetPassword = async (req, res=response) => {
+const resetPassword = async (req, res = response) => {
     try {
         const { id, token } = req.params;
         const { password, password2 } = req.body;
-        
+
         const user = await User.findById(id);
-        
+
         console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");
 
         const tokenCookie = req.cookies.access_token;
-       
-        
-        if(!(token == tokenCookie) && (token == null)) {
+
+
+        if (!(token == tokenCookie) && (token == null)) {
             return res.status(400).send("Token no valido");
-            
+
         }
 
-        if(isValidPassword(password, password2) === false) {
+        if (isValidPassword(password, password2) === false) {
             return res.status(400).json({
                 ok: false,
                 err: {
                     message: 'Las contraseñas no coinciden'
                 }
             });
-            
+
         }
-        
+
         const salt = bcrypt.genSaltSync(10);
         user.password = bcrypt.hashSync(password, salt);
 
-        await user.save(); 
+        await user.save();
         res.status(200).json({
             ok: true,
             message: "Contraseña actualizada"
         });
-     
-    } catch(error) {
+
+    } catch (error) {
         res.status(500).json({
             ok: false,
             err: error
@@ -289,7 +307,7 @@ const resetPassword = async (req, res=response) => {
 }
 
 
-const renewToken = async(req, res) => {
+const renewToken = async (req, res) => {
     const userId = req.user.id;
     const token = await generateJWT(userId);
     res.json({
