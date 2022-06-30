@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -69,15 +70,19 @@ const FinishRegisterCompany = (props) => {
         if (isUpdated === true) navigate("/")
     }
 
+    const goBack = () => {
+        navigate(-1);
+    }
+
 
     return (
-        <div className="FinishRegister">
-            <form className="FinishRegister__form" onSubmit={onSubmitForm}>
-                <div className="FinishRegister__header">
-                    <h1>Tipo de Cuenta</h1>
+        <div className="FinishRegisterCompany">
+            <form className="FinishRegisterCompany__form" onSubmit={onSubmitForm}>
+                <div className="FinishRegisterCompany__header">
+                    <h1>Perfil Empresa</h1>
                     <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
                 </div>
-                <div className="FinishRegister__photo">
+                <div className="FinishRegisterCompany__photo">
                     <InputFileWithPreview
                         name="img"
                         alt="img"
@@ -86,7 +91,7 @@ const FinishRegisterCompany = (props) => {
                         value={user.img}
                     />
                 </div>
-                <div className="FinishRegister__inputs">
+                <div className="FinishRegisterCompany__inputs">
                     <WrapperDirection direction="vertical">
                         <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Nombre de la Empresa">
@@ -177,10 +182,16 @@ const FinishRegisterCompany = (props) => {
                         </WrapperDirection>
                     </WrapperDirection>
                 </div>
-                <div className="FinishRegister__submit-button">
+                <div className="FinishRegisterCompany__submit-button">
                     <Button type="submit">Finalizar!</Button>
                 </div>
             </form>
+            <div className="FinishRegisterCompany__back">
+                <button type="button" onClick={goBack}>
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
+                    <span>Retroceder</span>
+                </button>
+            </div>
         </div>
     )
 }

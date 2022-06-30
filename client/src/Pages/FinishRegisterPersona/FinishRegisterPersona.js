@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -56,7 +57,7 @@ const FinishRegisterPersona = (props) => {
         zipCode: '',
         userType: 'natural'
     });
-    
+
     const onChangeHandler = (evt) => {
 
         const propery = evt.target.name;
@@ -79,15 +80,19 @@ const FinishRegisterPersona = (props) => {
             navigate("/")
     }
 
+    const goBack = () => {
+        navigate(-1);
+    }
+
 
     return (
-        <div className="FinishRegister">
-            <form className="FinishRegister__form" onSubmit={onSubmitForm}>
-                <div className="FinishRegister__header">
-                    <h1>Tipo de Cuenta</h1>
+        <div className="FinishRegisterPersona">
+            <form className="FinishRegisterPersona__form" onSubmit={onSubmitForm}>
+                <div className="FinishRegisterPersona__header">
+                    <h1>Perfil Persona Natural</h1>
                     <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
                 </div>
-                <div className="FinishRegister__photo">
+                <div className="FinishRegisterPersona__photo">
                     <InputFileWithPreview
                         name="img"
                         alt="img"
@@ -96,7 +101,7 @@ const FinishRegisterPersona = (props) => {
                         value={user.img}
                     />
                 </div>
-                <div className="FinishRegister__inputs">
+                <div className="FinishRegisterPersona__inputs">
                     <WrapperDirection direction="vertical">
                         <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Primer Nombre">
@@ -194,10 +199,16 @@ const FinishRegisterPersona = (props) => {
                         </WrapperDirection>
                     </WrapperDirection>
                 </div>
-                <div className="FinishRegister__submit-button">
+                <div className="FinishRegisterPersona__submit-button">
                     <Button type="submit">Finalizar!</Button>
                 </div>
             </form>
+            <div className="FinishRegisterPersona__back">
+                <button type="button" onClick={goBack}>
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-left-long" />
+                    <span>Retroceder</span>
+                </button>
+            </div>
         </div>
     )
 }
