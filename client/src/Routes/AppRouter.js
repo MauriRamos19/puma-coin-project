@@ -1,6 +1,9 @@
 import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faUser, faLandmark } from '@fortawesome/free-solid-svg-icons'
+
 import App from '../App';
 import Register from '../Pages/Register/Register';
 import Login from '../Pages/Login/Login';
@@ -13,6 +16,8 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
+
+library.add(faUser, faLandmark)
 
 
 const AppRouter = () => {
@@ -29,8 +34,8 @@ const AppRouter = () => {
                     <Route path="/trade" element={<Trade />} />
                     <Route path="/support" element={<Support />} />
                 </Route>
-                <Route path="/register" element={<Register dispatchModal={dispatchModal}/>} />
-                <Route path="/login" element={<Login dispatchModal={dispatchModal}/>} />
+                <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
+                <Route path="/login" element={<Login dispatchModal={dispatchModal} />} />
                 <Route path="passWord-reset/:userID/:token" element={<PasswordReset />} />
                 <Route path="/finish-register/:userID" element={<FinishRegister />} />
                 <Route path="/finish-register-persona/:userID" element={<FinishRegisterPersona />} />
