@@ -21,26 +21,26 @@ class Server {
         this.routes()
     }
 
-    dbConnect = async() => {
+    dbConnect = async () => {
         await dbConnection()
     }
 
-    middlewares () {
+    middlewares() {
         this.app.use(cors({
             origin: process.env.BASE_URL
         }));
-        this.app.use( express.json() )
+        this.app.use(express.json())
         this.app.use(cookieParser());
     }
 
     routes = () => {
-        this.app.use(this.paths.users,require('../routes/users'));
-        this.app.use(this.paths.auth,require('../routes/auth'));
-        this.app.use(this.paths.passwordReset,require('../routes/passwordReset'));
+        this.app.use(this.paths.users, require('../routes/users'));
+        this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
     }
 
-    listen () {
-        this.app.listen(this.port, ()=>{
+    listen() {
+        this.app.listen(this.port, () => {
             console.log("Server up on port: ", this.port)
         });
     }
