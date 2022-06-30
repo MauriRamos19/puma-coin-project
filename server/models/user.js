@@ -23,6 +23,26 @@ const userSchema = Schema({
     lastName: {
         type: String
     },
+
+    /* nickName: {
+        type: String,
+        required: true
+    }, */
+
+    /* email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+    sex: {
+        type: String,
+        enum: ["male", "female"]
+    }, */
+    
     gender: {
         type: String,
         enum: ["male","female","other","masculino","femenino","otro"]

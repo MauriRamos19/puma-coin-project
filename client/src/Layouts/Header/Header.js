@@ -2,14 +2,22 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
+import { logoutUser } from '../../services/auth'
+import { useCookies, withCookies } from 'react-cookie';
+import Cookies from 'universal-cookie'
 import './Header.css'
+
 
 const Header = (props) => {
 
     const navigate = useNavigate();
-
+    
+    const { cookies } = props;
+  
     const isLoggedIn = () => {
-        const token = localStorage.getItem('token')
+       
+        const token = cookies.get('access_token')
+
         if (token) {
             return true
         } else {
@@ -18,12 +26,10 @@ const Header = (props) => {
     }
 
     const logout = () => {
-        localStorage.removeItem('token');
-        // window.location.reload();
-        navigate('/')
+            cookies.remove('access_token')
+            // window.location.reload();
+          
     }
-
-
 
     return (
         <div className='Header'>
@@ -37,9 +43,9 @@ const Header = (props) => {
             <div className='Header__navigation__wrapper'>
                 <nav className='Header__navigation'>
                     <ul>
-                        <li><Link to='/'>Home</Link></li>
+                        <li><Link to='/'>Principal</Link></li>
                         <li><Link to='/trade'>Trade</Link></li>
-                        <li><Link to='/support'>Support</Link></li>
+                        <li><Link to='/support'>Soporte</Link></li>
                     </ul>
                 </nav>
                 
@@ -48,7 +54,7 @@ const Header = (props) => {
                         <Button 
                             className='Header__account__logout'
                             onClick={logout}>
-                            Logout
+                            Salir
                         </Button>
                     </div>
                     :
@@ -57,14 +63,14 @@ const Header = (props) => {
                             to='/login'
                             className='Header__account__login'
                         >
-                            Login
+                            Iniciar sesión  
                         </Link>
                         <Link
                             to='/register'
                             className='Header__account__register'
                         >
                             <Button>
-                                Register
+                                Registrate
 
                             </Button>
                         </Link>
@@ -76,4 +82,5 @@ const Header = (props) => {
     )
 }
 
-export default Header
+export default withCookies(Header)
+

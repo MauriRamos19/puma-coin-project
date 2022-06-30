@@ -8,6 +8,7 @@ const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 const mongoose = require('mongoose');
 const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
+const templatePasswordReset = require('../public/templates');
 
 const login = async(req=request, res=response) => {
     const { email, password } = req.body;
@@ -49,14 +50,9 @@ const login = async(req=request, res=response) => {
 
         const token = await generateJWT(userDB.id);
 
-        const userId = mongoose.Types.ObjectId(userDB.id);
+    
 
          return res
-        //  .cookie("access_token", token, {
-        //     maxAge: 60*60*100,
-        //     httpOnly: true,
-        //     sameSite: 'strict',
-        // })
         .status(200)
         .json({
             ok: true,
@@ -124,8 +120,16 @@ const register = async(req, res) => {
 
         const token = await generateJWT(user.id);
 
-        const link = `${process.env.BASE_URL}/finish-register?id=${user.id}`;
-        await sendEmail(user.email, "Welcome to the app", link);
+
+        
+
+        const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
+
+        const hmtl=`<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
+            <p>Entra al siguiente enlace para completar tu registro:</p>
+            <a href="${link}">${link}</a>`;
+
+        await sendEmail(user, "Bienvenido a Puma Coin", hmtl);
         
         await user.save();
 
@@ -146,14 +150,14 @@ const register = async(req, res) => {
 }
 
 
-const logout = (req, res=response) => {
-    res.clearCookie("access_token").status(200).json({ message: "ok" });
-}
+// const logout = (req, res=response) => {
+//     res.clearCookie("access_token").status(200).json({ message: "ok" });
+// }
 
 
 const forgotPassword = async(req, res) => {
     const { email } = req.body;
-
+    //console.log(email,"12345");
     try {
         const userDB = await User.findOne({ email });
 
@@ -169,14 +173,18 @@ const forgotPassword = async(req, res) => {
         const token = await generateJWT(userDB.id);
 
         
-        const link = `${process.env.BASE_URL}/password-reset?id=${userDB.id}&token=${token}`;
-        await sendEmail(userDB.email, "Password reset", link);
+        const link = `${process.env.BASE_URL}/password-reset/${userDB.id}/${token}`;
 
-        res.cookie("access_token", token, {
+        const html = (templatePasswordReset(email, link));
+        await sendEmail(userDB, "Password reset", html);
+
+        res
+        .cookie("access_token", token, {
             maxAge: 60*60*100,
             httpOnly: true,
             sameSite: 'strict',
-        }).status(200).json({
+        })
+        .status(200).json({
             ok: true,
             message: "Email enviado"
         });
@@ -204,55 +212,25 @@ const finishRegister = async(req, res) => {
             });
         }
         
+        const { address2, img, wallet, ...rest } = body;
 
-
-        if(userType === 'company') {
-            
-            const { address2, img, wallet, ...rest } = body;
-
-            for(const param in rest) {
-                if(rest[param] === '') {
-                    res.status(400).json({
-                        msg: 'Los campos no pueden estar vacios'
-                    })
-                }
+        for(const param in rest) {
+            if(rest[param] === '') {
+                res.status(400).json({
+                    msg: 'Los campos no pueden estar vacios'
+                })
             }
-
-            const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
-           
-            await user.save()
-
-            return res.status(200).json({
-                ok: true,
-                user: userDB
-            });
-            
-        } else if(userType === 'natural') {
-            
-            const { address2, img, wallet, ...rest } = body;
-
-
-     
-            for(const param in rest) {
-                if(rest[param] === '') {
-                    res.status(400).json({
-                        msg: 'Los campos no pueden estar vacios'
-                    })
-                }
-            }
-
-            const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
-           
-            await user.save()
-
-            return res.status(200).json({
-                ok: true,
-                user: userDB
-            });
-
         }
 
-        
+        const user = await User.findByIdAndUpdate(id, { userType: userType, ...body}, { new: true });
+
+        await user.save()
+
+        return res.status(200).json({
+            ok: true,
+            user: userDB
+        });
+
     
     } catch (error) {
         res.status(500).json({
@@ -269,7 +247,8 @@ const resetPassword = async (req, res=response) => {
         const { password, password2 } = req.body;
         
         const user = await User.findById(id);
-       
+        
+        console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");
 
@@ -327,7 +306,6 @@ module.exports = {
     login,
     register,
     renewToken,
-    logout,
     forgotPassword,
     resetPassword,
     finishRegister
