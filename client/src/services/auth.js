@@ -50,14 +50,14 @@ const logoutUser = async () => {
     }
 }
 
-const sendEmail = async (email) => {
+const requestResetPassword = async (email) => {
 
     try {
 
         const { data: responseData } = await axios.post(uri + '/sendEmail', { email });
         const { ok, message } = responseData;
 
-        console.log(message);
+        console.log(message, responseData);
 
         if (ok)
             return true;
@@ -66,7 +66,7 @@ const sendEmail = async (email) => {
 
     } catch (error) {
 
-        console.error(`Algo salio mal en la funcion sendEmail, aqui esta el error: `, error);
+        console.error(`Algo salio mal en la funcion requestResetPassword, aqui esta el error: `, error);
         return false;
     }
 }
@@ -94,6 +94,6 @@ export {
     register,
     login,
     logoutUser,
-    sendEmail,
+    requestResetPassword,
     finishRegister
 };

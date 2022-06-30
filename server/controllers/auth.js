@@ -180,11 +180,6 @@ const forgotPassword = async (req, res) => {
         await sendEmail(userDB, "Password reset", html);
 
         res
-            .cookie("access_token", token, {
-                maxAge: 60 * 60 * 100,
-                httpOnly: true,
-                sameSite: 'strict',
-            })
             .status(200).json({
                 ok: true,
                 message: "Email enviado"

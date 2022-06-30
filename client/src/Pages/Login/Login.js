@@ -4,8 +4,7 @@ import Button from "../../Components/Button/Button";
 import InputContainer from "../../Components/InputContainer/InputContainer";
 import AuthBlueSquare from "../../Layouts/AuthBlueSquare/AuthBlueSquare";
 import "./Login.css";
-import { login as loginService } from "../../services/auth";
-import { sendEmail } from "../../services/auth";
+import { login as loginService, requestResetPassword } from "../../services/auth";
 import Message from "../../Components/Message/Message";
 import { withCookies, Cookies } from "react-cookie";
 
@@ -47,7 +46,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 		// cookies.set("access_token", token, options);
 		//navigate('/');
-		
+
 		localStorage.setItem("token", token);
 		navigate("/");
 	};
@@ -66,12 +65,14 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		setMessage({ active: false });
 	};
 
-	const onSubmitTest = (evt) => {
+	const onSubmitResetPasswordModal = async (evt) => {
 
 		evt.preventDefault()
 
 		const emailToResetPassword = evt.target.email.value;
-		const isEmailSent = sendEmail(emailToResetPassword);
+		const isEmailSent = await requestResetPassword(emailToResetPassword);
+
+		console.log("isEmailSent", isEmailSent)
 
 		if (isEmailSent === true) navigate("/");
 	};
@@ -95,7 +96,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 			type: "emailChangePassword",
 			data: {
 				content: (
-					<form className="Login__form" onSubmit={onSubmitTest}>
+					<form className="Login__form" onSubmit={onSubmitResetPasswordModal}>
 						<InputContainer>
 							<label htmlFor="email"></label>
 							<input
