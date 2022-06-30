@@ -16,7 +16,7 @@ const Header = (props) => {
   
     const isLoggedIn = () => {
        
-        const token = cookies.get('access_token')
+        const token = localStorage.getItem('access_token')
 
         if (token) {
             return true
@@ -26,8 +26,11 @@ const Header = (props) => {
     }
 
     const logout = () => {
-            cookies.remove('access_token')
+            //cookies.remove('access_token')
             // window.location.reload();
+
+            localStorage.removeItem('access_token');
+            navigate("/");
           
     }
 
@@ -82,5 +85,6 @@ const Header = (props) => {
     )
 }
 
-export default withCookies(Header)
+export default Header;
+//export default withCookies(Header)
 

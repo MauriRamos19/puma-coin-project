@@ -37,7 +37,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
     //const { token, error } = await loginService(form);
 
-    const options = {
+/*     const options = {
       domain: "localhost",
       path: "/",
       maxAge: 1,
@@ -45,10 +45,10 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
       secure: true,
       sameSite: "strict",
     };
-
-    cookies.set("access_token", token, options);
+ */
+    //cookies.set("access_token", token, options);
     //navigate('/');
-    localStorage.setItem("token", token);
+    localStorage.setItem("access_token", token);
     navigate("/");
   };
 
@@ -155,5 +155,5 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
   );
 };
 
-//export default Login;
-export default withCookies(Login);
+export default Login;
+//export default withCookies(Login);

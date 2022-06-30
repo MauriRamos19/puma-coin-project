@@ -38,6 +38,8 @@ const departmentsOptions = [
 ]
 
 const FinishRegister = (props) => {
+
+    
     return (
         <div className="FinishRegister">
             <div className="FinishRegister__form">
