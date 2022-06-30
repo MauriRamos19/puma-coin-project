@@ -4,7 +4,9 @@ import Button from "../../Components/Button/Button";
 import { resetPassword } from "../../services/auth";
 import unah from '../../Assets/images/unah.png'
 import moneda from '../../Assets/images/moneda.png'
-import poli from '../../Assets/images/poli.png'
+import audi from '../../Assets/images/audi.png'
+import btc from '../../Assets/images/BTC.png'
+import puma from '../../Assets/images/puma.png'
 
 import "./PasswordReset.css";
 
@@ -42,6 +44,11 @@ const PasswordReset = (props) => {
         <div className="PasswordReset__title_column_size">
           <h1>Restablece tu contraseña</h1>
         </div>
+        
+          <div className="Unah__image">
+						<img className='Unah__img_puma' src={puma} />
+					</div>
+
         <div className="PasswordReset__first_column_wrapper">
           <div className="myDIVA">
             <div className="PasswordReset__box_title">
@@ -75,12 +82,13 @@ const PasswordReset = (props) => {
           </div>
         </div>
 
-        <div className="Unah__image">
+        {/* <div className="Unah__image">
 						<img className='Unah__img_password' src={unah} />
 					</div>
-          {/* <div className="Home__image">
-						<img className='Home__img_coin' src={moneda} />
+          <div className="Audi__image">
+						<img className='Audi__img_password' src={audi} />
 					</div> */}
+
           {/* <div className="Poli__image">
 						<img className='Poli__img_password' src={poli} />
 					</div> */}
