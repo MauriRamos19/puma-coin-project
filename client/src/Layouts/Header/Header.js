@@ -14,7 +14,7 @@ const Header = ({ cookies }) => {
 
     const isLoggedIn = () => {
 
-        const token = localStorage.getItem('access_token')
+        const token = localStorage.getItem('token')
 
         if (token) return true
 
@@ -26,7 +26,7 @@ const Header = ({ cookies }) => {
         //cookies.remove('access_token')
         // window.location.reload();
 
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('token');
         navigate("/");
     }
 
