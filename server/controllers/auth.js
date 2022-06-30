@@ -202,6 +202,7 @@ const finishRegister = async (req, res) => {
     const { id } = req.params;
     const body = req.body;
     console.log("FinishRegister: body - ", body)
+    console.log("FinishRegister: id - ", id)
 
     try {
         const userDB = await User.findById(id);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -39,7 +39,7 @@ const departmentsOptions = [
 const FinishRegisterCompany = (props) => {
 
     const navigate = useNavigate();
-    const [userID, setUserID] = useState(null);
+    let { userID } = useParams();
     const [user, setUser] = useState({
         nombre_empresa: '',
         img: '',
@@ -53,11 +53,6 @@ const FinishRegisterCompany = (props) => {
         codigopostal: '',
         userType: 'company'
     });
-
-    useEffect(() => {
-        const userID = window.location.pathname.split("/")[2];
-        setUserID(userID);
-    }, []);
 
     const onChangeHandler = (evt) => {
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -39,13 +39,7 @@ const departmentsOptions = [
 
 const FinishRegister = (props) => {
 
-    const [userID, setUserID] = useState(null)
-
-    useEffect(() => {
-        const userID = window.location.pathname.split("/")[2];
-        setUserID(userID);
-    }, [])
-
+    let { userID } = useParams();
 
     return (
         <div className="FinishRegister">

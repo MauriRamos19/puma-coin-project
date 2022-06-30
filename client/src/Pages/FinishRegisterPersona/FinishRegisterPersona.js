@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
@@ -40,7 +40,7 @@ const departmentsOptions = [
 const FinishRegisterPersona = (props) => {
 
 
-    const [userID, setUserID] = useState(null);
+    let { userID } = useParams();
     const [user, setUser] = useState({
         primer_nombre: '',
         apellido: '',
@@ -56,11 +56,6 @@ const FinishRegisterPersona = (props) => {
         userType: 'natural'
     });
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const userID = window.location.pathname.split("/")[2];
-        setUserID(userID);
-    }, [])
 
     const onChangeHandler = (evt) => {
 
