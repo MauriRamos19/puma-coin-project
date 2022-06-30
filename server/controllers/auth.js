@@ -236,6 +236,7 @@ const finishRegister = async (req, res) => {
             })
         }
 
+
         const user = await User.findByIdAndUpdate(id, { ...body }, { new: true });
         console.log("FinishRegister: user - ", user)
 

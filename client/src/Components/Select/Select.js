@@ -15,7 +15,7 @@ const Select = ({ options, name, value, id, className, onChange }) => {
                         key={option.id}
                         value={option.value}
                     >
-                        {option.value}
+                        {option?.option || option.value}
                     </option>
                 )
             }

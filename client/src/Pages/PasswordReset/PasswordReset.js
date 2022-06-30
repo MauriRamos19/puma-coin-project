@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
-import { resetPassword } from "../../services/auth";
+
 import unah from "../../Assets/images/unah.png";
 import moneda from "../../Assets/images/moneda.png";
 import audi from "../../Assets/images/audi.png";
@@ -9,6 +9,7 @@ import btc from "../../Assets/images/BTC.png";
 import puma from "../../Assets/images/puma.png";
 
 import "./PasswordReset.css";
+import { resetPassword } from "../../services/passwordReset";
 
 const PasswordReset = (props) => {
 
@@ -20,7 +21,6 @@ const PasswordReset = (props) => {
 	});
 
 	const onChangeHandler = (evt) => {
-		console.log(evt)
 		setPassword(prev => Object.assign({}, {
 			...prev,
 			[evt.target.name]: evt.target.value

@@ -7,12 +7,16 @@ const register = async (user) => {
         const response = await axios.post(uri + '/register', user);
         return response.data;
 
-    } catch ({ response: { data: { errors } } }) {
+    } catch (error) {
+
+        console.error(`Algo salio mal en la funcion register, aqui esta el error: `, error);
+
+        const { response: { data } } = error;
 
         return {
-            error: errors[0].msg
-        };
-
+            token: null,
+            error: data?.err?.message || "Algo salio mal durante el registro"
+        }
     }
 }
 
@@ -67,28 +71,6 @@ const sendEmail = async (email) => {
     }
 }
 
-const resetPassword = async (id, token, password, password2) => {
-
-    try {
-
-        const { data: responseData } = await axios.put(uri + `/password-reset/${id}/${token}`, { password, password2 });
-        const { ok, message } = responseData;
-
-        console.log(message);
-
-        if (ok)
-            return true;
-        else
-            return false;
-
-    } catch (error) {
-
-        console.error(`Algo salio mal en la funcion resetPassword, aqui esta el error: `, error);
-        return false;
-    }
-}
-
-
 const finishRegister = async (id, data) => {
 
     try {
@@ -113,6 +95,5 @@ export {
     login,
     logoutUser,
     sendEmail,
-    resetPassword,
     finishRegister
 };

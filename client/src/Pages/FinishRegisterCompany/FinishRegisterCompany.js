@@ -35,16 +35,16 @@ const FinishRegisterCompany = (props) => {
     const navigate = useNavigate();
     let { userID } = useParams();
     const [user, setUser] = useState({
-        nombre_empresa: '',
+        name: '',
         img: '',
-        rtn: '',
-        telefono: '',
-        direccion1: '',
-        direccion2: '',
-        pais: '',
-        departamento: '',
-        ciudad: '',
-        codigopostal: '',
+        RTN: '',
+        phone: '',
+        address: '',
+        address2: '',
+        country: '',
+        department: '',
+        city: '',
+        zipCode: '',
         userType: 'company'
     });
 
@@ -92,18 +92,18 @@ const FinishRegisterCompany = (props) => {
                             <InputWithLabel label="Nombre de la Empresa">
                                 <input
                                     type="text"
-                                    name="nombre_empresa"
+                                    name="name"
                                     placeholder="Escriba el nombre de la Empresa"
                                     onChange={onChangeHandler}
-                                    value={user.nombre_empresa} />
+                                    value={user.name} />
                             </InputWithLabel>
                             <InputWithLabel label="RTN">
                                 <input
                                     type="text"
-                                    name="rtn"
+                                    name="RTN"
                                     placeholder="Escriba su RTN"
                                     onChange={onChangeHandler}
-                                    value={user.rtn} />
+                                    value={user.RTN} />
                             </InputWithLabel>
                         </WrapperDirection>
 
@@ -111,47 +111,47 @@ const FinishRegisterCompany = (props) => {
                             <InputWithLabel label="Telefono">
                                 <input
                                     type="text"
-                                    name="telefono"
+                                    name="phone"
                                     placeholder="Escriba su Telefono"
                                     onChange={onChangeHandler}
-                                    value={user.telefono} />
+                                    value={user.phone} />
                             </InputWithLabel>
                         </WrapperDirection>
 
                         <InputWithLabel label="Dirección 1">
                             <input
                                 type="text"
-                                name="direccion1"
+                                name="address"
                                 placeholder="Escriba su Dirección 1"
                                 onChange={onChangeHandler}
-                                value={user.direccion1} />
+                                value={user.address} />
                         </InputWithLabel>
 
                         <InputWithLabel label="Dirección 2">
                             <input
                                 type="text"
-                                name="direccion2"
+                                name="address2"
                                 placeholder="Escriba su Direccion 2"
                                 onChange={onChangeHandler}
-                                value={user.direccion2} />
+                                value={user.address2} />
                         </InputWithLabel>
 
                         <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Pais">
                                 <input
                                     type="text"
-                                    name="pais"
+                                    name="country"
                                     placeholder="Escriba su País"
                                     onChange={onChangeHandler}
-                                    value={user.pais} />
+                                    value={user.country} />
                             </InputWithLabel>
                             <InputWithLabel label="Departamento">
                                 <input
                                     type="text"
-                                    name="departamento"
+                                    name="department"
                                     placeholder="Escriba su Departamento"
                                     onChange={onChangeHandler}
-                                    value={user.departamento} />
+                                    value={user.department} />
                             </InputWithLabel>
 
 
@@ -161,18 +161,18 @@ const FinishRegisterCompany = (props) => {
                             <InputWithLabel label="Ciudad">
                                 <input
                                     type="text"
-                                    name="ciudad"
+                                    name="city"
                                     placeholder="Escriba su Ciudad"
                                     onChange={onChangeHandler}
-                                    value={user.ciudad} />
+                                    value={user.city} />
                             </InputWithLabel>
                             <InputWithLabel label="Codigo Postal">
                                 <input
                                     type="text"
-                                    name="codigopostal"
+                                    name="zipCode"
                                     placeholder="Escriba su Codigo Postal"
                                     onChange={onChangeHandler}
-                                    value={user.codigopostal} />
+                                    value={user.zipCode} />
                             </InputWithLabel>
                         </WrapperDirection>
                     </WrapperDirection>
