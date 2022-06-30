@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
@@ -9,12 +9,6 @@ import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection
 import { finishRegister } from '../../services/auth'
 
 import './FinishRegisterCompany.css'
-
-const sexOptions = [
-    { id: "m", value: "Masculino" },
-    { id: "f", value: "Femenino" },
-    { id: "o", value: "Otro" }
-]
 
 const departmentsOptions = [
     { id: "Atlántida", value: "Atlántida" },

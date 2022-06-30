@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
@@ -41,6 +41,7 @@ const FinishRegisterPersona = (props) => {
 
 
     let { userID } = useParams();
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         primer_nombre: '',
         apellido: '',
@@ -55,8 +56,7 @@ const FinishRegisterPersona = (props) => {
         codigopostal: '',
         userType: 'natural'
     });
-    const navigate = useNavigate()
-
+    
     const onChangeHandler = (evt) => {
 
         const propery = evt.currentTarget.name;

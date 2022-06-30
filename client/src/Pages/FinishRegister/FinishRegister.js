@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useParams } from 'react-router-dom'
-
-import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Button from '../../Components/Button/Button'
-import InputContainer from '../../Components/InputContainer/InputContainer'
-import InputFileWithPreview from '../../Components/InputFileWithPreview/InputFileWithPreview'
-import InputWithLabel from '../../Components/InputWithLabel/InputWithLabel'
-import Select from '../../Components/Select/Select'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
-import './FinishRegister.css'
-import moneda from '../../Assets/images/moneda.png'
 
-const sexOptions = [
-    { id: "m", value: "Masculino" },
-    { id: "f", value: "Femenino" },
-    { id: "o", value: "Otro" }
-]
+import moneda from '../../Assets/images/moneda.png'
+import './FinishRegister.css'
 
 const departmentsOptions = [
     { id: "Atlántida", value: "Atlántida" },
