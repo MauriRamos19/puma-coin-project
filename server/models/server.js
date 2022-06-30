@@ -26,7 +26,9 @@ class Server {
     }
 
     middlewares () {
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: process.env.BASE_URL
+        }));
         this.app.use( express.json() )
         this.app.use(cookieParser());
     }
