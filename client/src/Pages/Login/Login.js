@@ -36,17 +36,18 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 		//const { token, error } = await loginService(form);
 
-		const options = {
-			domain: "localhost",
-			path: "/",
-			maxAge: 1,
-			HttpOnly: true,
-			secure: true,
-			sameSite: "strict",
-		};
+		// const options = {
+		// 	domain: "localhost",
+		// 	path: "/",
+		// 	maxAge: 1,
+		// 	HttpOnly: true,
+		// 	secure: true,
+		// 	sameSite: "strict",
+		// };
 
-		cookies.set("access_token", token, options);
+		// cookies.set("access_token", token, options);
 		//navigate('/');
+		
 		localStorage.setItem("token", token);
 		navigate("/");
 	};
@@ -156,5 +157,5 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 	);
 };
 
-//export default Login;
-export default withCookies(Login);
+export default Login;
+//export default withCookies(Login);

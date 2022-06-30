@@ -40,7 +40,7 @@ const Register = ({ dispatchModal }) => {
             return;
         }
 
-        localStorage.setItem("token", token);
+        localStorage.setItem("access_token", token);
         navigate('/');
 
         dispatchModal({ type: "completeRegister" });
