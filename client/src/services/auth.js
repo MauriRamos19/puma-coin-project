@@ -48,19 +48,22 @@ const logoutUser = async () => {
 
 const sendEmail = async (email) => {
 
-    //console.log(email);
     try {
 
-        const response = await axios.post(uri + '/sendEmail', { email });
-        return response.data;
+        const { data: responseData } = await axios.post(uri + '/sendEmail', { email });
+        const { ok, message } = responseData;
+
+        console.log(message);
+
+        if (ok)
+            return true;
+        else
+            return false;
 
     } catch (error) {
 
-        console.log(error);
-        return {
-            error: "Aqui hay problemas"
-        };
-
+        console.error(`Algo salio mal en la funcion sendEmail, aqui esta el error: `, error);
+        return false;
     }
 }
 
@@ -68,16 +71,20 @@ const resetPassword = async (id, token, password, password2) => {
 
     try {
 
-        const response = await axios.put(uri + `/password-reset/${id}/${token}`, { password, password2 });
-        return response.data;
+        const { data: responseData } = await axios.put(uri + `/password-reset/${id}/${token}`, { password, password2 });
+        const { ok, message } = responseData;
+
+        console.log(message);
+
+        if (ok)
+            return true;
+        else
+            return false;
 
     } catch (error) {
 
-        console.log(error);
-        return {
-            error: "Aqui hay problemas"
-        };
-
+        console.error(`Algo salio mal en la funcion resetPassword, aqui esta el error: `, error);
+        return false;
     }
 }
 

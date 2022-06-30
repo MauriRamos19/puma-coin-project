@@ -50,8 +50,8 @@ const FinishRegisterCompany = (props) => {
 
     const onChangeHandler = (evt) => {
 
-        const propery = evt.currentTarget.name;
-        const value = evt.currentTarget.value;
+        const propery = evt.target.name;
+        const value = evt.target.value;
 
         setUser(prev => Object.assign({}, {
             ...prev,
@@ -66,8 +66,7 @@ const FinishRegisterCompany = (props) => {
         const isUpdated = await finishRegister(userID, user);
         console.log("isUpdated", isUpdated);
 
-        if (isUpdated === true)
-            navigate("/")
+        if (isUpdated === true) navigate("/")
     }
 
 

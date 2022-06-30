@@ -156,8 +156,9 @@ const register = async (req, res) => {
 
 
 const forgotPassword = async (req, res) => {
+
     const { email } = req.body;
-    //console.log(email,"12345");
+
     try {
         const userDB = await User.findOne({ email });
 
@@ -188,7 +189,9 @@ const forgotPassword = async (req, res) => {
                 ok: true,
                 message: "Email enviado"
             });
+
     } catch (error) {
+        
         res.status(500).json({
             ok: false,
             err: error

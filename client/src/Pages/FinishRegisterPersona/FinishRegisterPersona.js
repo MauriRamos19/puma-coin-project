@@ -59,8 +59,8 @@ const FinishRegisterPersona = (props) => {
     
     const onChangeHandler = (evt) => {
 
-        const propery = evt.currentTarget.name;
-        const value = evt.currentTarget.value;
+        const propery = evt.target.name;
+        const value = evt.target.value;
 
         setUser(prev => Object.assign({}, {
             ...prev,
