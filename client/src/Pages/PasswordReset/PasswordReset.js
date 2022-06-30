@@ -42,6 +42,15 @@ const PasswordReset = (props) => {
 				<div className="PasswordReset__title_column_size">
 					<h1>Restablece tu contraseña</h1>
 				</div>
+
+				<div className="Unah__image">
+					<img className="Unah__img_password" src={unah} />
+				</div>
+
+				<div className="Unah__image">
+					<img className="Unah__img_puma" src={puma} />
+				</div>
+
 				<div className="PasswordReset__first_column_wrapper">
 					<div className="myDIVA">
 						<div className="PasswordReset__box_title">
