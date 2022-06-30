@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { resetPassword } from "../../services/auth";
+import unah from '../../Assets/images/unah.png'
+import moneda from '../../Assets/images/moneda.png'
+import poli from '../../Assets/images/poli.png'
 
 import "./PasswordReset.css";
 
@@ -71,6 +74,16 @@ const PasswordReset = (props) => {
             </div>
           </div>
         </div>
+
+        <div className="Unah__image">
+						<img className='Unah__img_password' src={unah} />
+					</div>
+          {/* <div className="Home__image">
+						<img className='Home__img_coin' src={moneda} />
+					</div> */}
+          {/* <div className="Poli__image">
+						<img className='Poli__img_password' src={poli} />
+					</div> */}
         {/* <div className="Home__image">
 						<img className='Home__img_card' src={tarjeta} />
 					</div>
