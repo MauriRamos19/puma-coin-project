@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
 import { logoutUser } from '../../services/auth'
@@ -10,12 +10,10 @@ import './Header.css'
 
 const Header = (props) => {
 
-    const navigate = useNavigate();
-    
     const { cookies } = props;
-  
+
     const isLoggedIn = () => {
-       
+
         const token = cookies.get('access_token')
 
         if (token) {
@@ -26,14 +24,14 @@ const Header = (props) => {
     }
 
     const logout = () => {
-            cookies.remove('access_token')
-            // window.location.reload();
-          
+        cookies.remove('access_token')
+        // window.location.reload();
+
     }
 
     return (
         <div className='Header'>
-            <Link 
+            <Link
                 to='/'
                 className='Header__logo'
             >
@@ -48,10 +46,10 @@ const Header = (props) => {
                         <li><NavLink to='/support'>Soporte</NavLink></li>
                     </ul>
                 </nav>
-                
+
                 {isLoggedIn() ?
                     <div className='Header__account'>
-                        <Button 
+                        <Button
                             className='Header__account__logout'
                             onClick={logout}>
                             Salir
@@ -63,7 +61,7 @@ const Header = (props) => {
                             to='/login'
                             className='Header__account__login'
                         >
-                            Iniciar sesión  
+                            Iniciar sesión
                         </Link>
                         <Link
                             to='/register'
@@ -71,12 +69,10 @@ const Header = (props) => {
                         >
                             <Button>
                                 Registrate
-
                             </Button>
                         </Link>
                     </div>
-                }           
-                
+                }
             </div>
         </div>
     )
