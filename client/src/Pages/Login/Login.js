@@ -74,22 +74,16 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 		console.log("isEmailSent", isEmailSent)
 
-		if (isEmailSent === true) navigate("/");
-	};
+		if (isEmailSent !== true) return; 
 
-	/* const options = {
-			  domain: 'localhost',
-			  path: '/',
-			  maxAge: 1,
-			  HttpOnly: true,
-			  secure:true,
-			  sameSite: 'strict'
-		  	
-		  }
-  
-		  cookies.set('access_token', token, options);
-		  navigate('/');
-	  }) */
+		dispatchModal({
+			type: "emailSentChangePassword",
+			data: {
+				title: "Correo Enviado",
+				description: "Revisa tu correo, hemos enviado el email para que puedas cambiar la contraseña",
+			}
+		})
+	};
 
 	const openModal = (evt) => {
 		dispatchModal({
