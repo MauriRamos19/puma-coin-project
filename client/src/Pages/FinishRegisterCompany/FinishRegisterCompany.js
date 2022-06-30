@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
 import Button from '../../Components/Button/Button'
-import InputContainer from '../../Components/InputContainer/InputContainer'
 import InputFileWithPreview from '../../Components/InputFileWithPreview/InputFileWithPreview'
 import InputWithLabel from '../../Components/InputWithLabel/InputWithLabel'
-import Select from '../../Components/Select/Select'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
+import { finishRegister } from '../../services/auth'
+
 import './FinishRegisterCompany.css'
 
 const sexOptions = [
@@ -36,18 +37,65 @@ const departmentsOptions = [
 ]
 
 const FinishRegisterCompany = (props) => {
+
+    const navigate = useNavigate();
+    const [userID, setUserID] = useState(null);
+    const [user, setUser] = useState({
+        nombre_empresa: '',
+        img: '',
+        rtn: '',
+        telefono: '',
+        direccion1: '',
+        direccion2: '',
+        pais: '',
+        departamento: '',
+        ciudad: '',
+        codigopostal: '',
+        userType: 'company'
+    });
+
+    useEffect(() => {
+        const userID = window.location.pathname.split("/")[2];
+        setUserID(userID);
+    }, []);
+
+    const onChangeHandler = (evt) => {
+
+        const propery = evt.currentTarget.name;
+        const value = evt.currentTarget.value;
+
+        setUser(prev => Object.assign({}, {
+            ...prev,
+            [propery]: value
+        }));
+    }
+
+    const onSubmitForm = async (evt) => {
+
+        evt.preventDefault();
+
+        const isUpdated = await finishRegister(userID, user);
+        console.log("isUpdated", isUpdated);
+
+        if (isUpdated === true)
+            navigate("/")
+    }
+
+
     return (
         <div className="FinishRegister">
-            <form className="FinishRegister__form">
+            <form className="FinishRegister__form" onSubmit={onSubmitForm}>
                 <div className="FinishRegister__header">
                     <h1>Tipo de Cuenta</h1>
                     <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
                 </div>
                 <div className="FinishRegister__photo">
                     <InputFileWithPreview
-                        name="profilePhoto"
-                        alt="profilePhoto"
+                        name="img"
+                        alt="img"
                         imagePlaceHolder={imagePlaceHolder}
+                        onChange={onChangeHandler}
+                        value={user.img}
                     />
                 </div>
                 <div className="FinishRegister__inputs">
@@ -57,22 +105,28 @@ const FinishRegisterCompany = (props) => {
                                 <input
                                     type="text"
                                     name="nombre_empresa"
-                                    placeholder="Escriba el nombre de la Empresa" />
+                                    placeholder="Escriba el nombre de la Empresa"
+                                    onChange={onChangeHandler}
+                                    value={user.nombre_empresa} />
                             </InputWithLabel>
                             <InputWithLabel label="RTN">
                                 <input
                                     type="text"
                                     name="rtn"
-                                    placeholder="Escriba su RTN" />
+                                    placeholder="Escriba su RTN"
+                                    onChange={onChangeHandler}
+                                    value={user.rtn} />
                             </InputWithLabel>
                         </WrapperDirection>
 
-                        <WrapperDirection direction="horizontal">                            
+                        <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Telefono">
                                 <input
                                     type="text"
                                     name="telefono"
-                                    placeholder="Escriba su Telefono" />
+                                    placeholder="Escriba su Telefono"
+                                    onChange={onChangeHandler}
+                                    value={user.telefono} />
                             </InputWithLabel>
                         </WrapperDirection>
 
@@ -80,14 +134,18 @@ const FinishRegisterCompany = (props) => {
                             <input
                                 type="text"
                                 name="direccion1"
-                                placeholder="Escriba su Dirección 1" />
+                                placeholder="Escriba su Dirección 1"
+                                onChange={onChangeHandler}
+                                value={user.direccion1} />
                         </InputWithLabel>
 
                         <InputWithLabel label="Dirección 2">
                             <input
                                 type="text"
                                 name="direccion2"
-                                placeholder="Escriba su Direccion 2" />
+                                placeholder="Escriba su Direccion 2"
+                                onChange={onChangeHandler}
+                                value={user.direccion2} />
                         </InputWithLabel>
 
                         <WrapperDirection direction="horizontal">
@@ -95,30 +153,38 @@ const FinishRegisterCompany = (props) => {
                                 <input
                                     type="text"
                                     name="pais"
-                                    placeholder="Escriba su País" />
+                                    placeholder="Escriba su País"
+                                    onChange={onChangeHandler}
+                                    value={user.pais} />
                             </InputWithLabel>
                             <InputWithLabel label="Departamento">
                                 <input
                                     type="text"
                                     name="departamento"
-                                    placeholder="Escriba su Departamento" />
+                                    placeholder="Escriba su Departamento"
+                                    onChange={onChangeHandler}
+                                    value={user.departamento} />
                             </InputWithLabel>
-                            
-                            
+
+
                         </WrapperDirection>
-                        
+
                         <WrapperDirection direction="horizontal">
                             <InputWithLabel label="Ciudad">
                                 <input
                                     type="text"
                                     name="ciudad"
-                                    placeholder="Escriba su Ciudad" />
+                                    placeholder="Escriba su Ciudad"
+                                    onChange={onChangeHandler}
+                                    value={user.ciudad} />
                             </InputWithLabel>
                             <InputWithLabel label="Codigo Postal">
                                 <input
                                     type="text"
                                     name="codigopostal"
-                                    placeholder="Escriba su Codigo Postal" />
+                                    placeholder="Escriba su Codigo Postal"
+                                    onChange={onChangeHandler}
+                                    value={user.codigopostal} />
                             </InputWithLabel>
                         </WrapperDirection>
                     </WrapperDirection>

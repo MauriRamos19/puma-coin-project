@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 import imagePlaceHolder from '../../Assets/images/userImagePlaceHolder.png'
@@ -38,55 +38,64 @@ const departmentsOptions = [
 ]
 
 const FinishRegister = (props) => {
+
+    const [userID, setUserID] = useState(null)
+
+    useEffect(() => {
+        const userID = window.location.pathname.split("/")[2];
+        setUserID(userID);
+    }, [])
+
+
     return (
         <div className="FinishRegister">
             <div className="FinishRegister__form">
                 <div className="FinishRegister__header">
-                <div className="Home__first_column_wrapper">
+                    <div className="Home__first_column_wrapper">
 
-                    <div className="FinishRegister__image">
-						<img className='FinishRegister__img_coin' src={moneda} />
-					</div>
-                    
-				<div className="myDIVRegister">
-					<div className="FinishRegister__box_title">
-						<h1>Tipo de Cuenta</h1> 
-                        <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>                                            
-					</div>                    
-					<div>
-						<div className="FinishRegister__form">
-                            <WrapperDirection direction="vertical">
-                                <WrapperDirection direction="horizontal">   
-                                    <Link
-                                        to='/finish-register-persona'
-                                        className='Header__account__register'
-                                    >
-                                        <Button>
-                                            Personal
-                                        </Button>
+                        {/* <div className="FinishRegister__image">
+                            <img className='FinishRegister__img_coin' src={moneda} />
+                        </div> */}
 
-                                    </Link>
-                                </WrapperDirection> 
-                            </WrapperDirection> 
-							
-                            <WrapperDirection direction="vertical">
-                                <WrapperDirection direction="horizontal">   
-                                    <Link
-                                        to='/finish-register-Company'
-                                        className='Header__account__register'
-                                    >
-                                        <Button>
-                                            Empresarial 
-                                        </Button>
-                                    </Link>
-                                </WrapperDirection>
-                        </WrapperDirection> 
-							
-						</div>
-					</div>
-				</div>
-			</div> 
-            </div>
+                        <div className="myDIVRegister">
+                            <div className="FinishRegister__box_title">
+                                <h1>Tipo de Cuenta</h1>
+                                <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
+                            </div>
+                            <div>
+                                <div className="FinishRegister__form">
+                                    <WrapperDirection direction="vertical">
+                                        <WrapperDirection direction="horizontal">
+                                            <Link
+                                                to={'/finish-register-persona/' + userID}
+                                                className='Header__account__register'
+                                            >
+                                                <Button>
+                                                    Personal
+                                                </Button>
+
+                                            </Link>
+                                        </WrapperDirection>
+                                    </WrapperDirection>
+
+                                    <WrapperDirection direction="vertical">
+                                        <WrapperDirection direction="horizontal">
+                                            <Link
+                                                to={'/finish-register-company/' + userID}
+                                                className='Header__account__register'
+                                            >
+                                                <Button>
+                                                    Empresarial
+                                                </Button>
+                                            </Link>
+                                        </WrapperDirection>
+                                    </WrapperDirection>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

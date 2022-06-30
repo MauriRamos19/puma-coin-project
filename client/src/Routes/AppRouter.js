@@ -32,9 +32,9 @@ const AppRouter = () => {
                 <Route path="/register" element={<Register dispatchModal={dispatchModal}/>} />
                 <Route path="/login" element={<Login dispatchModal={dispatchModal}/>} />
                 <Route path="passWord-reset/:id/:token" element={<PasswordReset />} />
-                <Route path="/finish-register" element={<FinishRegister />} />
-                <Route path="/finish-register-persona" element={<FinishRegisterPersona />} />
-                <Route path="/finish-register-company" element={<FinishRegisterCompany />} />
+                <Route path="/finish-register/:id" element={<FinishRegister />} />
+                <Route path="/finish-register-persona/:id" element={<FinishRegisterPersona />} />
+                <Route path="/finish-register-company/:id" element={<FinishRegisterCompany />} />
             </Routes>
             <ModalManagment {...modal} dispatchModal={dispatchModal} />
         </Router>
