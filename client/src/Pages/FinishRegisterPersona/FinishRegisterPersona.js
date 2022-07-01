@@ -200,7 +200,7 @@ const FinishRegisterPersona = (props) => {
                     </WrapperDirection>
                 </div>
                 <div className="FinishRegisterPersona__submit-button">
-                    <Button type="submit">Finalizar!</Button>
+                    <Button type="submit">¡Finalizar!</Button>
                 </div>
             </form>
             <div className="FinishRegisterPersona__back">

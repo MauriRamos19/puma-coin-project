@@ -80,7 +80,7 @@ const FinishRegisterCompany = (props) => {
             <form className="FinishRegisterCompany__form" onSubmit={onSubmitForm}>
                 <div className="FinishRegisterCompany__header">
                     <h1>Perfil Empresa</h1>
-                    <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
+                    <p>Necesitamos un poco más de información sobre su empresa, para proteger su cuenta.</p>
                 </div>
                 <div className="FinishRegisterCompany__photo">
                     <InputFileWithPreview
@@ -183,7 +183,7 @@ const FinishRegisterCompany = (props) => {
                     </WrapperDirection>
                 </div>
                 <div className="FinishRegisterCompany__submit-button">
-                    <Button type="submit">Finalizar!</Button>
+                    <Button type="submit">¡Finalizar!</Button>
                 </div>
             </form>
             <div className="FinishRegisterCompany__back">
