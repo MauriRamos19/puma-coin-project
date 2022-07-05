@@ -1,0 +1,72 @@
+/* ============ General ============ */
+.Header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #E7E3EB;
+
+    padding: 5px 15px;
+    display: flex;
+    gap: 4rem;
+}
+
+.Header li {
+    list-style: none;
+}
+
+.Header a {
+    text-decoration: none;
+    color: #00386F;
+}
+/**/
+
+/* ============ Logo ============ */
+.Header__logo {
+    display: flex;
+    align-items: center;
+}
+
+.Header__logo__img {
+    width: auto;
+    height: 70px;
+}
+
+.Header__logo__name {
+    color: #08315B;
+}
+/**/
+
+/* ============ Navigation ============ */
+.Header__navigation__wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Header__navigation > ul {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    font-size: 1.1rem;
+}
+
+.Header__navigation > ul a.active{
+    color: #007fff;
+}
+/**/
+
+/* ============ Account ============ */
+.Header__account {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Header__account .Header__account__logout {
+    background: #feecf0;
+    color: #f14668 ;
+}
+
+.Header__account__logout:hover {
+    background: #fddce3;
+}

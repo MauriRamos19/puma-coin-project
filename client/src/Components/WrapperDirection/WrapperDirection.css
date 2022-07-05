@@ -1,0 +1,8 @@
+.wrapper-direction {
+    display: flex;
+    gap: 2rem;
+}
+
+.wrapper-direction.vertical {
+    flex-flow: column;
+}

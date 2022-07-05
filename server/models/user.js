@@ -5,17 +5,31 @@ const { Schema, model } = require('mongoose');
 
 
 const userSchema = Schema({
-    firstName: {
+    email: {
+        type: String,
+        required: [true, 'El email es requerido'],
+        unique: true
+    },
+    password: {
+        type: String,
+        required: [true, 'La contraseña es requerida'],
+    },
+    RTN: {
+        type: String
+    },
+    name: {
         type: String
     },
     lastName: {
         type: String
     },
-    nickName: {
+
+    /* nickName: {
         type: String,
         required: true
-    },
-    email: {
+    }, */
+
+    /* email: {
         type: String,
         required: true,
         unique: true
@@ -27,6 +41,11 @@ const userSchema = Schema({
     sex: {
         type: String,
         enum: ["male", "female"]
+    }, */
+    
+    gender: {
+        type: String,
+        enum: ["male","female","other","masculino","femenino","otro"]
     },
     phone: {
         type: String
@@ -49,26 +68,26 @@ const userSchema = Schema({
     zipCode: {
         type: String
     },
-    wallet: {
-        type: String,
-    },
     img: {
         type: String
-    },
-    rol: {
-        type: String,
-        required: true,
-        default: 'USER_ROLE',
-        enum: ['ADMIN_ROLE', 'USER_ROLE']
     },
     status: {
         type: Boolean,
         default: true
     },
     wallet: {
-        type: String
+        type: String,
+    },
+    userType: {
+        type: String,
+        enum: ["natural", "company"]
     }
+
 });
+
+
+
+
 
 
 userSchema.methods.toJSON = function() {
