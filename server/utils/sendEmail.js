@@ -10,8 +10,8 @@ const sendEmail = async (user, subject, html) => {
             ciphers:'SSLv3'
         },
         auth: {
-            user: "pumacoin1847@outlook.com",
-            pass: "Pum4c01nms3v41",
+            user: process.env.PUMACOIN_EMAIL,
+            pass: process.env.PUMACOIN_EMAIL_PASSWORD
         }
     }
     
