@@ -14,11 +14,10 @@ const sendEmail = async (user, subject, html) => {
             pass: process.env.PUMACOIN_EMAIL_PASSWORD
         }
     }
-    
-    );
+);
 
     const mailOptions = {
-        from: 'Equipo PumaCoin <pumacoin1847@outlook.com>',
+        from: `Puma Anonimo <${process.env.PUMACOIN_EMAIL}>`,
         to: user.email,
         subject: subject,
         html: html
