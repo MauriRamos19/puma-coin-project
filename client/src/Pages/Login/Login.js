@@ -8,6 +8,7 @@ import { login as loginService, requestResetPassword } from "../../services/auth
 import Message from "../../Components/Message/Message";
 import { withCookies, Cookies } from "react-cookie";
 
+
 const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 	const navigate = useNavigate();
@@ -33,21 +34,9 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 			return;
 		}
 
-		//const { token, error } = await loginService(form);
 
-		// const options = {
-		// 	domain: "localhost",
-		// 	path: "/",
-		// 	maxAge: 1,
-		// 	HttpOnly: true,
-		// 	secure: true,
-		// 	sameSite: "strict",
-		// };
+		cookies.set("x_access_token", token, {maxAge: 60*60, HttpOnly: true, secure: true, sameSite: 'strict' });
 
-		// cookies.set("access_token", token, options);
-		//navigate('/');
-
-		localStorage.setItem("token", token);
 		navigate("/");
 	};
 
@@ -152,5 +141,5 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 	);
 };
 
-export default Login;
-//export default withCookies(Login);
+
+export default withCookies(Login);

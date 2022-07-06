@@ -8,7 +8,7 @@ const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 const mongoose = require('mongoose');
 const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
-const templatePasswordReset = require('../public/templates');
+
 
 const login = async (req = request, res = response) => {
     const { email, password } = req.body;
@@ -50,10 +50,13 @@ const login = async (req = request, res = response) => {
 
         const token = await generateJWT(userDB.id);
 
+      
 
-
-        return res
-            .status(200)
+        res.cookie('x_access_token',token, {maxAge: 3600000});
+        
+    
+        return res.
+            status(200)
             .json({
                 ok: true,
                 user: userDB,

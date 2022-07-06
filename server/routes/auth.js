@@ -32,9 +32,6 @@ router.post('/register', [
 
 router.put('/finish-register/:id', finishRegister);
 
-// router.get('/logout',validateJWT,logout);
-
-
 
 router.get('/', validateJWT, renewToken);
 module.exports = router;

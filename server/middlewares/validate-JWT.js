@@ -4,7 +4,8 @@ const User = require('../models/user');
 
 const validateJWT = async(req, res=response, next) => {
 
-    const token = req.cookies.access_token;
+    const token = req.cookies.x_access_token;
+
     
     if(!token) {
         
@@ -16,9 +17,12 @@ const validateJWT = async(req, res=response, next) => {
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_SECRET);
-        
-        const user = User.findById(id);
+ 
 
+        const user = await User.findById(id);
+
+
+      
         if((!user) || (user.status === 'inactive')) {
             return res.status(401).json({
                 ok: false,
@@ -28,7 +32,7 @@ const validateJWT = async(req, res=response, next) => {
         
         req.user = user;
         req.token = token;
-        
+
         next();
     }
     catch(err) {
