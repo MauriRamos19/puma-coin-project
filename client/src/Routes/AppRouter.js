@@ -11,6 +11,7 @@ import Trade from '../Pages/Trade/Trade';
 import Support from '../Pages/Support/Support';
 import Home from '../Pages/Home/Home';
 import PasswordReset from '../Pages/PasswordReset/PasswordReset';
+import Settings from "../Pages/Settings/Settings";
 import FinishRegister from '../Pages/FinishRegister/FinishRegister';
 import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
@@ -36,6 +37,7 @@ const AppRouter = () => {
                 </Route>
                 <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
                 <Route path="/login" element={<Login dispatchModal={dispatchModal} />} />
+                <Route path="/settings" element={<Settings />} />
                 <Route path="passWord-reset/:userID/:token" element={<PasswordReset />} />
                 <Route path="/finish-register/:userID" element={<FinishRegister />} />
                 <Route path="/finish-register-persona/:userID" element={<FinishRegisterPersona />} />

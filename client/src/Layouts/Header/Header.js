@@ -1,21 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
-import { logoutUser } from '../../services/auth'
 import { useCookies, withCookies } from 'react-cookie';
-import Cookies from 'universal-cookie'
 import './Header.css'
+
+
 
 
 const Header = ({ cookies }) => {
 
     const navigate = useNavigate();
 
+
     const isLoggedIn = () => {
 
-        const token = localStorage.getItem('token')
 
+        const token = cookies.get('x_access_token')
+
+        
+
+        
         if (token) return true
 
         return false
@@ -23,10 +28,8 @@ const Header = ({ cookies }) => {
 
     const logout = () => {
 
-        //cookies.remove('access_token')
-        // window.location.reload();
+        cookies.remove('x_access_token')
 
-        localStorage.removeItem('token');
         navigate("/");
     }
 
@@ -50,6 +53,12 @@ const Header = ({ cookies }) => {
 
                 {isLoggedIn() ?
                     <div className='Header__account'>
+                        <Link
+                            to='/settings'
+                            className='Header__account__login'
+                        >
+                            Preferencias
+                        </Link>
                         <Button
                             className='Header__account__logout'
                             onClick={logout}>
@@ -79,6 +88,6 @@ const Header = ({ cookies }) => {
     )
 }
 
-export default Header;
-//export default withCookies(Header)
+// export default Header;
+export default withCookies(Header)
 

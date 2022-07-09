@@ -9,9 +9,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT
         this.paths = {
-            users: "/api/users",
             auth: "/api/auth",
-            passwordReset: "/api/password-reset"
+            passwordReset: "/api/password-reset",
+            account: "/api/settings/account"
         }
 
         this.dbConnect();
@@ -27,16 +27,18 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: process.env.BASE_URL
+            origin: process.env.BASE_URL,
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE']
         }));
         this.app.use(express.json())
         this.app.use(cookieParser());
     }
 
     routes = () => {
-        this.app.use(this.paths.users, require('../routes/users'));
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
+        this.app.use(this.paths.account, require('../routes/account'));
     }
 
     listen() {

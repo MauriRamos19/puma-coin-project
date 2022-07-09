@@ -1,0 +1,21 @@
+
+const axios = require("axios").default;
+const uri = process.env.REACT_APP_API_URL;
+
+
+
+
+export const getInfoAccount = async () => {
+    
+        try {
+    
+            const data = await axios.get(uri + '/settings/account',{withCredentials:true}).then(res => res.data);
+            console.log(data);
+    
+    
+        } catch (error) {
+    
+            console.error(`Algo salio mal en la funcion getInfo, aqui esta el error: `, error);
+            return false;
+        }
+}

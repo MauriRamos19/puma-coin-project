@@ -35,20 +35,6 @@ const login = async (user) => {
     }
 }
 
-const logoutUser = async () => {
-    try {
-
-        const response = await axios.get(uri + '/logout');
-        return response.data;
-
-    } catch ({ response: { data: { ok, err } } }) {
-
-        return {
-            error: err.message
-
-        };
-    }
-}
 
 const requestResetPassword = async (email) => {
 
@@ -93,7 +79,6 @@ const finishRegister = async (id, data) => {
 export {
     register,
     login,
-    logoutUser,
     requestResetPassword,
     finishRegister
 };
