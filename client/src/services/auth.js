@@ -1,25 +1,29 @@
 const axios = require("axios").default;
-const uri = process.env.REACT_APP_API_URL;
+const uri = process.env.REACT_APP_API_URL + "/auth";
 
 const register = async (user) => {
     try {
 
-        const response = await axios.post(uri + '/auth/register', user);
+        const response = await axios.post(uri + '/register', user);
         return response.data;
 
-    } catch ({ response: { data: { errors } } }) {
+    } catch (error) {
+
+        console.error(`Algo salio mal en la funcion register, aqui esta el error: `, error);
+
+        const { response: { data } } = error;
 
         return {
-            error: errors[0].msg
-        };
-
+            token: null,
+            error: data?.err?.message || "Algo salio mal durante el registro"
+        }
     }
 }
 
 const login = async (user) => {
     try {
 
-        const response = await axios.post(uri + '/auth/login', user);
+        const response = await axios.post(uri + '/login', user);
         return response.data;
 
     } catch ({ response: { data: { ok, err } } }) {
@@ -31,57 +35,50 @@ const login = async (user) => {
     }
 }
 
-const logoutUser = async () => {
-    try {
-        
-        const response = await axios.get(uri + '/auth/logout');
-        return response.data;
 
-    } catch ({ response: { data: { ok, err } } }) {
-        
-        return {
-            error: err.message
+const requestResetPassword = async (email) => {
 
-        };  
-    }
-}
-
-const sendEmail = async (email) => {
-
-    //console.log(email);
     try {
 
-        const response = await axios.post(uri + '/auth/sendEmail', {email});
-        return response.data;
+        const { data: responseData } = await axios.post(uri + '/sendEmail', { email });
+        const { ok, message } = responseData;
+
+        console.log(message, responseData);
+
+        if (ok)
+            return true;
+        else
+            return false;
 
     } catch (error) {
 
-        console.log(error);
-        return {
-            error: "Aqui hay problemas"
-        };
-
+        console.error(`Algo salio mal en la funcion requestResetPassword, aqui esta el error: `, error);
+        return false;
     }
 }
 
-const resetPassword = async (id, token, password, password2) => {
+const finishRegister = async (id, data) => {
 
-    console.log(uri + `/auth/${id}/${token}`);
     try {
 
-        const response = await axios.put("http://localhost:8899/api" + `/password-reset/${id}/${token}`, {password, password2});
-        return response.data;
+        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`, data);
+        const { ok, user } = responseData;
+
+        if (ok && user?.status)
+            return true;
+        else
+            return false;
 
     } catch (error) {
 
-        console.log(error);
-        return {
-            error: "Aqui hay problemas"
-        };
-
+        console.error(`Algo salio mal en la funcion finishRegister, aqui esta el error: `, error);
+        return false;
     }
 }
 
-export { register, login, logoutUser, sendEmail, resetPassword };
-
-//export { register, login, logoutUser };
+export {
+    register,
+    login,
+    requestResetPassword,
+    finishRegister
+};

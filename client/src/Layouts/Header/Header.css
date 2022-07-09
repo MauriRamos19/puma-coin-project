@@ -49,6 +49,10 @@
 
     font-size: 1.1rem;
 }
+
+.Header__navigation > ul a.active{
+    color: #007fff;
+}
 /**/
 
 /* ============ Account ============ */

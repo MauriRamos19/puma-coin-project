@@ -51,6 +51,14 @@
     color: #266FB6;
 }
 
+.modal_content{
+    width: 100%;
+}
+
+.modalInfo .description{
+    font-weight: 350;
+}
+
 @media screen and (max-width: 700px) {
     .Login > :nth-child(2) {
         display: none;

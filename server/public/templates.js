@@ -17,7 +17,7 @@ const templatePasswordReset = (email,link) => `<div style="
         <tbody>
             <tr>
                 <td>
-                    <a href="">
+                    <a href="${link}">
                         <img 
                             src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656499007/Restablece_tu_contrasena_whizon.png"
                             alt="PST Dashboard" 
@@ -70,7 +70,7 @@ const templatePasswordReset = (email,link) => `<div style="
             </tr>
             <tr>
                 <td>
-                    <table>
+                    <table style="width: 100%">
                         <tbody>
                             <tr>
                                 <td style="text-align: start; width: 50%;">
@@ -80,7 +80,7 @@ const templatePasswordReset = (email,link) => `<div style="
                                 </td>
                                 <td style="text-align: end; width: 50%;">
                                     <p style="color: #424242; font-size: 0.7rem;">
-                                        <a href="" style="color: #2196F3; text-decoration: none;">Powered by UNAH</a>
+                                        <a href="" style="color: #2196F3; text-decoration: none;">Powered by PumaCoin</a>
                                     </p>
                                 </td>
                             </tr>

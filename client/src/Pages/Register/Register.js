@@ -10,8 +10,9 @@ import { registerForm as initialDataForm } from '../../Utils/initialData'
 import Message from '../../Components/Message/Message'
 import LoaderEllipsis from '../../Components/Loaders/Ellipsis/LoaderEllipsis'
 
+import { withCookies, Cookies } from "react-cookie";
 
-const Register = ({ dispatchModal }) => {
+const Register = ({ cookies ,dispatchModal }) => {
 
     const [form, setForm] = useState(initialDataForm)
     const [message, setMessage] = useState({ active: false });
@@ -40,7 +41,7 @@ const Register = ({ dispatchModal }) => {
             return;
         }
 
-        localStorage.setItem("access_token", token);
+        cookies.set("x_access_token", token, {maxAge: 60*60, HttpOnly: true, secure: true, sameSite: 'strict' });
         navigate('/');
 
         dispatchModal({ type: "completeRegister" });
@@ -130,4 +131,4 @@ const Register = ({ dispatchModal }) => {
     )
 }
 
-export default Register
+export default withCookies(Register);
