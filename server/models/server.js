@@ -9,7 +9,6 @@ class Server {
         this.app = express();
         this.port = process.env.PORT
         this.paths = {
-            users: "/api/users",
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
             account: "/api/settings/account"
@@ -37,7 +36,6 @@ class Server {
     }
 
     routes = () => {
-        this.app.use(this.paths.users, require('../routes/users'));
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
         this.app.use(this.paths.account, require('../routes/account'));

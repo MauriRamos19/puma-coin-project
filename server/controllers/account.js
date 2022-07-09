@@ -1,5 +1,7 @@
 const { request, response } = require('express');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { isValidPassword } = require('../helpers/db-validators');
 const User = require('../models/user');
 
 const getInfoAccount = async(req,res=response) => {
@@ -36,7 +38,7 @@ const getInfoAccount = async(req,res=response) => {
 
 const putInfoAccount = async (req, res) => {
 
-    const user = req.user;
+        const user = req.user;
 
  
 
@@ -49,7 +51,7 @@ const putInfoAccount = async (req, res) => {
             });
         }
 
-        const { address2, img, wallet, ...rest } = req.body;
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, ...rest } = req.body;
 
         const emptyFields = (
             Object.entries(rest)
@@ -64,6 +66,45 @@ const putInfoAccount = async (req, res) => {
                 fields: emptyFields
             })
         }
+
+
+        if ( currentPassword || newPassword || newPassword2 ) {
+            const validPassword = bcrypt.compareSync(currentPassword, user.password);
+
+            if (!validPassword) {
+                        return res.status(400).json({
+                            ok: false,
+                            err: {
+                                message: 'La contraseña es incorrecta'
+                            }
+                        });
+            } else {
+                if (isValidPassword(newPassword, newPassword2) === false) {
+                    return res.status(400).json({
+                        ok: false,
+                        err: {
+                            message: 'Las contraseñas no coinciden'
+                        }
+                    });
+                }
+
+                if (newPassword.length < 6) {
+                return res.status(400).json({
+                    ok: false,
+                    err: {
+                        message: 'La contraseña debe tener al menos 6 caracteres'
+                    }
+                });
+                }
+
+                    const salt = bcrypt.genSaltSync(10);
+                    user.password = bcrypt.hashSync(newPassword, salt);;
+            }
+        }
+        
+        
+
+
 
         user.name = rest.name;
         user.phone = rest.phone;
