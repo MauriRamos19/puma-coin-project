@@ -15,7 +15,7 @@ const network = clusterApiUrl('devnet');
 
 const wallets = [
 	/* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
-	new PhantomWalletAdapter(),
+	new PhantomWalletAdapter()
 ]
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
