@@ -1,14 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { clusterApiUrl } from '@solana/web3.js';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
+import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import AppRouter from './Routes/AppRouter';
+
+import './index.css';
+
+require('@solana/wallet-adapter-react-ui/styles.css');
+
+const network = clusterApiUrl('devnet');
+
+const wallets = [
+	/* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
+	new PhantomWalletAdapter(),
+]
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+	<React.StrictMode>
+		<ConnectionProvider endpoint={network}>
+			<WalletProvider wallets={wallets} autoConnect>
+				<WalletModalProvider>
+					<AppRouter />
+				</WalletModalProvider>
+			</WalletProvider>
+		</ConnectionProvider>
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -4,6 +4,7 @@ import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
 import { useCookies, withCookies } from 'react-cookie';
 import './Header.css'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 
 
@@ -53,6 +54,7 @@ const Header = ({ cookies }) => {
 
                 {isLoggedIn() ?
                     <div className='Header__account'>
+                        <WalletMultiButton />
                         <Link
                             to='/settings'
                             className='Header__account__login'
@@ -67,6 +69,7 @@ const Header = ({ cookies }) => {
                     </div>
                     :
                     <div className='Header__account'>
+                        <WalletMultiButton />
                         <Link
                             to='/login'
                             className='Header__account__login'
