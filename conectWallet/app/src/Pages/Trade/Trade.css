@@ -1,0 +1,14 @@
+.Trade__image {
+    display: flex;
+    position: fixed;
+    align-items: center;
+}
+
+.Trade__img_waiting {
+    position: fixed;
+    display: flex;
+    width: auto;
+    height: 300px;
+    top: 29%;
+    left: 27%;
+}
