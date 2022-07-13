@@ -6,7 +6,7 @@ import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection
 import InputWithLabel from '../../Components/InputWithLabel/InputWithLabel'
 import Button from '../../Components/Button/Button'
 
-//import './Settings.css'
+import './Senttings.css'
 
 
 const Settings = () => {
@@ -51,6 +51,7 @@ const Settings = () => {
           <p>Permitenos ayudarte a Mantener Actualizado tu Perfil</p>          
         </div>
         <div>
+        <WrapperDirection direction="horizontal">
           <InputFileWithPreview
               name="img"
               alt="img"
@@ -58,6 +59,7 @@ const Settings = () => {
               onChange={onChangeHandler}
               value={user.img}
             />
+        </WrapperDirection>
         </div>
         <div>
         <WrapperDirection direction="vertical">
@@ -82,10 +84,10 @@ const Settings = () => {
               <InputWithLabel label="Correo Electronico">
                 <input
                   type="text"
-                  name="name"
+                  name="correo"
                   placeholder=""
                   onChange={onChangeHandler}
-                  value={user.name} />
+                  value={user.correo} />
               </InputWithLabel>
             </WrapperDirection>
 
@@ -103,26 +105,26 @@ const Settings = () => {
                 <InputWithLabel label="Contraseña Actual">
                   <input
                     type="text"
-                    name="phone"
+                    name="contreseña_actual"
                     placeholder="Escriba su Contraseña Actual"
                     onChange={onChangeHandler}
-                    value={user.phone} />
+                    value={user.contraseña_actual} />
                 </InputWithLabel>
                 <InputWithLabel label="Nueva Contraseña">
                   <input
                     type="text"
-                    name="phone"
+                    name="new_contraseña"
                     placeholder="Escriba su Nueva Contraseña"
                     onChange={onChangeHandler}
-                    value={user.phone} />
+                    value={user.new_contraseña} />
                 </InputWithLabel>
                 <InputWithLabel label="Confirme su Contraseña">
                   <input
                     type="text"
-                    name="phone"
+                    name="confirmacion_contraseña"
                     placeholder="Repita su Contraseña"
                     onChange={onChangeHandler}
-                    value={user.phone} />
+                    value={user.confirmacion_contraseña} />
                 </InputWithLabel>
               
             </WrapperDirection>
