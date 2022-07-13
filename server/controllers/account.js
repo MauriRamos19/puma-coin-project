@@ -106,7 +106,7 @@ const putInfoAccount = async (req, res) => {
 
 
 
-        user.name = rest.name;
+        //user.name = rest.name;
         user.phone = rest.phone;
         user.address = rest.address;
         user.address2 = address2;
