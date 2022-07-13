@@ -51,7 +51,7 @@ const putInfoAccount = async (req, res) => {
             });
         }
 
-        const { address2, img, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
 
         const emptyFields = (
             Object.entries(rest)
@@ -111,7 +111,6 @@ const putInfoAccount = async (req, res) => {
         user.address = rest.address;
         user.address2 = address2;
         user.img = img;
-        user.wallet = wallet;
         user.country = rest.country;
         user.department = rest.department;
         user.city = rest.city
