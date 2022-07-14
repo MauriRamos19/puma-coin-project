@@ -34,6 +34,7 @@ const AppRouter = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/trade" element={<Trade />} />
                     <Route path="/support" element={<Support />} />
+                    <Route path="/settings" element={<Settings />} />
                 </Route>
                 <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
                 <Route path="/login" element={<Login dispatchModal={dispatchModal} />} />

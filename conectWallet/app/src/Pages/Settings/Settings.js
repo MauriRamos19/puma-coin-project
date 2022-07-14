@@ -9,18 +9,22 @@ import InputFileWithPreview from "../../Components/InputFileWithPreview/InputFil
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 
 import "./Settings.css";
-import { getInfoAccount } from "../../services/settings";
+import { getInfoAccount, putInfoAccount } from "../../services/settings";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
-
+  
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
     lastName: "",
     email: "",
-    password: "",
     img: "",
     phone: "",
+    currentPassword:"",
+    newPassword:"",
+    newPassword2:"",
     address: "",
     address2: "",
     country: "",
@@ -29,14 +33,18 @@ const Settings = () => {
     zipCode: "",
   });
 
-  const [newPassword, setNewPassowrd] = useState({
-    newPassword: "",
-    newPassword2: "",
-  });
+
 
   useEffect(  () => {
 
-    getInfoAccount().then(data => console.log(data.user));
+    getInfoAccount().then(data => {
+      setUser( (prev) => {
+        return {
+          ...prev,
+          ...data.user
+        };
+      });
+    });
 
   
   }, [])
@@ -56,6 +64,16 @@ const Settings = () => {
       )
     );
   };
+
+  const onClickHandler = (evt) => {
+    evt.preventDefault();
+    putInfoAccount(user).then(data => {
+      console.log(user);
+    }
+    );
+    navigate('/');
+  }
+
 
   return (
   
@@ -79,6 +97,7 @@ const Settings = () => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Nombre">
                 <input
+                  disabled={true}
                   type="text"
                   name="name"
                   placeholder=""
@@ -88,6 +107,7 @@ const Settings = () => {
               </InputWithLabel>
               <InputWithLabel label="Apellido">
                 <input
+                  disabled={true}
                   type="text"
                   name="lastName"
                   placeholder=""
@@ -97,6 +117,7 @@ const Settings = () => {
               </InputWithLabel>
               <InputWithLabel label="Correo Electronico">
                 <input
+                  disabled={true}
                   type="text"
                   name="email"
                   placeholder=""
@@ -110,10 +131,10 @@ const Settings = () => {
               <InputWithLabel label="Contraseña Actual">
                 <input
                   type="password"
-                  name="password"
+                  name="currentPassword"
                   placeholder=""
                   onChange={onChangeHandler}
-                  value={user.password}
+                  value={user.currentPassword}
                 />
               </InputWithLabel>
               <InputWithLabel label="Nueva Contraseña">
@@ -151,7 +172,7 @@ const Settings = () => {
               <InputWithLabel label="Direccion 1">
                 <input
                   type="text"
-                  name="phone"
+                  name="address"
                   placeholder=""
                   onChange={onChangeHandler}
                   value={user.address}
@@ -215,7 +236,7 @@ const Settings = () => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <Button type="submit">Actulizar</Button>
+          <Button type="submit" onClick={onClickHandler}>Actulizar</Button>
         </div>
       </form>
     </div>

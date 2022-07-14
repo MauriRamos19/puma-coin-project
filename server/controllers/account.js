@@ -67,6 +67,7 @@ const putInfoAccount = async (req, res) => {
             })
         }
 
+        
 
         if ( currentPassword || newPassword || newPassword2 ) {
             const validPassword = bcrypt.compareSync(currentPassword, user.password);

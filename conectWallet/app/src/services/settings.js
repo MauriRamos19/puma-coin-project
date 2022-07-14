@@ -25,7 +25,8 @@ export const getInfoAccount = async () => {
 export const putInfoAccount = async (user) => {
         
         try {
-        
+            
+            console.log(user)
             await axios.put(uri + '/settings/account', user,{withCredentials:true}).then(res => res.data);
 
             return true;
