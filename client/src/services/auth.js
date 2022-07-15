@@ -61,7 +61,7 @@ const finishRegister = async (id, data) => {
 
     try {
 
-        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`, data);
+        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`,data);
         const { ok, user } = responseData;
 
         if (ok && user?.status)
