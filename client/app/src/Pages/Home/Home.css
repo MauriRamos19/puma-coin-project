@@ -202,3 +202,28 @@
     top: 66%;
     left: -10%;
 }
+
+.rebote img {
+    animation: 3s ease-in-out 0.66s infinite normal none running rebote
+}
+
+/* Standard syntax */
+@keyframes rebote {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    50% {
+        transform: translate(5px, 10px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+
+}
+
+model-viewer {
+    width: 500px;
+    height: 500px;
+}
