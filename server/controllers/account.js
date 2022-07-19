@@ -51,7 +51,7 @@ const putInfoAccount = async (req, res) => {
             });
         }
 
-        const { address2, img, wallet, currentPassword, newPassword, newPassword2, ...rest } = req.body;
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
 
         const emptyFields = (
             Object.entries(rest)
@@ -67,6 +67,7 @@ const putInfoAccount = async (req, res) => {
             })
         }
 
+        
 
         if ( currentPassword || newPassword || newPassword2 ) {
             const validPassword = bcrypt.compareSync(currentPassword, user.password);
@@ -106,23 +107,23 @@ const putInfoAccount = async (req, res) => {
 
 
 
-        user.name = rest.name;
+        //user.name = rest.name;
         user.phone = rest.phone;
         user.address = rest.address;
         user.address2 = address2;
         user.img = img;
-        user.wallet = wallet;
         user.country = rest.country;
         user.department = rest.department;
         user.city = rest.city
+        
 
-        if(user.userType === 'company') {
+        // if(user.userType === 'company') {
             
-            user.RTN = rest.RTN;
+        //     user.RTN = rest.RTN;
 
-        }else if (user.userType === 'natural') {
-            user.lastName = rest.lastName;
-        }
+        // }else if (user.userType === 'natural') {
+        //     user.lastName = rest.lastName;
+        // }
 
 
         await user.save()
