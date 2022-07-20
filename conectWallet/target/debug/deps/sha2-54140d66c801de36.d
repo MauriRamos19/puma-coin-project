@@ -1,0 +1,12 @@
+c:\Users\KinimoX\Documents\GitHub\puma-coin-project\conectWallet\target\debug\deps\sha2-54140d66c801de36.rmeta: C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\lib.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\consts.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\soft.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\x86.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\soft.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\x86.rs
+
+c:\Users\KinimoX\Documents\GitHub\puma-coin-project\conectWallet\target\debug\deps\sha2-54140d66c801de36.d: C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\lib.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\consts.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\soft.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\x86.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\soft.rs C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\x86.rs
+
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\lib.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\consts.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\soft.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha256\x86.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\soft.rs:
+C:\Users\KinimoX\.cargo\registry\src\github.com-1ecc6299db9ec823\sha2-0.9.9\src\sha512\x86.rs:
