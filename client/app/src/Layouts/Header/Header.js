@@ -58,7 +58,7 @@ const Header = ({ cookies }) => {
                             to='/settings'
                             className='Header__account__login'
                         >
-                            Preferencias
+                            Perfil
                         </Link>
                         <Button
                             className='Header__account__logout'
