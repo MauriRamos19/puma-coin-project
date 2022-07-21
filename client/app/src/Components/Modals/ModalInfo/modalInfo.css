@@ -1,0 +1,48 @@
+.modalInfo {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 3rem;
+}
+
+.modalInfo .heading_icon {
+    font-size: 4rem;
+}
+
+.modalInfo.success .heading_icon {
+    color: #00b6a5;
+}
+
+.modalInfo.warning .heading_icon {
+    color: #ffc956;
+}
+
+.modalInfo.fail .heading_icon {
+    color: #ff6557;
+}
+
+.modalInfo .title {
+    font-size: 1.5rem;
+}
+
+.modalInfo .description {
+    text-align: center;
+}
+
+.modalInfo .linkToStep {
+    text-decoration: underline;
+}
+
+.modalInfo .linkToStep:hover {
+    cursor: pointer;
+}
+
+.modalInfo .close_btn {
+    font-size: 1.3rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-23px, 19px);
+}

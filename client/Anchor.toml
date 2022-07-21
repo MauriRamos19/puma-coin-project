@@ -1,0 +1,15 @@
+[features]
+seeds = false
+skip-lint = false
+[programs.localnet]
+conect_wallet = "9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "/home/kinimox/SolanaWallet/PumaWallet.json"
+
+[scripts]
+test = "yarn run mocha -t 1000000 tests/"

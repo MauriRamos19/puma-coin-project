@@ -1,38 +1,44 @@
+const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const validateJWT = async(req, res, next) => {
+const validateJWT = async(req, res=response, next) => {
 
-    const token = req.headers['x-token'];
+    const token = req.cookies.x_access_token;
+
     
     if(!token) {
         
         return res.status(401).json({
             ok: false,
-            message: 'No token provided'
+            message: 'No hay token'
         });
     }
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_SECRET);
-        
-        const user = User.findById(id);
+ 
 
+        const user = await User.findById(id);
+
+
+      
         if((!user) || (user.status === 'inactive')) {
             return res.status(401).json({
                 ok: false,
-                message: 'User inactive'
+                message: 'El usuario esta inactivo'
             });
         }
         
         req.user = user;
-        
+        req.token = token;
+
         next();
     }
     catch(err) {
         return res.status(401).json({
             ok: false,
-            message: 'Invalid token'
+            message: 'El token no es valido'
         });
     }
 }
