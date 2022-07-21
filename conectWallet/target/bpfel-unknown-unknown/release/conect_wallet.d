@@ -1,1 +1,0 @@
-/mnt/c/Users/KinimoX/Documents/GitHub/puma-coin-project/conectWallet/target/bpfel-unknown-unknown/release/conect_wallet.so: /mnt/c/Users/KinimoX/Documents/GitHub/puma-coin-project/conectWallet/programs/conectWallet/src/lib.rs

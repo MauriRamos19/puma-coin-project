@@ -2,3 +2,5 @@ client
 client/node_modules
 node_modules
 .env
+conectWallet
+conectWallet/target
