@@ -27,21 +27,12 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            server: [{ 
-                origin: "https://pumacoin-finance.web.app",
-                credentials: true,
-                methods: ['GET', 'POST', 'PUT', 'DELETE'],
-                allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
-            },{ 
-                origin: "https://pumacoin-finance.web.app",
-                credentials: true,
-                methods: ['GET', 'POST', 'PUT', 'DELETE'],
-                allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
-            }],
+            origin: "*",
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
         }));
         this.app.use(express.json())
         this.app.use(cookieParser());
