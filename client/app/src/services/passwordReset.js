@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const uri = "https://pumacoin-backend.herokuapp.com/api/password-reset";
+const uri = "/api/password-reset";
 
 const resetPassword = async (id, token, password, password2) => {
 
