@@ -1,0 +1,13 @@
+.Message {
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.Message.error {
+    background-color: #feecf0;
+    color: #cc0f35;
+}
+
+.Message.loading {
+    text-align: center;
+}

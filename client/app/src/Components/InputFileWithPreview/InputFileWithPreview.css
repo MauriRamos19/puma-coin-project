@@ -1,0 +1,16 @@
+.InputFileWithPreview img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+
+    display: grid;
+    place-items: center;
+}
+
+.InputFileWithPreview img:hover {
+    cursor: pointer;
+}
+
+.InputFileWithPreview input[type="file"]{
+    display: none;
+}
