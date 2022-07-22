@@ -1,1 +1,3 @@
-# npm i
+# Server
+
+Ejecutar ```npm install``` para instalar los modulos
