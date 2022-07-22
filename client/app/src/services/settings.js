@@ -1,6 +1,6 @@
 
 const axios = require("axios").default;
-const uri = "/api";
+const uri = "https://pumacoin-backend.herokuapp.com/api";
 
 
 
