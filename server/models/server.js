@@ -26,22 +26,20 @@ class Server {
     }
 
     middlewares() {
+        var whitelist = ['https://pumacoin-finance.web.app', 'https://pumacoin-backend.herokuapp.com']
+        var corsOptions = {
+            origin: function (origin, callback) {
+                if (whitelist.indexOf(origin) !== -1) {
+                    callback(null, true)
+                } else {
+                    callback(new Error('Not allowed by CORS'))
+                }
+            },
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE']
+        }
         this.app.use(cors({
-            server: [{ 
-                origin: "https://pumacoin-finance.web.app",
-                credentials: true,
-                methods: ['GET', 'POST', 'PUT', 'DELETE'],
-                allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
-            },{ 
-                origin: "https://pumacoin-backend.herokuapp.com",
-                credentials: true,
-                methods: ['GET', 'POST', 'PUT', 'DELETE'],
-                allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-                optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
-            }],
+            corsOptions
         }));
         this.app.use(express.json())
         this.app.use(cookieParser());
