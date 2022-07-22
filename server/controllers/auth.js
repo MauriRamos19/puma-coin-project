@@ -320,6 +320,12 @@ const renewToken = async (req, res) => {
     });
 }
 
+app.use(
+    cors({
+        credentials: true,
+        origin: ["http://localhost:3000", "https://pumacoin-finance.web.app/"]
+    })
+);
 
 
 
