@@ -54,7 +54,7 @@ const login = async (req = request, res = response) => {
 
         res.cookie('x_access_token',token, {maxAge: 3600000});
         
-        res.header('Access-Control-Allow-Origin', '*');
+
         return res.
             status(200)
             .json({

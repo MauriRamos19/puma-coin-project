@@ -5,7 +5,6 @@ const { isValidPassword, existEmail } = require("../helpers/db-validators");
 const { validateFields } = require("../middlewares/validate-fields");
 const { validateJWT } = require("../middlewares/validate-JWT");
 const router = Router();
-const functions = require('firebase-functions');
 
 
 router.post('/login', [
@@ -34,5 +33,4 @@ router.put('/finish-register/:id', finishRegister);
 
 
 router.get('/', validateJWT, renewToken);
-
-exports.widgets = functions.https.onRequest(router);
+module.exports = router;
