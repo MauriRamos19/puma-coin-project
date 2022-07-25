@@ -12,3 +12,32 @@
     top: 29%;
     left: 27%;
 }
+.Trade_column{
+    position:fixed;
+    padding-left: 400px;
+    margin-left: 20px;
+}
+.Trade__wrapper {
+    display: flex;
+    gap: 2rem;
+    padding-top: 100px;
+    padding-left: 350px;
+}
+
+.Trade__card {
+    width: 320px;
+    padding: 30px;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #3977b5;
+    color: initial;
+    text-decoration: none;
+}
+
+.Trade__card .icon {
+    font-size: 3em;
+    color: #3977b5;
+}
