@@ -1,12 +1,11 @@
-import './App.css';
 import { useState } from 'react';
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import {
   Program, AnchorProvider, web3
 } from '@project-serum/anchor';
-import idl from './idl.json';
+import idl from '../../idl.json';
 
-import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -15,7 +14,8 @@ const network = clusterApiUrl('devnet');
 
 const wallets = [
   /* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
-  new PhantomWalletAdapter()
+  new PhantomWalletAdapter(),
+  new SolflareWalletAdapter()
 ]
 
 const { SystemProgram, Keypair } = web3;
@@ -116,11 +116,7 @@ function App() {
 /* wallet configuration as specified here: https://github.com/solana-labs/wallet-adapter#setup */
 const AppWithProvider = () => (
     <ConnectionProvider endpoint={network}>
-    <WalletProvider wallets={wallets} autoConnect>
-      <WalletModalProvider>
-        <App />
-      </WalletModalProvider>
-    </WalletProvider>
+      <App />
   </ConnectionProvider>
 )
 
