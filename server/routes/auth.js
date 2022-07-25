@@ -37,7 +37,7 @@ router.get('/', validateJWT, renewToken);
 router.use(
     cors({
         credentials: true,
-        origin: ["http://localhost:3000", "https://pumacoin-finance.web.app/"]
+        origin: ["http://localhost:3000/", "https://pumacoin-finance.web.app/"]
     })
 );
 module.exports = router;

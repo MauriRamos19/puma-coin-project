@@ -5,7 +5,6 @@ import {conectWallet} from '../../Layouts/Transactions/conectWallet';
 
 
 const Trade = (props) => {
-    <conectWallet/>
     return (
         <div className="Trade_Page">
             <div className='Trade_bar'>
@@ -26,7 +25,7 @@ const Trade = (props) => {
                     </div>
                 </div>
                 <div>
-                    <p>{conectWallet()}</p>
+                    <p>{conectWallet().toString()}</p>
                 </div>
             </div>
         </div>
