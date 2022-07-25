@@ -25,7 +25,7 @@ const Trade = (props) => {
                     </div>
                 </div>
                 <div>
-                    <p>{conectWallet().toString()}</p>
+                    {conectWallet()}
                 </div>
             </div>
         </div>

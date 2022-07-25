@@ -1,11 +1,12 @@
-import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import {
-    Program, AnchorProvider, web3
+    Program, AnchorProvider, web3, getProvider
 } from '@project-serum/anchor';
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { useState } from 'react';
+import Button from "../../Components/Button/Button";
 
 
 //Red de solana a conectar
@@ -19,29 +20,36 @@ const opts = {
 
 //Direccion del contrato del programa (Deploy Anchor)
 const programID = new PublicKey(idl.metadata.address);
-
+const baseAccount = Keypair.generate();
 //Billeteras conectadas
 const wallets = [
     new PhantomWalletAdapter(),
     new SolflareWalletAdapter()
 ]
 
+const connection = new Connection(network,opts.preflightCommitment);
 
-
-function ConectadaWallet(){
+function GetProviderWallet(){
     const wallet = useWallet();
-    const connection = new Connection(network,opts.preflightCommitment);
     const provider = new AnchorProvider(
         connection, wallet, opts.preflightCommitment,
         );
-    return connection;
+    return provider;
 }
 
 export function conectWallet (){
-
-    const baseAccount = Keypair.generate();
     return (
-        <p>{ConectadaWallet()}</p>
+        <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
+                Wallet conectada: {GetProviderWallet().wallet.publicKey.toString()}
+            </p>
+            <Button >Pide Solana</Button> 
+        </div>
         );
 }
+
+/*async function airdropSol() {    
+    const airdrop = await connection.requestAirdrop(GetProviderWallet().wallet.publicKey,1);
+    const signature = await connection.confirmTransaction(airdrop);
+    return signature;
+}*/
 
