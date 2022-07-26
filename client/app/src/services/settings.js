@@ -1,6 +1,6 @@
 
 const axios = require("axios").default;
-const uri = "https://pumacoin-backend.herokuapp.com/api/password-reset";
+const uri = "https://pumacoin-backend.herokuapp.com/api";
 
 
 
