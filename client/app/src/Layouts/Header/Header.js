@@ -55,22 +55,14 @@ const Header = ({ cookies }) => {
 
                 {isLoggedIn() ?
                     <div className='Header__account'>
-                         <a><WalletMultiButton /></a> 
+                        <WalletMultiButton />
                         <nav className="Header__Menu__navigation">
                             <ul className = "Header__Menu__desplegable">                             
-                                   
-                                
                                 <li className ="Header__menu__item menu__item--show">
-                                    
-                                <a href="#" className="Header__menu__link"><img src={user} /> <img src={arrow} class="Header__menu__arrow"/></a>
-                                    
+                                <a href="#" className="Header__menu__link"><img src={user} /> <img src={arrow} className="Header__menu__arrow"/></a>
                                     <ul className = "Header__menu__nesting">
-                                        
-
                                         <li className ="Header__menu__inside">
-                                            <a>
-                                                <Link to='/settings' className='Header__account__login'> Perfil </Link>
-                                            </a>
+                                            <Link to='/settings' className='Header__account__login'> Perfil </Link>
                                         </li>
 
                                         <li className = "Header__menu__inside">
