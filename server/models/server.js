@@ -11,7 +11,8 @@ class Server {
         this.paths = {
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
-            account: "/api/settings/account"
+            account: "/api/settings/account",
+            support: "/api/support"
         }
 
         this.dbConnect();
@@ -42,6 +43,7 @@ class Server {
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
         this.app.use(this.paths.account, require('../routes/account'));
+        this.app.use(this.paths.support, require('../routes/support'));
     }
 
     listen() {
