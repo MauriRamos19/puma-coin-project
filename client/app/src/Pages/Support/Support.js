@@ -12,7 +12,9 @@ import { getInfoAccount, putInfoAccount } from "../../services/settings";
 
 import "./Support.css";
 import Button from "../../Components/Button/Button";
-import { sendEmail } from "../../services/supportEmail";
+
+
+import { sendEmail } from "../../services/support";
 
 
 
