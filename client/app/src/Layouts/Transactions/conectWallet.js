@@ -29,14 +29,6 @@ const wallets = [
 
 const connection = new Connection(network,opts.preflightCommitment);
 
-/*function GetProviderWallet(){
-    const wallet = useWallet();
-    const provider = new AnchorProvider(
-        connection, wallet, opts.preflightCommitment,
-        );
-    return provider;
-}*/
-
 export function ConectWallet (){
 
     const wallet = useWallet();
@@ -49,18 +41,24 @@ export function ConectWallet (){
     }
 
     async function airdropSol() {    
-        const airdrop = await connection.requestAirdrop(getProviderWallet().wallet.publicKey,1.0);
+        const airdrop = await connection.requestAirdrop(getProviderWallet().wallet.publicKey,LAMPORTS_PER_SOL);
         const signature = await connection.confirmTransaction(airdrop);
     }
 
-    return (
-        <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
-                Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
-            </p>
-            <Button onClick={airdropSol}>Pide Solana</Button> 
-        </div>
+    if (!wallet.connected){
+        return(
+            <div><p>Debe conectar la billetera/wallet</p></div>
         );
-}
+    }else{
+        return (
+            <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
+                    Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
+                </p>
+                <Button onClick={airdropSol}>Pide Solana</Button> 
+            </div>
+            );
+    }
+} 
 
 
 
