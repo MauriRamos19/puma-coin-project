@@ -13,7 +13,6 @@ import { getInfoAccount, putInfoAccount } from "../../services/settings";
 import "./Support.css";
 import Button from "../../Components/Button/Button";
 
-
 import { sendEmail } from "../../services/support";
 
 
@@ -81,10 +80,10 @@ const Support = (props) => {
                         <InputWithLabel label="Escriba su Nombre">
                             <input
                             type="text"
-                            name="name_soporte"
+                            name="name"
                             placeholder="Nombre"
                             onChange={onChangeHandler}
-                            value={form.name_soporte}
+                            value={form.name}
                             />
                         </InputWithLabel>                                                
                         </WrapperDirection>
@@ -100,19 +99,19 @@ const Support = (props) => {
                         <InputWithLabel label = "Asunto">
                             <input 
                             type="text"
-                            name="asunto"
+                            name="subject"
                             placeholder="asunto"
                             onChange={onChangeHandler}
-                            value={form.asunto}
+                            value={form.subject}
                             />                  
                         </InputWithLabel>
                         <InputWithLabel label = "Mensaje">
                             <textarea 
                             type="text"
-                            name="mensaje"
+                            name="message"
                             placeholder=""
                             onChange={onChangeHandler}
-                            value={form.mensaje}
+                            value={form.message}
                             />                  
                         </InputWithLabel>
                     </WrapperDirection>

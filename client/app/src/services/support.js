@@ -3,11 +3,11 @@ const uri = "https://pumacoin-backend.herokuapp.com/api/support";
 
 
 
-export const sendEmail = async (email) => {
+export const sendEmail = async (data) => {
 
     try {
 
-        const response = await axios.post(uri, email);
+        const response = await axios.post(uri, data);
         return response.data;
 
     } catch (error) {
