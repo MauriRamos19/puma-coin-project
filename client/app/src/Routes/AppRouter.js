@@ -17,6 +17,9 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
+import OldCostumer from '../Pages/OldCostumer/OldCostumer';
+import NewCostumer from '../Pages/NewCostumer/NewCostumer';
+import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
 library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite)
 
@@ -32,7 +35,11 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/trade" element={<Trade />} />
+                    <Route path="/trade" element={<Trade/>}>
+                        <Route path="/trade" element={<TradeMenu />} />
+                        <Route path="/trade/old-costumer" element={<OldCostumer />} />
+                        <Route path="/trade/new-costumer" element={<NewCostumer />} />
+                    </Route>
                     <Route path="/support" element={<Support />} />
                     <Route path="/settings" element={<Settings />} />
                 </Route>
