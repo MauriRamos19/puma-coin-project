@@ -60,11 +60,11 @@ const Home = (props) => {
 							<InputWithLabel label="Recibes">
 								<WrapperDirection className="Home__form__input">
 									<input type="text" name="getClient" id="getClient" />
-									<span>Puma</span>
+									<span>PUMA</span>
 								</WrapperDirection>
 							</InputWithLabel>
 
-							<Button type="button">Compra Ahora</Button>
+							<Button type="button" >Compra Ahora</Button>
 						</form>
 					</div>
 				</div>
