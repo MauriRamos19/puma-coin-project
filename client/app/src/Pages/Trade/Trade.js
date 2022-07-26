@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Trade.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {conectWallet} from '../../Layouts/Transactions/conectWallet';
+import { ConectWallet } from '../../Layouts/Transactions/conectWallet';
 
 
 const Trade = (props) => {
@@ -25,7 +25,7 @@ const Trade = (props) => {
                     </div>
                 </div>
                 <div>
-                    {conectWallet()}
+                    {ConectWallet()}
                 </div>
             </div>
         </div>
