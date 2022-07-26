@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -26,3 +27,8 @@ yarn-error.log*
 
 # env
 .env
+=======
+node_modules
+.env
+HerokuDeploy
+>>>>>>> 97540855e830d81e2d0f9e3590a5b5016a96e184

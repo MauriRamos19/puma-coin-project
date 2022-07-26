@@ -27,9 +27,12 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: process.env.BASE_URL,
+            origin: "*",
             credentials: true,
-            methods: ['GET', 'POST', 'PUT', 'DELETE']
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
         }));
         this.app.use(express.json())
         this.app.use(cookieParser());

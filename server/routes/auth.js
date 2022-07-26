@@ -5,8 +5,7 @@ const { isValidPassword, existEmail } = require("../helpers/db-validators");
 const { validateFields } = require("../middlewares/validate-fields");
 const { validateJWT } = require("../middlewares/validate-JWT");
 const router = Router();
-
-
+const cors = require('cors');
 
 router.post('/login', [
     check('email', 'Email is required').isEmail(),
@@ -34,4 +33,11 @@ router.put('/finish-register/:id', finishRegister);
 
 
 router.get('/', validateJWT, renewToken);
+
+router.use(
+    cors({
+        credentials: true,
+        origin: ["http://localhost:3000/", "https://pumacoin-finance.web.app/", "https://api.devnet.solana.com/"]
+    })
+);
 module.exports = router;
