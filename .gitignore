@@ -1,3 +1,34 @@
+<<<<<<< HEAD
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+client
+client/node_modules
+
+# testingcd 
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+=======
 node_modules
 .env
 HerokuDeploy
+>>>>>>> 97540855e830d81e2d0f9e3590a5b5016a96e184
