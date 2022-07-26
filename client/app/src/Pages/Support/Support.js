@@ -12,7 +12,7 @@ import { getInfoAccount, putInfoAccount } from "../../services/settings";
 
 import "./Support.css";
 import Button from "../../Components/Button/Button";
-import { sendEmail } from "../../services/support";
+import { sendEmail } from "../../services/supportEmail";
 
 
 
@@ -23,7 +23,7 @@ const Support = (props) => {
         name: "",
         email: "",
         subject: "",
-        mensaje: ""
+        message: ""
     });
 
     const onChangeHandler = (evt) => {
