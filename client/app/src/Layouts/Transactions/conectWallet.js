@@ -10,7 +10,7 @@ import Button from "../../Components/Button/Button";
 
 
 //Red de solana a conectar
-const network = clusterApiUrl('testnet');
+const network = clusterApiUrl('devnet');
 
 //Variables para manejo de wallet conectada
 const { SystemProgram, Keypair } = web3;
