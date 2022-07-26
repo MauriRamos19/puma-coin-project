@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Suspense, useRef, useState } from "react";
 import Button from "../../Components/Button/Button";
 import InputWithLabel from "../../Components/InputWithLabel/InputWithLabel";
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 import moneda from '../../Assets/images/moneda.png'
 import logoIs from '../../Assets/images/logoIs.png'
 import tarjeta from '../../Assets/images/tarjetaUnah.png'
+import model2 from '../../Assets/images/model (2).png'
+import moneda3D from '../../Assets/moneda.glb'
 
 
 import "./Home.css";
@@ -35,9 +37,10 @@ const Home = (props) => {
 					<div className="Home__image">
 						<img className='Home__img_logoIS' src={logoIs} />
 					</div>
-					<div className="Home__image">
-						<img className='Home__img_coin' src={moneda} />
+					<div className="Home__image rebote">
+						<img className='Home__img_coin' src={model2} />
 					</div>
+					<model-viewer src={moneda3D} camera-controls auto-rotate disable-zoom camera-orbit></model-viewer>
 			</div>
 			<div className="Home__first_column_wrapper">
 				<div className="myDIV">
@@ -45,14 +48,7 @@ const Home = (props) => {
 						<h1>PumaCoin</h1>
 					</div>
 					<div>
-						<form className="Home__form">
-
-							<InputWithLabel label="Recibes">
-								<WrapperDirection className="Home__form__input">
-									<input type="text" name="getClient" id="getClient" />
-									<span>Puma</span>
-								</WrapperDirection>
-							</InputWithLabel>
+						<form className="Home__form">							
 
 							<InputWithLabel label="Inviertes">
 								<WrapperDirection className="Home__form__input">
@@ -61,11 +57,19 @@ const Home = (props) => {
 								</WrapperDirection>
 							</InputWithLabel>
 
+							<InputWithLabel label="Recibes">
+								<WrapperDirection className="Home__form__input">
+									<input type="text" name="getClient" id="getClient" />
+									<span>Puma</span>
+								</WrapperDirection>
+							</InputWithLabel>
+
 							<Button type="button">Compra Ahora</Button>
 						</form>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	);
 };

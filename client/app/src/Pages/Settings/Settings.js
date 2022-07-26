@@ -236,7 +236,12 @@ const Settings = () => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <Button type="submit" onClick={onClickHandler}>Actulizar</Button>
+          <WrapperDirection>
+            <Button type="submit" onClick={onClickHandler}>Actulizar</Button>
+            
+            <Button type="submit" onClick={onClickHandler}>Borrar</Button>         
+          </WrapperDirection>
+          
         </div>
       </form>
     </div>

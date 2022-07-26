@@ -7,6 +7,9 @@ import { WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import AppRouter from './Routes/AppRouter';
 
+
+
+
 import './index.css';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -17,6 +20,8 @@ const wallets = [
 	/* view list of available wallets at https://github.com/solana-labs/wallet-adapter#wallets */
 	new PhantomWalletAdapter()
 ]
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +34,8 @@ root.render(
 			</WalletProvider>
 		</ConnectionProvider>
 	</React.StrictMode>
+		
+	
 );
 
 // If you want to start measuring performance in your app, pass a function
