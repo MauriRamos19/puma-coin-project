@@ -1,6 +1,6 @@
 
 const axios = require("axios").default;
-const uri = "http://localhost:8899/api";
+const uri = "https://pumacoin-backend.herokuapp.com/api/password-reset";
 
 
 
@@ -34,6 +34,22 @@ export const putInfoAccount = async (user) => {
         } catch (error) {
         
             console.error(`Algo salio mal en la funcion putInfo, aqui esta el error: `, error);
+            return false;
+        }
+}
+
+
+export const deleteAccount = async () => {
+        
+        try {
+    
+            const data = await axios.delete(uri + '/settings/account',{withCredentials:true}).then(res => res.data);
+        
+            return data;
+    
+        } catch (error) {
+    
+            console.error(`Algo salio mal en la funcion deleteAccount, aqui esta el error: `, error);
             return false;
         }
 }

@@ -12,28 +12,18 @@ import { getInfoAccount, putInfoAccount } from "../../services/settings";
 
 import "./Support.css";
 import Button from "../../Components/Button/Button";
+import { sendEmail } from "../../services/support";
 
 
 
 const Support = (props) => {
 
-
-    let { userID } = useParams();
     const navigate = useNavigate()
-    const [user, setUser] = useState({
-        name_soporte: '',
-        lastName: '',
-        img: '',
-        asunto: '',
-        phone: '',
-        address: '',
-        address2: '',
-        mensaje: '',
-        country: '',
-        department: '',
-        city: '',
-        zipCode: '',
-        userType: 'natural'
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        mensaje: ""
     });
 
     const onChangeHandler = (evt) => {
@@ -41,7 +31,7 @@ const Support = (props) => {
         const propery = evt.target.name;
         const value = evt.target.value;
 
-        setUser(prev => Object.assign({}, {
+        setForm(prev => Object.assign({}, {
             ...prev,
             [propery]: value
         }));
@@ -50,6 +40,19 @@ const Support = (props) => {
     const goBack = () => {
         navigate(-1);
     }
+
+    const handleSendEmail = async () => {
+        try {
+            const data = await sendEmail(form);
+        
+            if (data) {
+                alert('Mensaje enviado');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
 
     return (
@@ -79,7 +82,7 @@ const Support = (props) => {
                             name="name_soporte"
                             placeholder="Nombre"
                             onChange={onChangeHandler}
-                            value={user.name_soporte}
+                            value={form.name_soporte}
                             />
                         </InputWithLabel>                                                
                         </WrapperDirection>
@@ -89,7 +92,7 @@ const Support = (props) => {
                             name="email"
                             placeholder="correo electronico"
                             onChange={onChangeHandler}
-                            value={user.email}
+                            value={form.email}
                             />                  
                         </InputWithLabel>
                         <InputWithLabel label = "Asunto">
@@ -98,21 +101,21 @@ const Support = (props) => {
                             name="asunto"
                             placeholder="asunto"
                             onChange={onChangeHandler}
-                            value={user.asunto}
+                            value={form.asunto}
                             />                  
                         </InputWithLabel>
                         <InputWithLabel label = "Mensaje">
-                            <input 
+                            <textarea 
                             type="text"
                             name="mensaje"
                             placeholder=""
                             onChange={onChangeHandler}
-                            value={user.mensaje}
+                            value={form.mensaje}
                             />                  
                         </InputWithLabel>
                     </WrapperDirection>
                 </div>
-			     <Button > Enviar </Button>
+			     <Button onClick={handleSendEmail}> Enviar </Button>
             </form>
             </div>  
               
