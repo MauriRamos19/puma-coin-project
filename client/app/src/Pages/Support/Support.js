@@ -107,6 +107,7 @@ const Support = (props) => {
                         </InputWithLabel>
                         <InputWithLabel label = "Mensaje">
                             <textarea 
+                            rows = "10"
                             type="text"
                             name="message"
                             placeholder=""
