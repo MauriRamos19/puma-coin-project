@@ -1,0 +1,66 @@
+.Trade__image {
+    display: flex;
+    position: fixed;
+    align-items: center;
+}
+
+.Trade__img_waiting {
+    position: fixed;
+    display: flex;
+    width: auto;
+    height: 300px;
+    top: 29%;
+    left: 27%;
+}
+.Trade_column{
+    position:fixed;
+    padding-left: 400px;
+    margin-left: 20px;
+}
+.Trade__wrapper {
+    display: flex;
+    gap: 2rem;
+    padding-top: 100px;
+    padding-left: 350px;
+}
+
+.Trade__card {
+    width: 320px;
+    padding: 30px;
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #3977b5;
+    color: initial;
+    text-decoration: none;
+    border-radius: 50px;
+}
+
+.Trade__card .icon {
+    font-size: 3em;
+    color: #3977b5;
+    
+}
+
+.Trade__card:hover .icon {
+    font-size: 3em;
+    color: #3977b5;
+    animation: rotatelogo infinite 5s linear;
+}
+
+.Trade__card:hover {
+    box-shadow: 0 0 10px rgba(57, 119, 181, 0.3);
+    transform: scale(1.01);
+    color: #0783ff;
+    
+}
+
+@keyframes rotatelogo {
+    from{
+        transform: rotate(0deg);
+    }to{
+        transform: rotate(360deg);
+    }
+}
