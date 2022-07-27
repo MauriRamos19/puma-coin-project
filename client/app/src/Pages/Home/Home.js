@@ -48,14 +48,7 @@ const Home = (props) => {
 						<h1>PumaCoin</h1>
 					</div>
 					<div>
-						<form className="Home__form">
-
-							<InputWithLabel label="Recibes">
-								<WrapperDirection className="Home__form__input">
-									<input type="text" name="getClient" id="getClient" />
-									<span>Puma</span>
-								</WrapperDirection>
-							</InputWithLabel>
+						<form className="Home__form">							
 
 							<InputWithLabel label="Inviertes">
 								<WrapperDirection className="Home__form__input">
@@ -64,7 +57,14 @@ const Home = (props) => {
 								</WrapperDirection>
 							</InputWithLabel>
 
-							<Button type="button">Compra Ahora</Button>
+							<InputWithLabel label="Recibes">
+								<WrapperDirection className="Home__form__input">
+									<input type="text" name="getClient" id="getClient" />
+									<span>PUMA</span>
+								</WrapperDirection>
+							</InputWithLabel>
+
+							<Button type="button" >Compra Ahora</Button>
 						</form>
 					</div>
 				</div>

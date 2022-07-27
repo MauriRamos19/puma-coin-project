@@ -29,27 +29,36 @@ const wallets = [
 
 const connection = new Connection(network,opts.preflightCommitment);
 
-function GetProviderWallet(){
+export function ConectWallet (){
+
     const wallet = useWallet();
-    const provider = new AnchorProvider(
-        connection, wallet, opts.preflightCommitment,
-        );
-    return provider;
-}
+    function getProviderWallet(){
+        const provider = new AnchorProvider(
+            connection, wallet, opts.preflightCommitment,
+            );
+        return provider;
+    }
 
-export function conectWallet (){
-    return (
-        <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
-                Wallet conectada: {GetProviderWallet().wallet.publicKey.toString()}
-            </p>
-            <Button >Pide Solana</Button> 
-        </div>
-        );
-}
+    async function airdropSol() {    
+        const airdrop = await connection.requestAirdrop(getProviderWallet().wallet.publicKey,LAMPORTS_PER_SOL);
+        const signature = await connection.confirmTransaction(airdrop);
+        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ getProviderWallet().wallet.publicKey.toString())
+    }
 
-/*async function airdropSol() {    
-    const airdrop = await connection.requestAirdrop(GetProviderWallet().wallet.publicKey,1);
-    const signature = await connection.confirmTransaction(airdrop);
-    return signature;
-}*/
+    if (!wallet.connected){
+        return(
+            <div><p>Debe conectar la billetera/wallet</p></div>
+        );
+    }else{
+        return (
+            <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
+                    Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
+                </p>
+                <Button onClick={airdropSol}>Pide Solana</Button> 
+            </div>
+            );
+    }
+} 
+
+
 
