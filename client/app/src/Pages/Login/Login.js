@@ -35,7 +35,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		}
 
 
-		cookies.set("x_access_token", token, {maxAge: 60*60, HttpOnly: true, secure: true, sameSite: 'strict' });
+		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'none' });
 
 		navigate("/");
 	};
