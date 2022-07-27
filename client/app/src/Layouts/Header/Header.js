@@ -62,14 +62,14 @@ const Header = ({ cookies }) => {
                                 
                                 <li className ="Header__menu__item menu__item--show">
                                     
-                                <a href="#" className="Header__menu__link"><img src={user} /> <img src={arrow} class="Header__menu__arrow"/></a>
+                                <a href="#" className="Header__menu__link"><img src={user} /> <img src={arrow} className="Header__menu__arrow"/></a>
                                     
                                     <ul className = "Header__menu__nesting">
                                         
 
                                         <li className ="Header__menu__inside">
                                             <a>
-                                                <Link to='/settings' className='Header__account__login'> Perfil </Link>
+                                                <Link to='/settings'> Perfil </Link>
                                             </a>
                                         </li>
 
