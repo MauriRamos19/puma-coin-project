@@ -10,7 +10,7 @@ import Button from "../../Components/Button/Button";
 
 
 //Red de solana a conectar
-const network = clusterApiUrl('testnet');
+const network = clusterApiUrl('devnet');
 
 //Variables para manejo de wallet conectada
 const { SystemProgram, Keypair } = web3;
@@ -36,13 +36,13 @@ export function ConectWallet (){
         const provider = new AnchorProvider(
             connection, wallet, opts.preflightCommitment,
             );
-        console.log(wallet);
         return provider;
     }
 
     async function airdropSol() {    
         const airdrop = await connection.requestAirdrop(getProviderWallet().wallet.publicKey,LAMPORTS_PER_SOL);
         const signature = await connection.confirmTransaction(airdrop);
+        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ getProviderWallet().wallet.publicKey.toString())
     }
 
     if (!wallet.connected){

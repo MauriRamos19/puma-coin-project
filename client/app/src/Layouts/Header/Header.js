@@ -6,7 +6,7 @@ import { useCookies, withCookies } from 'react-cookie';
 import './Header.css'
 import arrow from '../../Assets/arrow.svg'
 import user from '../../Assets/user.svg'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 
@@ -55,35 +55,29 @@ const Header = ({ cookies }) => {
 
                 {isLoggedIn() ?
                     <div className='Header__account'>
-                         <a><WalletMultiButton /></a> 
+                        <WalletMultiButton />
                         <nav className="Header__Menu__navigation">
                             <ul className = "Header__Menu__desplegable">                             
-                                   
-                                
                                 <li className ="Header__menu__item menu__item--show">
-                                    
-                                <a href="#" className="Header__menu__link"><img src={user} /> <img src={arrow} className="Header__menu__arrow"/></a>
-                                    
+                                <a href="#" className="Header__menu__link">
+                                    <FontAwesomeIcon className="icon" icon="fa-solid fa-user" />
+                                    <FontAwesomeIcon className="Header__menu__arrow" icon="fa-solid fa-angle-down" />
+                                </a>
+                                    <div className="Header__div__menu">
                                     <ul className = "Header__menu__nesting">
-                                        
-
                                         <li className ="Header__menu__inside">
-                                            <a>
-                                                <Link to='/settings'> Perfil </Link>
-                                            </a>
+                                            <Link to='/settings' className='Header__account__login'> Perfil </Link>
                                         </li>
-
+                                        <hr/>
                                         <li className = "Header__menu__inside">
-                                            <a>
                                                 <Button
                                                 className='Header__account__logout'
                                                 onClick={logout}>
                                                 Salir
                                                 </Button>
-                                            </a>
                                         </li>
-                                    
-                                    </ul>                                   
+                                    </ul>        
+                                    </div>                           
                                 </li>
                                 
                                 

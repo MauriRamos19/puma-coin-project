@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown} from '@fortawesome/free-solid-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
@@ -17,8 +17,11 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
+import OldCostumer from '../Pages/OldCostumer/OldCostumer';
+import NewCostumer from '../Pages/NewCostumer/NewCostumer';
+import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
-library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite)
+library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown)
 
 
 const AppRouter = () => {
@@ -32,7 +35,11 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/trade" element={<Trade />} />
+                    <Route path="/trade" element={<Trade/>}>
+                        <Route path="/trade" element={<TradeMenu />} />
+                        <Route path="/trade/old-costumer" element={<OldCostumer />} />
+                        <Route path="/trade/new-costumer" element={<NewCostumer />} />
+                    </Route>
                     <Route path="/support" element={<Support />} />
                     <Route path="/settings" element={<Settings />} />
                 </Route>

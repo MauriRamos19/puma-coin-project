@@ -30,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<ConnectionProvider endpoint={network}>
-			<WalletProvider wallets={wallets} autoConnect>
+			<WalletProvider wallets={wallets}>
 				<WalletModalProvider>
 					<AppRouter />
 				</WalletModalProvider>
