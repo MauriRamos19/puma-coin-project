@@ -1,18 +1,12 @@
-<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
-<<<<<<<< HEAD:.gitignore
-client
 client/node_modules
 
 # testingcd 
-========
-# testing
->>>>>>>> 49e08c092e1c1d8e5db572345ec7b8a506f73862:conectWallet/app/.gitignore
 /coverage
 
 # production
@@ -28,8 +22,6 @@ client/node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-=======
-node_modules
+
+# env
 .env
-HerokuDeploy
->>>>>>> be192daea2feb80334c00ee12f3b211675f6c199
