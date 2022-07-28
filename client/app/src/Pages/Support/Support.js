@@ -8,7 +8,7 @@ import unah from "../../Assets/images/unah.png";
 import poli from "../../Assets/images/poli.png";
 import facultad from "../../Assets/images/facultad.png";
 import UNAH_1847 from "../../Assets/images/UNAH_1847(1).png";
-import { getInfoAccount, putInfoAccount } from "../../services/settings";
+// import { getUser, editUser } from "../../services/user";
 
 import "./Support.css";
 import Button from "../../Components/Button/Button";
@@ -107,9 +107,10 @@ const Support = (props) => {
                         </InputWithLabel>
                         <InputWithLabel label = "Mensaje">
                             <textarea 
+                            rows = "10"
                             type="text"
                             name="message"
-                            placeholder=""
+                            placeholder="Cuentanos más acerca de tu problema."
                             onChange={onChangeHandler}
                             value={form.message}
                             />                  

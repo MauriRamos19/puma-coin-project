@@ -5,22 +5,27 @@ import {
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
+
 
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
 
 //Variables para manejo de wallet conectada
+
 const { SystemProgram, Keypair } = web3;
+
 const opts = {
     preflightCommitment: "processed"
 }
 
 //Direccion del contrato del programa (Deploy Anchor)
 const programID = new PublicKey(idl.metadata.address);
-const baseAccount = Keypair.generate();
+
+//direccion autoridad mint
+const mintAuth = new PublicKey('7DXB18p5BQBwZpmVDu3RtyG34Jc6cQhPtz6ReVtGr1Jg')
 //Billeteras conectadas
 const wallets = [
     new PhantomWalletAdapter(),
@@ -28,8 +33,12 @@ const wallets = [
 ]
 
 const connection = new Connection(network,opts.preflightCommitment);
+//direccion del token
+const tokenContract = new PublicKey("ND8Hje1MuZUqMYbxSh8gQCooMSuddky1NBwmX5NpsM9")
 
 export function ConectWallet (){
+    const [message, setMessage] = useState({ active: false });
+
 
     const wallet = useWallet();
     function getProviderWallet(){
@@ -40,25 +49,55 @@ export function ConectWallet (){
     }
 
     async function airdropSol() {    
-        const airdrop = await connection.requestAirdrop(getProviderWallet().wallet.publicKey,LAMPORTS_PER_SOL);
+        const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
         const signature = await connection.confirmTransaction(airdrop);
-        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ getProviderWallet().wallet.publicKey.toString())
+        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey)
     }
+    
+    useEffect(() => {
+        
+        if(!wallet.connected) {
+            setMessage({
+                active: false,
+                type: "error",
+                message: "No se pudo conectar con la wallet",
+            });
+        } else {
+            setMessage({
+                active: true,
+                type: "alert",
+                message: "Wallet conectada",
+            });
+        }
+    }
+    , [wallet]);
 
-    if (!wallet.connected){
-        return(
-            <div><p>Debe conectar la billetera/wallet</p></div>
-        );
-    }else{
-        return (
-            <div><p>Wallet generada: {baseAccount.publicKey.toString()} <br/>
-                    Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
-                </p>
-                <Button onClick={airdropSol}>Pide Solana</Button> 
-            </div>
-            );
-    }
+
+    
+    return (
+        <div>
+            {
+                !wallet.connected ? (
+                <div>
+                    <p>{message.message}</p>
+                 </div>
+                ) : (
+                     <div>
+                        <Button onClick={airdropSol}>Pide Solana</Button> 
+                    </div>
+                )
+                
+            }
+        </div>
+    )
+
+    
+        
+
+      
 } 
+
+
 
 
 
