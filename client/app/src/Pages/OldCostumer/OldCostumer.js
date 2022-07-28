@@ -2,7 +2,8 @@ import React from 'react'
 import cargando from '../../Assets/images/cargando.png'
 import {  ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import "./OldCostumer.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getUser } from '../../services/user';
+
 const OldCostumer = (props) => {
 
     return (

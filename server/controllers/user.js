@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 
 
-const getInfoAccount = async(req,res=response) => {
+const getUser = async(req,res=response) => {
     
     try {
         
@@ -38,7 +38,7 @@ const getInfoAccount = async(req,res=response) => {
 
 
 
-const putInfoAccount = async (req, res) => {
+const editUser = async (req, res) => {
 
         const user = req.user;
 
@@ -178,7 +178,7 @@ const deleteAccount = async(req, res=response) => {
 
 
 module.exports = {
-    getInfoAccount,
-    putInfoAccount,
+    getUser,
+    editUser,
     deleteAccount
 };
