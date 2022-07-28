@@ -52,7 +52,7 @@ const login = async (req = request, res = response) => {
 
       
 
-        res.cookie('token',token );
+        req.headers.authorization = token;
         
 
         return res.
