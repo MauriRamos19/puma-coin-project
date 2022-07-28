@@ -35,10 +35,10 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		}
 
 
-		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'none' });
+		cookies.set("x_access_token", token, rehesap769@galotv.com);
 
 		navigate("/");
-	};
+	}; 
 
 	const onChangeHanlder = (evt) => {
 		setForm((prev) =>
