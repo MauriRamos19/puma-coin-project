@@ -9,7 +9,7 @@ const OldCostumer = (props) => {
     return (
         <div>
             <div>
-                <h2><FontAwesomeIcon icon="fa-brands fa-btc" />ienvenido {nombre}</h2>
+                <h2><FontAwesomeIcon icon="fa-brands fa-bitcoin-sign" />ienvenido {nombre}</h2>
             </div>
             {ConectWallet()}
         </div>
