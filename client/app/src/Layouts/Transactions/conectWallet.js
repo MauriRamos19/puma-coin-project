@@ -61,14 +61,14 @@ export function ConectWallet (){
             setMessage({
                 active: false,
                 type: "error",
-                billetera: wallet.publicKey,
                 message: "No se pudo conectar con la Billetera/Wallet. Verifique la conexión y vuelva a intentarlo.",
             });
         } else {
+            const billetera = wallet.publicKey
             setMessage({
                 active: true,
                 type: "alert",
-                message: "Billetera/Wallet conectada. La billetera que usará para realizar las transacciones es: ",
+                message: "Billetera/Wallet conectada. La billetera que usará para realizar las transacciones es: "+billetera,
             });
         }
     }
