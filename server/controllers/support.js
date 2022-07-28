@@ -1,11 +1,14 @@
 const {sendEmailToSupport} = require('../utils/sendEmailToSupport');
+const { supportEmail } = require('../public/templates.js')
 
-
-const receiveEmail = (req, res) => {
+const receiveEmail = async (req, res) => {
         
     const { name ,email, subject, message } = req.body;
 
-    sendEmailToSupport(name, email, subject, message);
+    const template = supportEmail(name, email, subject, message);
+
+    
+    await sendEmailToSupport("Support service",template);
 
     res.status(200).json({
         ok: true,
