@@ -52,7 +52,7 @@ const login = async (req = request, res = response) => {
 
       
 
-        res.cookie('token',token, { maxAge: 3600000 });
+        res.cookie('token',token );
         
 
         return res.
