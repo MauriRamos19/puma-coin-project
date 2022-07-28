@@ -7,6 +7,7 @@ import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adap
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { useState } from 'react';
 import Button from "../../Components/Button/Button";
+import Message from "../../Components/Message/Message";
 import {AccountLayout, TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, createMint, getMint} from "@solana/spl-token";
 
 //Red de solana a conectar
@@ -36,6 +37,9 @@ const connection = new Connection(network,opts.preflightCommitment);
 const tokenContract = new PublicKey("ND8Hje1MuZUqMYbxSh8gQCooMSuddky1NBwmX5NpsM9")
 
 export function ConectWallet (){
+    const [message, setMessage] = useState({ active: false });
+
+
     const wallet = useWallet();
     function getProviderWallet(){
         const provider = new AnchorProvider(
@@ -51,8 +55,12 @@ export function ConectWallet (){
     }
     
     if (!wallet.connected){     
+        setMessage({
+            active: true,
+            type: "error",
+        });
         return(
-            <div><p>Debe conectar la billetera/wallet</p></div>
+            <div><Message type={message.type} message="Debe conectar la Billetera/wallet" /></div>
         );
     }else{
         return (
