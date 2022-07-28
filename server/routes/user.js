@@ -1,14 +1,14 @@
 
 const router =  require('express').Router();
 
-const { getInfoAccount, putInfoAccount, deleteAccount } = require('../controllers/account');
+const { getUser, editUser, deleteAccount } = require('../controllers/user');
 const { validateJWT } = require('../middlewares/validate-JWT');
 
 
 
-router.get('/', validateJWT ,getInfoAccount);
+router.get('/', validateJWT ,getUser);
 
-router.put('/', validateJWT ,putInfoAccount);
+router.put('/', validateJWT ,editUser);
 
 router.delete('/', validateJWT ,deleteAccount);
 

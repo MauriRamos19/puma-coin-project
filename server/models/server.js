@@ -11,7 +11,7 @@ class Server {
         this.paths = {
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
-            account: "/api/settings/account",
+            user: "/api/user",
             support: "/api/support"
         }
 
@@ -43,7 +43,7 @@ class Server {
     routes = () => {
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
-        this.app.use(this.paths.account, require('../routes/account'));
+        this.app.use(this.paths.user, require('../routes/user'));
         this.app.use(this.paths.support, require('../routes/support'));
     }
 
