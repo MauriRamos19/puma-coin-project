@@ -4,10 +4,12 @@ const jwt = require('jsonwebtoken');
 const { isValidPassword } = require('../helpers/db-validators');
 const User = require('../models/user');
 
+
+
 const getInfoAccount = async(req,res=response) => {
     
     try {
-    
+        
         const user = req.user;
         
         if(!user) {
