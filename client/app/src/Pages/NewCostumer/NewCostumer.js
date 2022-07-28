@@ -4,8 +4,8 @@ import "./NewCostumer.css";
 
 const NewCostumer = (props) => {
     return (
-        <div className="Home__image">
-			<img className='Support__img_waiting' src={cargando} />
+        <div>
+			{ConectWallet()}
 		</div>
     )
 }

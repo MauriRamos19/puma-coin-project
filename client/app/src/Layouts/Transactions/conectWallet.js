@@ -30,7 +30,7 @@ const wallets = [
     new PhantomWalletAdapter(),
     new SolflareWalletAdapter()
 ]
-const randomAccount = Keypair.generate();
+
 const connection = new Connection(network,opts.preflightCommitment);
 //direccion del token
 const tokenContract = new PublicKey("ND8Hje1MuZUqMYbxSh8gQCooMSuddky1NBwmX5NpsM9")
