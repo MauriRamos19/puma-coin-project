@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const uri = "https://pumacoin-backend.herokuapp.com/api/auth";
+const uri = 'https://pumacoin-backend.herokuapp.com/api/auth';
 
 const register = async (user) => {
     try {

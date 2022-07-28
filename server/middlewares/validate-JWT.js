@@ -4,9 +4,9 @@ const User = require('../models/user');
 
 const validateJWT = async(req, res=response, next) => {
 
-    const token = req.headers['x-access-token'] || req.headers['Authorization'].split(' ')[1]  || req.headers['authorization'].split(' ')[1];
+    const token = req.header('authorization').split(' ')[1];
     
-
+   
     if(!token) {
         
         return res.status(401).json({
