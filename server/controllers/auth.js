@@ -51,8 +51,8 @@ const login = async (req = request, res = response) => {
         const token = await generateJWT(userDB.id);
 
       
-    
-        res.setHeader('Authorization', `Bearer ${token}`);
+
+        res.cookie('token',token, { maxAge: 3600000 });
         
 
         return res.
