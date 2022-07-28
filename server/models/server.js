@@ -31,8 +31,8 @@ class Server {
             origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com"],
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            //allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            //exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
             optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
         }));
         this.app.use(express.json())
