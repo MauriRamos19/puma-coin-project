@@ -7,7 +7,7 @@ import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adap
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { useState } from 'react';
 import Button from "../../Components/Button/Button";
-import Message from "../../Components/Message/Message";
+
 
 
 //Red de solana a conectar

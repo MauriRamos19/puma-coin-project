@@ -6,7 +6,7 @@ import { getInfoAccount } from '../../services/settings';
 
 const OldCostumer = (props) => {
 
-    const nombre = getInfoAccount.name
+    const nombre = getInfoAccount()
     return (
         <div>
             <div>
