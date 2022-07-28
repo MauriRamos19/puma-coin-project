@@ -5,7 +5,7 @@ import {
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
 
 
@@ -54,19 +54,47 @@ export function ConectWallet (){
         console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey)
     }
     
-    if (!wallet.connected){     
-        return(
-            <div>
-            <p>no conectada</p>
-            </div>
-        );
-    }else{
-        return (
-            <div>
-                <Button onClick={airdropSol}>Pide Solana</Button> 
-            </div>
-            );
+    useEffect(() => {
+        
+        if(!wallet.connected) {
+            setMessage({
+                active: false,
+                type: "error",
+                message: "No se pudo conectar con la wallet",
+            });
+        } else {
+            setMessage({
+                active: true,
+                type: "alert",
+                message: "Wallet conectada",
+            });
+        }
     }
+    , [wallet]);
+
+
+    
+    return (
+        <div>
+            {
+                !wallet.connected ? (
+                <div>
+                    <p>{message.message}</p>
+                 </div>
+                ) : (
+                     <div>
+                        <Button onClick={airdropSol}>Pide Solana</Button> 
+                    </div>
+                )
+                
+            }
+        </div>
+    )
+
+    
+        
+
+      
 } 
 
 

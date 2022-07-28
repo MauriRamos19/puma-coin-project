@@ -6,11 +6,10 @@ import { getInfoAccount } from '../../services/settings';
 
 const OldCostumer = (props) => {
 
-    const nombre = getInfoAccount()
     return (
         <div>
             <div>
-                <h2>Bienvenido {nombre}</h2>
+                <h2>Bienvenido</h2>
             </div>
             {ConectWallet()}
         </div>
