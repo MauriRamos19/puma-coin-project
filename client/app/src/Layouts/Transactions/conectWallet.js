@@ -64,9 +64,12 @@ export function ConectWallet (){
 
     async function getAccountToken(){
         const getMintedToken = await getMint(connection,tokenContract);
-        const fromTokenAccount = await getOrCreateAssociatedTokenAccount(connection,walletPublic,getMintedToken.mintAuthority,
-        walletPublic);
-        return console.log('Creando cuenta para: '+ fromTokenAccount.address.toString());
+       /* const fromTokenAccount = await getOrCreateAssociatedTokenAccount(connection,walletPublic,getMintedToken.mintAuthority,
+        walletPublic);*/
+        const transactionUserWallet = await connection.getAccountInfo(wallet.publicKey)
+        const prueba = await connection.getTransactions()
+        return console.log(transactionUserWallet.data()+prueba)
+        /*return console.log('Creando cuenta para: '+ fromTokenAccount.address.toString());*/
     }
     
     if (!wallet.connected){     
