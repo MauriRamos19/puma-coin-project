@@ -9,7 +9,11 @@ export const getInfoAccount = async (token) => {
     
         try {
     
-            const data = await axios.get(uri + '/settings/account',{withCredentials:true, headers: `Bearer ${token}`}).then(res => res.data);
+            const data = await axios.get(uri + '/settings/account',{withCredentials:true},  
+            {headers: {
+                'Authorization': `Bearer ${token}`
+            },mode:'cors'}
+            ).then(res => res.data);
           
             return data;
     
