@@ -3,6 +3,8 @@ var cors = require('cors')
 const { dbConnection } = require('../database/config')
 
 var cookieParser = require('cookie-parser')
+const cookieSession = require('cookie-session')
+const session = require('express-session')
 class Server {
 
     constructor() {
@@ -33,7 +35,7 @@ class Server {
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
             exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
+            optionsSuccessStatus: 200 
         }));
         this.app.use(express.json())
         this.app.use(cookieParser());
