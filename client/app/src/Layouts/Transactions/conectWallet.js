@@ -63,10 +63,13 @@ export function ConectWallet (){
             <div><Message type={message.type} message="Debe conectar la Billetera/wallet" /></div>
         );
     }else{
+        setMessage({
+            active: true,
+            type: "alert",
+        });
         return (
-            <div><p>
-                    Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
-                </p>
+            <div>
+                <Message type={message.type} message=" Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}" />
                 <Button onClick={airdropSol}>Pide Solana</Button> 
             </div>
             );
