@@ -50,11 +50,6 @@ const login = async (req = request, res = response) => {
 
         const token = await generateJWT(userDB.id);
 
-      
-
-        req.headers.authorization = token;
-        
-
         return res.
             status(200)
             .json({

@@ -5,11 +5,11 @@ const uri = "https://pumacoin-backend.herokuapp.com/api";
 
 
 
-export const getInfoAccount = async () => {
+export const getInfoAccount = async (token) => {
     
         try {
     
-            const data = await axios.get(uri + '/settings/account',{withCredentials:true}).then(res => res.data);
+            const data = await axios.get(uri + '/settings/account',{withCredentials:true, headers: `Bearer ${token}`}).then(res => res.data);
           
             return data;
     

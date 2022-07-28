@@ -11,8 +11,8 @@ import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection
 import "./Settings.css";
 import { getInfoAccount, putInfoAccount } from "../../services/settings";
 import { useNavigate } from "react-router-dom";
-
-const Settings = () => {
+import { withCookies, Cookies } from "react-cookie";
+const Settings = ({withCookies, cookies}) => {
   
   const navigate = useNavigate();
 
@@ -37,7 +37,8 @@ const Settings = () => {
 
   useEffect(  () => {
 
-    getInfoAccount().then(data => {
+    const token = cookies.get('x_access_token')
+    getInfoAccount(token).then(data => {
       setUser( (prev) => {
         return {
           ...prev,
@@ -47,7 +48,7 @@ const Settings = () => {
     });
 
   
-  }, [])
+  }, [cookies]);
   
 
   const onChangeHandler = (evt) => {
@@ -248,4 +249,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default withCookies(Settings);
