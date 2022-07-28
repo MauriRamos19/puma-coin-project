@@ -56,7 +56,7 @@ export function ConectWallet (){
 
     async function transacciones(){
         const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey)
-        console.log(signatureTransactiones[0].signature+"]")
+        console.log(signatureTransactiones[0].signature)
     }
     
     useEffect(() => {
