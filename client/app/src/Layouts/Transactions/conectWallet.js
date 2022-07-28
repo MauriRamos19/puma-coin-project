@@ -8,7 +8,7 @@ import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-ad
 import { useState } from 'react';
 import Button from "../../Components/Button/Button";
 import Message from "../../Components/Message/Message";
-import {AccountLayout, TOKEN_PROGRAM_ID, getOrCreateAssociatedTokenAccount, createMint, getMint} from "@solana/spl-token";
+
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -55,21 +55,14 @@ export function ConectWallet (){
     }
     
     if (!wallet.connected){     
-        setMessage({
-            active: true,
-            type: "error",
-        });
         return(
-            <div><Message type={message.type} message="Debe conectar la Billetera/wallet" /></div>
+            <div>
+            <p>no conectada</p>
+            </div>
         );
     }else{
-        setMessage({
-            active: true,
-            type: "alert",
-        });
         return (
             <div>
-                <Message type={message.type} message=" Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}" />
                 <Button onClick={airdropSol}>Pide Solana</Button> 
             </div>
             );
