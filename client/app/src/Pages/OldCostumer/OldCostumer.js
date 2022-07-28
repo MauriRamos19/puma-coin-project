@@ -5,11 +5,10 @@ import "./OldCostumer.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const OldCostumer = (props) => {
 
-    const nombre = ""
     return (
         <div>
             <div>
-                <h2><FontAwesomeIcon icon="fa-brands fa-bitcoin-sign" />ienvenido {nombre}</h2>
+                <h2>Bienvenido</h2>
             </div>
             {ConectWallet()}
         </div>
