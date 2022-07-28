@@ -37,39 +37,17 @@ const tokenContract = new PublicKey("ND8Hje1MuZUqMYbxSh8gQCooMSuddky1NBwmX5NpsM9
 
 export function ConectWallet (){
     const wallet = useWallet();
-    const walletPublic = new web3.PublicKey(wallet.publicKey)
     function getProviderWallet(){
         const provider = new AnchorProvider(
             connection, wallet, opts.preflightCommitment,
             );
         return provider;
     }
-    async function prueba(){
-        const airdropWallet = await connection.requestAirdrop(randomAccount.publicKey,LAMPORTS_PER_SOL);
-        const signature = await connection.confirmTransaction(airdropWallet);
-        console.log(airdropWallet)
-        const getMints = await getMint(connection,tokenContract);
-        const mint = await createMint(connection,randomAccount,randomAccount.publicKey,null,9);
-        console.log("token "+ mint)
-        const tokenaccountPrueba = await getOrCreateAssociatedTokenAccount(connection,randomAccount,
-            mint,randomAccount.publicKey)
-        console.log('cuenta creada '+tokenaccountPrueba.address)
-    }
 
     async function airdropSol() {    
         const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
         const signature = await connection.confirmTransaction(airdrop);
         console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey)
-    }
-
-    async function getAccountToken(){
-        const getMintedToken = await getMint(connection,tokenContract);
-       /* const fromTokenAccount = await getOrCreateAssociatedTokenAccount(connection,walletPublic,getMintedToken.mintAuthority,
-        walletPublic);*/
-        const transactionUserWallet = await connection.getAccountInfo(wallet.publicKey)
-        const prueba = await connection.getTransactions()
-        return console.log(transactionUserWallet.data()+prueba)
-        /*return console.log('Creando cuenta para: '+ fromTokenAccount.address.toString());*/
     }
     
     if (!wallet.connected){     
@@ -82,7 +60,6 @@ export function ConectWallet (){
                     Wallet conectada: {getProviderWallet().wallet.publicKey.toString()}
                 </p>
                 <Button onClick={airdropSol}>Pide Solana</Button> 
-                <Button onClick={getAccountToken}>Tokens</Button> 
             </div>
             );
     }
