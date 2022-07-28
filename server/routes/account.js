@@ -12,12 +12,6 @@ router.put('/', validateJWT ,putInfoAccount);
 
 router.delete('/', validateJWT ,deleteAccount);
 
-router.use(
-    cors({
-        credentials: true,
-        origin: ["http://localhost:3000/", "https://pumacoin-finance.web.app/settings", "https://api.devnet.solana.com/"]
-    })
-);
 
 
 module.exports = router;
