@@ -7,6 +7,7 @@ import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adap
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
+import Message from '../../Components/Message/Message';
 
 
 
@@ -60,13 +61,14 @@ export function ConectWallet (){
             setMessage({
                 active: false,
                 type: "error",
-                message: "No se pudo conectar con la wallet",
+                billetera: wallet.publicKey,
+                message: "No se pudo conectar con la Billetera/Wallet. Verifique la conexión y vuelva a intentarlo.",
             });
         } else {
             setMessage({
                 active: true,
                 type: "alert",
-                message: "Wallet conectada",
+                message: "Billetera/Wallet conectada. La billetera que usará para realizar las transacciones es: ",
             });
         }
     }
@@ -79,10 +81,11 @@ export function ConectWallet (){
             {
                 !wallet.connected ? (
                 <div>
-                    <p>{message.message}</p>
-                 </div>
+                    <Message type={message.type} message={message.message} />
+                </div>
                 ) : (
-                     <div>
+                    <div>
+                        <Message type={message.type} message={message.message} />
                         <Button onClick={airdropSol}>Pide Solana</Button> 
                     </div>
                 )
