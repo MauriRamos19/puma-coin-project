@@ -2,15 +2,14 @@ import React from 'react'
 import cargando from '../../Assets/images/cargando.png'
 import {  ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import "./OldCostumer.css";
-import { getInfoAccount } from '../../services/settings';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const OldCostumer = (props) => {
 
-    const nombre = getInfoAccount()
+    const nombre = ""
     return (
         <div>
             <div>
-                <h2>Bienvenido {nombre}</h2>
+                <h2><FontAwesomeIcon icon="fa-brands fa-btc" />ienvenido {nombre}</h2>
             </div>
             {ConectWallet()}
         </div>
