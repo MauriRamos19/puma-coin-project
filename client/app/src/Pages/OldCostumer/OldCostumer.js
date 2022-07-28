@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import cargando from '../../Assets/images/cargando.png'
 import {  ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import "./OldCostumer.css";
 import { withCookies } from "react-cookie";
@@ -18,7 +17,8 @@ const OldCostumer = ({cookies}) => {
     return (
         <div>
             <div>
-                <h2>Bienvenido {name}</h2>
+                <h2>Bienvenido {name}, es bueno verte de vuelta.</h2>
+                <h3>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
             </div>
             {ConectWallet()}
         </div>

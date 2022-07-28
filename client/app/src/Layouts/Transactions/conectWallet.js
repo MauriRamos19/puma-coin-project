@@ -19,7 +19,7 @@ const network = clusterApiUrl('devnet');
 const { SystemProgram, Keypair } = web3;
 
 const opts = {
-    preflightCommitment: "processed"
+    preflightCommitment: "confirmed"
 }
 
 //Direccion del contrato del programa (Deploy Anchor)
@@ -51,8 +51,12 @@ export function ConectWallet (){
 
     async function airdropSol() {    
         const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
-        const signature = await connection.confirmTransaction(airdrop);
-        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey)
+        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey);
+    }
+
+    async function transacciones(){
+        const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey)
+        console.log(signatureTransactiones[0].signature+"]")
     }
     
     useEffect(() => {
@@ -65,6 +69,7 @@ export function ConectWallet (){
             });
         } else {
             const billetera = wallet.publicKey
+            
             setMessage({
                 active: true,
                 type: "alert",
@@ -86,7 +91,8 @@ export function ConectWallet (){
                 ) : (
                     <div>
                         <Message type={message.type} message={message.message} />
-                        <Button onClick={airdropSol}>Pide Solana</Button> 
+                        <Button onClick={airdropSol}>Pide Solana</Button>
+                        <Button onClick={transacciones}>Ver la Transaccion</Button>
                     </div>
                 )
                 
