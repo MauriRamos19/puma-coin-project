@@ -32,8 +32,8 @@ class Server {
         "https://pumacoin-backend.herokuapp.com"],
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
+            exposedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
             optionsSuccessStatus: 200
         }));
         this.app.use(express.json())
