@@ -10,3 +10,7 @@
 .OldCostumer__h3 {
     padding-left: 270px;
 }
+
+.rebote {
+    animation: 3s ease-in-out 0.66s infinite normal none running rebote
+}
