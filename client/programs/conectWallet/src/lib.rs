@@ -18,6 +18,11 @@ pub mod conect_wallet {
         base_account.count += 1;
         Ok(())
     }
+
+    pub fn create_token_account(ctx: Context<CreateAccountToken>) -> ProgramResult {
+        let base_account = &mut ctx.accounts.base_account;
+        Ok(())
+    }
 }
 
 #[derive(Accounts)]
@@ -29,6 +34,14 @@ pub struct Create<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
     pub system_program: Program <'info, System>,
+}
+#[derive(Accounts)]
+pub struct  CreateAccountToken<'info>{
+#[account(init, payer = user, space = 16 + 16)]
+pub base_account: Account<'info, BaseAccount>,
+#[account(mut)]
+pub user: Signer<'info>,
+pub system_program: Program <'info, System>,
 }
 
 // Transaction instructions
