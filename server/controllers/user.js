@@ -25,7 +25,6 @@ const getUser = async(req,res=response) => {
             ok: true,
             user
         });
-dsa
 
     } catch (error) {
         res.status(500).json({
