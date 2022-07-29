@@ -93,4 +93,121 @@ const templatePasswordReset = (email,link) => `<div style="
 </div>`
 
 
-module.exports = templatePasswordReset;
+const supportEmail  = (name,email,subject,message) => `
+<div 
+    style="
+        width:100%;
+        height:100%;
+        background-color: #fbfbfb;
+        padding: 30px 0;
+    "
+>
+    <table 
+        style="
+            width:30%;
+            min-width: 500px;
+            background-color: rgb(238, 238, 238);
+            margin: 0 auto;
+            text-align: center;
+    ">
+
+        <tr 
+            style="
+                background-color: rgb(255, 255, 255);
+                height: auto;
+        ">
+            <td>
+                <a href="https://pumacoin-finance.web.app/">
+                    <img 
+                        src="https://styles.redditmedia.com/t5_2ccx1v/styles/communityIcon_tfy0xb1d5m941.png?width=256&s=6bcb2bb377d2dde78d499f68ba19c4fc389f2b3f"
+                        style="
+                            height: 80px;
+                            width: auto;
+                        "
+                        alt="Puma Coin App"
+                    />
+                </a>
+            </td>
+        </tr>
+
+        <tr 
+            style="
+                background-color: rgb(245, 245, 245);
+        ">
+            <td style="padding: 20px 0">
+                <h2 style="
+                    color: #266FB6; 
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                ">
+                    Soporte
+                </h2>
+                <p>Un usuario ha solicitado ayuda</p>
+            </td>
+        </tr>
+        
+        <tr 
+            style="
+                background-color: rgb(255, 255, 255);  
+                text-align: start;
+        ">
+            <td
+                style="
+                    padding: 30px 0;
+                "
+            >
+                <table 
+                    width="80%"
+                    style="
+                        margin: 0 auto;
+                    "
+                >
+                    <tr>
+                        <td>
+                            <h5 style="margin: 7px 0px">Name</h5>
+                            <p  style="margin: 7px 0px">${name}</p>
+                            <hr style="color: rgba(0,0,0, 0.2)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5 style="margin: 7px 0px">Email</h5>
+                            <p style="margin: 7px 0px">${email}</p>
+                            <hr style="color: rgba(0,0,0, 0.2)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5 style="margin: 7px 0px">Subject</h5>
+                            <p style="margin: 7px 0px">${subject}</p>
+                            <hr style="color: rgba(0,0,0, 0.2)">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5 style="margin: 7px 0px">Message</h5>
+                            <p style="margin: 7px 0px">${message}</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <p style=" 
+        margin: 20px 0;
+        text-align: center;
+    ">
+        <span>
+            copyright © 2022 
+            <a 
+                href="https://pumacoin-finance.web.app/"
+                style="text-decoration: unset">
+                PumaCoin
+            </a>
+        </span>
+    </p>
+</div>
+`
+
+module.exports = {templatePasswordReset, supportEmail};
