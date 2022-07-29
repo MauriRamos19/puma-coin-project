@@ -15,7 +15,6 @@ export const getUser = async (token) => {
             },  
             
             ).then(res => res.data);
-          
             return data;
     
         } catch (error) {
