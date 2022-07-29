@@ -107,9 +107,10 @@ const Support = (props) => {
                         </InputWithLabel>
                         <InputWithLabel label = "Mensaje">
                             <textarea 
-                            type="text"
+                            rows="10"
+                            type="text"                            
                             name="message"
-                            placeholder=""
+                            placeholder="Escriba su mensaje aqui"
                             onChange={onChangeHandler}
                             value={form.message}
                             />                  
