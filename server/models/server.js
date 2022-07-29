@@ -31,8 +31,8 @@ class Server {
             origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com","https://pumacoin-backend.herokuapp.com"],
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
-            exposedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
+            allowedHeaders: ['Content-Type', 'Authorization',  'Origin'],
+            exposedHeaders: ['Content-Type', 'Authorization',  'Origin'],
             optionsSuccessStatus: 200
         }));
         this.app.use(express.json())
