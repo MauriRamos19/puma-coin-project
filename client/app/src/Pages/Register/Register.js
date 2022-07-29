@@ -41,7 +41,7 @@ const Register = ({ cookies ,dispatchModal }) => {
             return;
         }
 
-        cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
+        cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'none' });
         navigate('/');
 
         dispatchModal({ type: "completeRegister" });
