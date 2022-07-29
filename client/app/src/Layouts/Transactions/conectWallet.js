@@ -7,6 +7,7 @@ import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adap
 import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
+import Message from '../../Components/Message/Message';
 
 
 
@@ -18,7 +19,7 @@ const network = clusterApiUrl('devnet');
 const { SystemProgram, Keypair } = web3;
 
 const opts = {
-    preflightCommitment: "processed"
+    preflightCommitment: "confirmed"
 }
 
 //Direccion del contrato del programa (Deploy Anchor)
@@ -50,8 +51,12 @@ export function ConectWallet (){
 
     async function airdropSol() {    
         const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
-        const signature = await connection.confirmTransaction(airdrop);
-        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey)
+        console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey);
+    }
+
+    async function transacciones(){
+        const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey)
+        console.log(signatureTransactiones[0].signature)
     }
     
     useEffect(() => {
@@ -60,13 +65,15 @@ export function ConectWallet (){
             setMessage({
                 active: false,
                 type: "error",
-                message: "No se pudo conectar con la wallet",
+                message: "No se pudo conectar con la Billetera/Wallet. Verifique la conexión y vuelva a intentarlo.",
             });
         } else {
+            const billetera = wallet.publicKey
+            
             setMessage({
                 active: true,
                 type: "alert",
-                message: "Wallet conectada",
+                message: "Billetera/Wallet conectada. La billetera que usará para realizar las transacciones es: "+billetera,
             });
         }
     }
@@ -79,11 +86,13 @@ export function ConectWallet (){
             {
                 !wallet.connected ? (
                 <div>
-                    <p>{message.message}</p>
-                 </div>
+                    <Message type={message.type} message={message.message} />
+                </div>
                 ) : (
-                     <div>
-                        <Button onClick={airdropSol}>Pide Solana</Button> 
+                    <div>
+                        <Message type={message.type} message={message.message} />
+                        <Button onClick={airdropSol}>Pide Solana</Button>
+                        <Button onClick={transacciones}>Ver la Transaccion</Button>
                     </div>
                 )
                 
@@ -93,8 +102,6 @@ export function ConectWallet (){
 
     
         
-
-      
 } 
 
 

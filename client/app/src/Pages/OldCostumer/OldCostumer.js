@@ -1,19 +1,39 @@
-import React from 'react'
-import cargando from '../../Assets/images/cargando.png'
+import React, { useEffect, useState } from 'react';
 import {  ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import "./OldCostumer.css";
-import { getInfoAccount } from '../../services/user';
+import { withCookies } from "react-cookie";
+import { getUser } from '../../services/user';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import model2 from '../../Assets/images/model (2).png'
 
-const OldCostumer = (props) => {
+const OldCostumer = ({cookies}) => {
+    const [name, setName] = useState("")
 
-    return (
-        <div>
+    useEffect(()=>{
+        const token = cookies.get("x_access_token")
+
+        getUser(token).then(respuesta=>{
+            setName(respuesta.user.name)
+        })
+    },[name])
+
+    if (!cookies.get("x_access_token"))
+    {
+        return (<div>
+            <h1 className='OldCostumer__h1'>Bienvenido a Cliente Recurrente  <img className='OldCostumer__img'  src={model2} /></h1>
+            <h3 className='OldCostumer__h3'>Para poder continuar debes acceder a tu cuenta, inicia sesión.</h3>
+        </div>)
+    }else{
+        return (
             <div>
-                <h2>Bienvenido</h2>
+                <div>
+                    <h2 className='OldCostumer__h1'>Bienvenido {name}, es bueno verte de vuelta. <FontAwesomeIcon icon="fa-solid fa-rocket" /></h2>
+                    <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
+                </div>
+                {ConectWallet()}
             </div>
-            {ConectWallet()}
-        </div>
-    )
+        )
+    }
 }
 
-export default OldCostumer
+export default withCookies(OldCostumer)

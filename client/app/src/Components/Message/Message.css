@@ -9,8 +9,8 @@
 }
 
 .Message.alert{
-    background-color: #feecf0;
-    color: #ccc90f;
+    background-color: #fff3cd;
+    color: #b5a26a;
 }
 .Message.loading {
     text-align: center;
