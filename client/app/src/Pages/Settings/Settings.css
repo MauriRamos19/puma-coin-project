@@ -101,14 +101,22 @@
 }
 /**/
 
-/* ====== delete account button ====== */
+/* ====== user account options ====== */
 .deleteAccountBtn {
+    background-color: rgb(250, 119, 119);
+}
+
+.deleteAccountBtn:hover {
+    background-color: rgb(248, 74, 74);
+}
+
+.deleteAccountModalBtn {
     all: unset;
     font-size: 0.8rem;
     color: rgb(161, 0, 0);
 }
 
-.deleteAccountBtn:hover {
+.deleteAccountModalBtn:hover {
     cursor: pointer;
 }
 /**/
