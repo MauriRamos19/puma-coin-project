@@ -28,23 +28,10 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com",
-        "https://pumacoin-backend.herokuapp.com"],
+            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com","https://pumacoin-backend.herokuapp.com"],
             credentials: true,
-            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
-            exposedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Credentials'],
-            optionsSuccessStatus: 200
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
         }));
-        this.app.use(function (req, res) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-            res.header(
-              "Access-Control-Allow-Headers",
-              "Origin, X-Requested-With, Content-Type, Accept"
-            );
-
-          });
         this.app.use(express.json())
         this.app.use(cookieParser());
     }
