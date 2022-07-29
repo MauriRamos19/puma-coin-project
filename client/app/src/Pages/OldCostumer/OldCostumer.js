@@ -19,16 +19,15 @@ const OldCostumer = ({cookies}) => {
     if (!cookies.get("x_access_token"))
     {
         return (<div>
-            <h1>Bienvenido a Cliente Recurrente<img  src={model2} /></h1>
-            <h3>Para poder continuar debes acceder a tu cuenta, inicia sesión.</h3>
-            <div><img  src={model2} /></div>
+            <h1 className='OldCostumer__h1'>Bienvenido a Cliente Recurrente  <img className='OldCostumer__img'  src={model2} /></h1>
+            <h3 className='OldCostumer__h3'>Para poder continuar debes acceder a tu cuenta, inicia sesión.</h3>
         </div>)
     }else{
         return (
             <div>
                 <div>
-                    <h2>Bienvenido {name}, es bueno verte de vuelta.</h2>
-                    <h3>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
+                    <h2 className='OldCostumer__h1'>Bienvenido {name}, es bueno verte de vuelta.</h2>
+                    <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
                 </div>
                 {ConectWallet()}
             </div>
