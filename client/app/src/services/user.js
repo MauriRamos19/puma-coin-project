@@ -6,11 +6,16 @@ const uri = "https://pumacoin-backend.herokuapp.com/api";
 
 
 
-export const getInfoAccount = async () => {
+export const getUser = async (token) => {
     
         try {
     
-            const data = await axios.get(uri + '/settings/account',{withCredentials:true}).then(res => res.data);
+            const data = await axios.get(uri + '/user',{withCredentials:true, headers: {
+                'Authorization': `Bearer ${token}`
+            }
+            },  
+            
+            ).then(res => res.data);
           
             return data;
     
@@ -23,12 +28,12 @@ export const getInfoAccount = async () => {
 
 
 
-export const putInfoAccount = async (user) => {
+export const editUser = async (user) => {
         
         try {
             
             console.log(user)
-            await axios.put(uri + '/settings/account', user,{withCredentials:true}).then(res => res.data);
+            await axios.put(uri + '/user', user,{withCredentials:true}).then(res => res.data);
 
             return true;
                 
@@ -44,7 +49,7 @@ export const deleteAccount = async () => {
         
         try {
     
-            const data = await axios.delete(uri + '/settings/account',{withCredentials:true}).then(res => res.data);
+            const data = await axios.delete(uri + '/user',{withCredentials:true}).then(res => res.data);
         
             return data;
     

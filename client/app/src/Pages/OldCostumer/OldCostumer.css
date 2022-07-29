@@ -1,0 +1,16 @@
+.OldCostumer__img {
+    width: 40px;
+    height: 40px;
+}
+
+.OldCostumer__h1 {
+    padding-left: 300px;
+}
+
+.OldCostumer__h3 {
+    padding-left: 270px;
+}
+
+.rebote {
+    animation: 3s ease-in-out 0.66s infinite normal none running rebote
+}

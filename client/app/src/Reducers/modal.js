@@ -39,7 +39,14 @@ const modalReducer = function (prev, action) {
 				description: "",
 				...dynamicCustomData,
 			};
-
+		case "deleteUser":
+			return {
+				isActive: true,
+				type: "confirm",
+				title: "Desea eliminar su cuenta?",
+				description: "",
+				...dynamicCustomData,
+			}
 		case "close":
 			return {
 				isActive: false,

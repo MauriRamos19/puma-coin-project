@@ -11,7 +11,7 @@ class Server {
         this.paths = {
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
-            account: "/api/settings/account",
+            user: "/api/user",
             support: "/api/support"
         }
 
@@ -28,12 +28,13 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com"],
+            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com",
+        "https://pumacoin-backend.herokuapp.com"],
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            //allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            //exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
+            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+            optionsSuccessStatus: 200
         }));
         this.app.use(function (req, res) {
             res.header("Access-Control-Allow-Origin", "*");
@@ -51,7 +52,7 @@ class Server {
     routes = () => {
         this.app.use(this.paths.auth, require('../routes/auth'));
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
-        this.app.use(this.paths.account, require('../routes/account'));
+        this.app.use(this.paths.user, require('../routes/user'));
         this.app.use(this.paths.support, require('../routes/support'));
     }
 

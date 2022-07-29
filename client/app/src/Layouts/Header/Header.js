@@ -21,8 +21,6 @@ const Header = ({ cookies }) => {
         const token = cookies.get('x_access_token')
 
         
-
-        
         if (token) return true
 
         return false
