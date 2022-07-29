@@ -1,4 +1,5 @@
 import "./modal.css";
+import logoImg from '../Assets/images/pumaCoinLogo.png'
 
 const modalReducer = function (prev, action) {
 	
@@ -11,6 +12,7 @@ const modalReducer = function (prev, action) {
 		case "completeRegister":
 			return {
 				isActive: true,
+				img: logoImg,
 				type: "info",
 				title: "Completar Registro",
 				description:

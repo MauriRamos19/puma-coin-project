@@ -1,6 +1,5 @@
 .Home {
     width: 100%;
-    height: fit-content;
     display: flex;
     padding: 0px 40px;
     overflow: hidden;
@@ -13,17 +12,19 @@
 
 .Home > :nth-child(1) {
     min-width: 400px;
-    overflow: auto;
+    /* overflow: auto; */
 }
 
 .Home__first_column_wrapper {
     display: flex;
     flex-flow: column;
     padding: 50px;
-
+    max-width: 100%;
+    min-height: 100vh;
     gap: 2rem;
 
     position: relative;
+
 }
 
 .Home__first_column_wrapper_size {
@@ -31,26 +32,133 @@
     font-weight: 300;
 }
 
+.Home__second_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 12px;
+    padding: 25px;
+}
+
+.Home__third_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 8px;
+    padding: 20px;
+    /* width: 100%; */
+}
+
+.Home__column_second_wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.Home__column_second_wrapper > div {
+    width: 70%;
+    align-items: center;
+}
+
+.Home__column_second_wrapper_a{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 45px;
+    padding: 45px;
+}
+
+.Home__column_second_wrapper_a > div {
+    /* width: 100%; */
+    align-items: center;
+}
+
 .Home__title_column_size {
+    justify-content: center;
     font-size: 25px;
     width: 100%;
+    margin: 0 auto;
+    color: #3977b5
+   
+}
+
+.Home__title_column1_size {
+    justify-content: center;
+    font-size: 25px;
+    width: 100%;
+    margin: 0 auto;
+    color: #000
+   
+}
+
+.Home__title_column2_size {
+    justify-content: center;
+    font-size: 25px;
+    width: 100%;
+    margin: 0 auto;
+    color: #FDE404
+   
+}
+
+.Home__text_column_size {
+    justify-content: center;
+    font-size: 25px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .Home__box_title {
     display: flex;
     padding: 30px;
     justify-content: center;
+    position: relative;
+    text-align: center;
+}
 
+.Home__blue_box_title {
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color:#3977b5
+}
+
+.Home__card_principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.Home__card_secondary{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 30px;
+    padding: 30px;
+}
+
+.Home__card_side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 50px;
     position: relative;
 }
+
 
 .Home__first_column_button {
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    width: 85%;
-    margin-top: 40px;
+    /* width: 100%; */
+    margin: 30px;
 }
 
 .Home__first_column_buttonP {
@@ -62,12 +170,39 @@
     height: 34px;
 }
 
+.Home__first_card {
+    width: 100%;
+    height: 100%;
+    background-color: #3977b5;
+    color: white;
+    border-radius: 30px;
+    max-width: 1200px;
+}
+
+.Home__second_card_blue {
+    width: 100%;
+    height: 100%;
+    background-color: #3977b5;
+    color: white;
+    border-radius: 30px;
+    max-width: 1200px;
+}
+
 .myDIV {
-    width: 357px;
+    width: 100%;
+    height: 100%;
+    background-color: #3977b5;
+    color: white;
+    border-radius: 30px;
+    max-width: 1200px;
+}
+
+.conversor {
+    width: 115%;
     height: 393px;
     background-color: white;
     color: black;
-    border-radius: 8px;
+    border-radius: 15px;
     animation: mymove 5s infinite;
 }
 
@@ -172,17 +307,15 @@
 
 .Home__image {
     display: flex;
-    position: fixed;
     align-items: center;
 }
 
 .Home__img_coin {
-    position: fixed;
     display: flex;
-    width: auto;
-    height: 202px;
-    top: 30%;
-    left: 84%;
+    position: absolute;
+    width: 355%;
+    top: -113%;
+    left: -136%;
 }
 
 .Home__img_logoIS {
@@ -194,13 +327,34 @@
     left: 63%;
 }
 
+.Home__img_rocket {
+    display: flex;
+    position: absolute;
+    width: 64%;
+    top: -12%;
+    left: -17%;
+    transform: rotate(35deg);
+}
+
+.Home__img_bitcoin {
+    display: flex;
+    position: absolute;
+    width: 139%;
+    top: -6%;
+    left: 15%;
+}
+
 .Home__img_card {
     position: fixed;
     display: flex;
-    width: auto;
+    width: 100px;
     height: 250px;
     top: 66%;
     left: -10%;
+    background-image: url('../../Assets/images/tarjetaUnah.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .rebote img {
@@ -226,4 +380,24 @@
 model-viewer {
     width: 500px;
     height: 500px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #3977b5;
+    height: auto;
+    width: 100vw;
+    padding-top: 40px;
+    color: #fff;
+}
+
+.footer-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
