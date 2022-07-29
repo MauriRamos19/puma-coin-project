@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
-    faRocket,faTriangleExclamation} from '@fortawesome/free-solid-svg-icons'
+    faRocket,faTriangleExclamation, faWallet} from '@fortawesome/free-solid-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
@@ -23,7 +23,7 @@ import NewCostumer from '../Pages/NewCostumer/NewCostumer';
 import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
 library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown, 
-    faRocket,faTriangleExclamation)
+    faRocket,faTriangleExclamation, faWallet)
 
 
 const AppRouter = () => {

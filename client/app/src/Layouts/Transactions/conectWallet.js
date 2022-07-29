@@ -54,7 +54,7 @@ export function ConectWallet (){
         console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey);
         document.getElementById("head_trans").innerHTML = 'Solicitando un AIRDROP en la DevNet, para la billetera: '+ wallet.publicKey
         document.getElementById("trans").innerHTML = "Se agregó exitosamente 1 SOL a su billetera."
-     
+    
     }
 
     async function transacciones(){
