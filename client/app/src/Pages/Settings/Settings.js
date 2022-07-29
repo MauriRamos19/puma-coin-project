@@ -9,14 +9,14 @@ import InputFileWithPreview from "../../Components/InputFileWithPreview/InputFil
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 
 import "./Settings.css";
-import { getUser, editUser } from "../../services/user";
+import { getUser, editUser, deleteAccount } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 
 const Settings = ({withCookies, cookies, dispatchModal}) => {
   
   const navigate = useNavigate();
-
+  const [token,setToken] = useState(cookies.get('x_access_token'));
   const [user, setUser] = useState({
     name: "",
     lastName: "",
@@ -38,7 +38,6 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
 
   useEffect(  () => {
 
-    const token = cookies.get('x_access_token')
     getUser(token).then(data => {
       setUser( (prev) => {
         return {
@@ -49,7 +48,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     });
 
   
-  }, [cookies]);
+  }, [token]);
   
 
   const onChangeHandler = (evt) => {
@@ -69,15 +68,19 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
 
   const onClickHandler = (evt) => {
     evt.preventDefault();
-    editUser(user).then(data => {
+    editUser(user,token).then(data => {
       console.log(user);
     }
     );
     navigate('/');
   }
 
-  const deleteUserAccount = function () {
-    console.log("hola, me borro o que?");
+  const handleDeleteUser = () =>  {
+    deleteAccount(token).then(data => {
+      console.log(data)
+      cookies.remove('x_access_token')
+      navigate('/login');
+    });
   }
 
   const onDeleteUserHandler = (evt) => {
@@ -107,7 +110,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
           }}>
 
             <Button onClick={() => dispatchModal({ type:"close" })}>Cerrar</Button>
-            <button onClick={deleteUserAccount} className="deleteAccountBtn">Eliminar</button>
+            <button onClick={handleDeleteUser} className="deleteAccountBtn">Eliminar</button>
 
           </div>
         )
