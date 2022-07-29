@@ -31,8 +31,10 @@ export const editUser = async (user) => {
         
         try {
             
-            console.log(user)
-            await axios.put(uri + '/user', user,{withCredentials:true}).then(res => res.data);
+
+            await axios.put(uri + '/user', user,{withCredentials:true, headers: {
+                'Access-Control-Allow-Origin': '*'
+            }}).then(res => res.data);
 
             return true;
                 
@@ -48,7 +50,9 @@ export const deleteAccount = async () => {
         
         try {
     
-            const data = await axios.delete(uri + '/user',{withCredentials:true}).then(res => res.data);
+            const data = await axios.delete(uri + '/user',{withCredentials:true, headers: {
+                'Access-Control-Allow-Origin': '*'
+            }}).then(res => res.data);
         
             return data;
     
