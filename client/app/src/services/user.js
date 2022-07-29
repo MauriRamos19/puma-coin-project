@@ -44,7 +44,7 @@ export const editUser = async (user) => {
 
 
 export const deleteAccount = async () => {
-        
+        console.log("Borrando Cuenta")
         try {
     
             const data = await axios.delete(uri + '/user').then(res => res.data);
