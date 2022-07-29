@@ -12,8 +12,8 @@ const NewCostumer = ({cookies}) => {
     useEffect(()=>{
         const token = cookies.get("x_access_token")
 
-        getUser(token).then(respuesta=>{
-            setName(respuesta.user.name)
+        getUser(token).then(resp=>{
+            setName(resp.user.name || resp.user.email)
         })
     },[name])
 
