@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 
-const sendEmailToSupport = async (subject, html) => {
+const sendEmailToSupport = async (name ,email, subject, message) => {
     const transporter = nodemailer.createTransport({
         host: "smtp-mail.outlook.com",
         secureConnection: false,
@@ -20,7 +20,7 @@ const sendEmailToSupport = async (subject, html) => {
         from: process.env.PUMACOIN_EMAIL,
         to: process.env.PUMACOIN_EMAIL,
         subject: subject,
-        html: html
+        text: message
     };
     
     transporter.sendMail(mailOptions,  (error, info) => {

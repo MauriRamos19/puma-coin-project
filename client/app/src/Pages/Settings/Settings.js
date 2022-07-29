@@ -13,7 +13,7 @@ import { getUser, editUser } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 
-const Settings = ({withCookies, cookies}) => {
+const Settings = ({withCookies, cookies, dispatchModal}) => {
   
   const navigate = useNavigate();
 
@@ -74,6 +74,45 @@ const Settings = ({withCookies, cookies}) => {
     }
     );
     navigate('/');
+  }
+
+  const deleteUserAccount = function () {
+    console.log("hola, me borro o que?");
+  }
+
+  const onDeleteUserHandler = (evt) => {
+    console.log(dispatchModal)
+    dispatchModal({ 
+      type: "deleteUser",
+      data:{
+        title: "Borrar cuenta",
+        headingIcon: (
+          <FontAwesomeIcon 
+            icon="fa-solid fa-triangle-exclamation" 
+            style={{
+              color: "rgb(237, 70, 70)",
+              fontSize: "3rem"
+            }} />
+        ),
+        description: "Cuidado!, esta accion puede llegar hacer irreversible, estas seguro que quisieras eliminar tu cuenta?",
+        content:(
+
+          <div style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1rem"
+          }}>
+
+            <Button onClick={() => dispatchModal({ type:"close" })}>Cerrar</Button>
+            <button onClick={deleteUserAccount} className="deleteAccountBtn">Eliminar</button>
+
+          </div>
+        )
+      }
+    });
   }
 
 
@@ -238,10 +277,9 @@ const Settings = ({withCookies, cookies}) => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <WrapperDirection>
+          <WrapperDirection direction="vertical">
             <Button type="submit" onClick={onClickHandler}>Actualizar</Button>
-            
-            <Button type="submit" onClick={onClickHandler}>Borrar</Button>         
+            <Button type="button" onClick={onDeleteUserHandler}>Borrar</Button>         
           </WrapperDirection>
           
         </div>

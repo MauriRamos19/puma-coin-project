@@ -38,7 +38,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
 
 		navigate("/");
-	}; 
+	};
 
 	const onChangeHanlder = (evt) => {
 		setForm((prev) =>

@@ -100,3 +100,15 @@
     cursor: pointer;
 }
 /**/
+
+/* ====== delete account button ====== */
+.deleteAccountBtn {
+    all: unset;
+    font-size: 0.8rem;
+    color: rgb(161, 0, 0);
+}
+
+.deleteAccountBtn:hover {
+    cursor: pointer;
+}
+/**/
