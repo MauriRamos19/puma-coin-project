@@ -35,6 +35,15 @@ class Server {
             //exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
             optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204,
         }));
+        this.app.use(function (req, res) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+            res.header(
+              "Access-Control-Allow-Headers",
+              "Origin, X-Requested-With, Content-Type, Accept"
+            );
+
+          });
         this.app.use(express.json())
         this.app.use(cookieParser());
     }

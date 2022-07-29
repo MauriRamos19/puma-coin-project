@@ -83,15 +83,6 @@ const PasswordReset = (props) => {
 						</div>
 					</div>
 				</div>
-				{/* <div className="Home__image">
-						<img className='Home__img_card' src={tarjeta} />
-					</div>
-					<div className="Home__image">
-						<img className='Home__img_logoIS' src={logoIs} />
-					</div>
-					<div className="Home__image">
-						<img className='Home__img_coin' src={moneda} />
-					</div> */}
 			</div>
 		</div>
 	);
