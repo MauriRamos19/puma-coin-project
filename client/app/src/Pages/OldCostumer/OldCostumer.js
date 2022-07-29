@@ -32,7 +32,9 @@ const OldCostumer = ({cookies}) => {
                 </div>
                 {ConectWallet()}
                 <div>
+                    <p className="OldCostumer__tr" id="head_trans"></p>
                     <p className="OldCostumer__tr" id="trans"></p>
+                    <p className="OldCostumer__tr" id="sol_bal"></p>
                 </div>
             </div>
         )

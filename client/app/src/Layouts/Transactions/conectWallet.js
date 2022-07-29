@@ -8,7 +8,7 @@ import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-ad
 import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
 import Message from '../../Components/Message/Message';
-
+import "./conectWallet.css"
 
 
 //Red de solana a conectar
@@ -52,13 +52,19 @@ export function ConectWallet (){
     async function airdropSol() {    
         const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
         console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey);
+        document.getElementById("head_trans").innerHTML = 'Solicitando un AIRDROP en la DevNet, para la billetera: '+ wallet.publicKey
+        document.getElementById("trans").innerHTML = "Se agregó exitosamente 1 SOL a su billetera."
+     
     }
 
     async function transacciones(){
         const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey)
+        const signature = await connection.getBalance(wallet.publicKey)/1000000000
         console.log(signatureTransactiones[0].signature)
-        console.log(signatureTransactiones[0].slot)
+        console.log(signature)
+        document.getElementById("head_trans").innerHTML = 'Se ha confirmado la transacción, la dirección es:'
         document.getElementById("trans").innerHTML = signatureTransactiones[0].signature
+        document.getElementById("sol_bal").innerHTML = "Se agregó exitosamente 1 SOL a su billetera. SOL total: "+signature 
     }
     
     useEffect(() => {
@@ -93,8 +99,8 @@ export function ConectWallet (){
                 ) : (
                     <div>
                         <Message type={message.type} message={message.message} />
-                        <Button onClick={airdropSol}>Pide Solana</Button>
-                        <Button onClick={transacciones}>Ver la Transaccion</Button>
+                        <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
+                        <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
                     </div>
                 )
                 
