@@ -25,7 +25,7 @@ const getUser = async(req,res=response) => {
             ok: true,
             user
         });
-
+dsa
 
     } catch (error) {
         res.status(500).json({
@@ -40,7 +40,8 @@ const getUser = async(req,res=response) => {
 
 const editUser = async (req, res) => {
 
-        const user = req.user;
+        try {
+            const user = req.user;
 
  
 
@@ -105,11 +106,10 @@ const editUser = async (req, res) => {
             }
         }
         
-        
+    
 
 
 
-        //user.name = rest.name;
         user.phone = rest.phone;
         user.address = rest.address;
         user.address2 = address2;
@@ -119,13 +119,6 @@ const editUser = async (req, res) => {
         user.city = rest.city
         
 
-        // if(user.userType === 'company') {
-            
-        //     user.RTN = rest.RTN;
-
-        // }else if (user.userType === 'natural') {
-        //     user.lastName = rest.lastName;
-        // }
 
 
         await user.save()
@@ -135,6 +128,13 @@ const editUser = async (req, res) => {
             user
         });
 
+        } catch (error) {
+            
+            res.status(500).json({
+                ok: false,
+                msg: 'Algo salio mal'
+            })
+        }
 
 }
 

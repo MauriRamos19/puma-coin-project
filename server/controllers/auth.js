@@ -4,7 +4,7 @@ const User = require('../models/user');
 const { generateJWT } = require("../helpers/generateJWT");
 const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
-const templatePasswordReset = require('../public/templates.js')
+const { templatePasswordReset } = require('../public/templates.js')
 
 const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
