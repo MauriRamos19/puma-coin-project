@@ -12,7 +12,7 @@ const { sendEmail } = require('../utils/sendEmail');
 
 const login = async (req = request, res = response) => {
     const { email, password } = req.body;
-
+    console.log("Envio a heroku")
     try {
 
 
