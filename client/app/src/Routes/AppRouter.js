@@ -2,7 +2,8 @@ import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, faBitcoinSign} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
+    faBitcoinSign,faRocket} from '@fortawesome/free-solid-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
@@ -21,7 +22,8 @@ import OldCostumer from '../Pages/OldCostumer/OldCostumer';
 import NewCostumer from '../Pages/NewCostumer/NewCostumer';
 import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
-library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown,faBitcoinSign)
+library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown,
+    faBitcoinSign, faRocket)
 
 
 const AppRouter = () => {

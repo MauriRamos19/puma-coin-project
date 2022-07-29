@@ -3,6 +3,7 @@ import {  ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import "./OldCostumer.css";
 import { withCookies } from "react-cookie";
 import { getUser } from '../../services/user';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import model2 from '../../Assets/images/model (2).png'
 
 const OldCostumer = ({cookies}) => {
@@ -26,7 +27,7 @@ const OldCostumer = ({cookies}) => {
         return (
             <div>
                 <div>
-                    <h2 className='OldCostumer__h1'>Bienvenido {name}, es bueno verte de vuelta.</h2>
+                    <h2 className='OldCostumer__h1'>Bienvenido {name}, es bueno verte de vuelta. <FontAwesomeIcon icon="fa-solid fa-rocket" /></h2>
                     <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
                 </div>
                 {ConectWallet()}
