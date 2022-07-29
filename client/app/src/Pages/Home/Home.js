@@ -155,7 +155,6 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-
         {/* <footer>
           <div className="footer-content"></div>
         </footer> */}

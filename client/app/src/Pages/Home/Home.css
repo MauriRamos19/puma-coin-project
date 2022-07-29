@@ -11,8 +11,8 @@
 }
 
 .Home > :nth-child(1) {
-   /*  min-width: 400px; */
-    overflow: auto;
+    min-width: 400px;
+    /* overflow: auto; */
 }
 
 .Home__first_column_wrapper {
