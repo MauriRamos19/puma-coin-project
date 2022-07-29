@@ -9,11 +9,10 @@ export const getUser = async (token) => {
     
         try {
     
-            const data = await axios.get(uri + '/user',{withCredentials:true, headers: {
+            const data = await axios.get(uri + '/user',{ headers: {
                 'Authorization': `Bearer ${token}`
             }
             },  
-            
             ).then(res => res.data);
             return data;
     
@@ -26,13 +25,13 @@ export const getUser = async (token) => {
 
 
 
-export const editUser = async (user) => {
+export const editUser = async (user,token) => {
         
         try {
             
 
-            await axios.put(uri + '/user', user,{withCredentials:true, headers: {
-                'Access-Control-Allow-Origin': '*'
+            await axios.put(uri + '/user', user ,{withCredentials:true, headers:{
+                'Authorization': `Bearer ${token}`
             }}).then(res => res.data);
 
             return true;
@@ -45,12 +44,12 @@ export const editUser = async (user) => {
 }
 
 
-export const deleteAccount = async () => {
+export const deleteAccount = async (token) => {
         
         try {
     
             const data = await axios.delete(uri + '/user',{withCredentials:true, headers: {
-                'Access-Control-Allow-Origin': '*'
+                'Authorization': `Bearer ${token}`
             }}).then(res => res.data);
         
             return data;
