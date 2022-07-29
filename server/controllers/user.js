@@ -21,11 +21,19 @@ const getUser = async(req,res=response) => {
             });
         }
 
+        if(!user.status) {
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'El usuario no esta activo'
+                }
+            });
+        }
+
         res.status(200).json({
             ok: true,
             user
         });
-dsa
 
     } catch (error) {
         res.status(500).json({
@@ -53,7 +61,7 @@ const editUser = async (req, res) => {
                 }
             });
         }
-
+        
         const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
 
         const emptyFields = (
