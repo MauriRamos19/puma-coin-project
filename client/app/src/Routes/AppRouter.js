@@ -2,7 +2,7 @@ import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, faTriangleExclamation} from '@fortawesome/free-solid-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
@@ -21,7 +21,7 @@ import OldCostumer from '../Pages/OldCostumer/OldCostumer';
 import NewCostumer from '../Pages/NewCostumer/NewCostumer';
 import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
-library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown)
+library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown, faTriangleExclamation)
 
 
 const AppRouter = () => {
@@ -41,11 +41,11 @@ const AppRouter = () => {
                         <Route path="/trade/new-costumer" element={<NewCostumer />} />
                     </Route>
                     <Route path="/support" element={<Support />} />
-                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />
                 </Route>
                 <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
                 <Route path="/login" element={<Login dispatchModal={dispatchModal} />} />
-                <Route path="/settings" element={<Settings />} />
+                <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />
                 <Route path="password-reset/:userID/:token" element={<PasswordReset />} />
                 <Route path="/finish-register/:userID" element={<FinishRegister />} />
                 <Route path="/finish-register-persona/:userID" element={<FinishRegisterPersona />} />
