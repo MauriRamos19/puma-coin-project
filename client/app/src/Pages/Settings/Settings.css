@@ -73,11 +73,6 @@
     align-items: center;
     justify-content: center;
 }
-
-.Settings__submit-button button {
-    width: 100%;
-    max-width: 220px;
-}
 /**/
 
 /* ====== Back button ====== */
@@ -104,6 +99,8 @@
 /* ====== user account options ====== */
 .deleteAccountBtn {
     background-color: rgb(250, 119, 119);
+    max-width: unset;
+    width: fit-content;
 }
 
 .deleteAccountBtn:hover {
