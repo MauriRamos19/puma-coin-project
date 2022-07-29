@@ -4,9 +4,7 @@ const uri = 'https://pumacoin-backend.herokuapp.com/api/auth';
 const register = async (user) => {
     try {
 
-        const response = await axios.post(uri + '/register', {withCredentials:true,headers: {
-            'Access-Control-Allow-Origin': '*'
-        }}, user);
+        const response = await axios.post(uri + '/register', user);
         return response.data;
 
     } catch (error) {
@@ -25,9 +23,7 @@ const register = async (user) => {
 const login = async (user) => {
     try {
 
-        const response = await axios.post(uri + '/login', {withCredentials:true,headers: {
-            'Access-Control-Allow-Origin': '*'
-        }}, user);
+        const response = await axios.post(uri + '/login', user);
         return response.data;
 
     } catch ({ response: { data: { ok, err } } }) {
@@ -44,9 +40,7 @@ const requestResetPassword = async (email) => {
 
     try {
 
-        const { data: responseData } = await axios.post(uri + '/sendEmail', {withCredentials:true,headers: {
-            'Access-Control-Allow-Origin': '*'
-        }}, { email });
+        const { data: responseData } = await axios.post(uri + '/sendEmail', { email });
         const { ok, message } = responseData;
 
         console.log(message, responseData);
@@ -67,9 +61,7 @@ const finishRegister = async (id, data) => {
 
     try {
 
-        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`,{withCredentials:true,headers: {
-            'Access-Control-Allow-Origin': '*'
-        }}, data);
+        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`,{withCredentials:true}, data);
         const { ok, user } = responseData;
 
         if (ok && user?.status)
