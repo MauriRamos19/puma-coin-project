@@ -97,8 +97,6 @@ export function ConectWallet (){
                         <div>
                         <p className='conecWallet__par' id='trans'></p>    
                         </div>
-
-                        
                     </div>
                 )
                 
