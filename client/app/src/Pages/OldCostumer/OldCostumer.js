@@ -31,6 +31,9 @@ const OldCostumer = ({cookies}) => {
                     <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA! <FontAwesomeIcon className='rebote' icon="fa-solid fa-rocket" /></h3>
                 </div>
                 {ConectWallet()}
+                <div>
+                    <p className="OldCostumer__tr" id="trans"></p>
+                </div>
             </div>
         )
     }
