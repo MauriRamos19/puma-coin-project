@@ -9,7 +9,7 @@ export const getUser = async (token) => {
     
         try {
     
-            const data = await axios.get(uri + '/user',{withCredentials:true, headers: {
+            const data = await axios.get(uri + '/user',{headers: {
                 'Authorization': `Bearer ${token}`
             }
             },  
@@ -31,9 +31,7 @@ export const editUser = async (user) => {
         try {
             
 
-            await axios.put(uri + '/user', user,{withCredentials:true, headers: {
-                'Access-Control-Allow-Origin': '*'
-            }}).then(res => res.data);
+            await axios.put(uri + '/user', user).then(res => res.data);
 
             return true;
                 
@@ -49,9 +47,7 @@ export const deleteAccount = async () => {
         
         try {
     
-            const data = await axios.delete(uri + '/user',{withCredentials:true, headers: {
-                'Access-Control-Allow-Origin': '*'
-            }}).then(res => res.data);
+            const data = await axios.delete(uri + '/user').then(res => res.data);
         
             return data;
     
