@@ -1,15 +1,19 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction } from '@solana/web3.js';
 import {
-    Program, AnchorProvider, web3, getProvider
+    Program, AnchorProvider, web3, getProvider, Wallet
 } from '@project-serum/anchor';
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
-import { useWallet, WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
+import { useWallet, WalletProvider, ConnectionProvider, useAnchorWallet } from '@solana/wallet-adapter-react';
 import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
 import Message from '../../Components/Message/Message';
 import "./conectWallet.css"
-
+import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccount, getAssociatedTokenAddress, 
+    createAssociatedTokenAccountInstruction, 
+    createMint,
+    getOrCreateAssociatedTokenAccount,
+    createTransferInstruction} from "@solana/spl-token";
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -42,6 +46,7 @@ export function ConectWallet (){
 
 
     const wallet = useWallet();
+
     function getProviderWallet(){
         const provider = new AnchorProvider(
             connection, wallet, opts.preflightCommitment,
@@ -67,6 +72,16 @@ export function ConectWallet (){
         document.getElementById("sol_bal").innerHTML = "Se agregó exitosamente 1 SOL a su billetera. SOL total: "+signature 
     }
     
+    
+    async function createTokenAccount(){
+    
+    const minted = await getMint(connection,tokenContract)
+    /*const tx = new Transaction.add(
+        connection.requestAirdrop(wallet.publicKey,LAMPORTS_PER_SOL)
+    );
+    await wallet.sendTransaction(tx,connection)*/
+    }
+    
     useEffect(() => {
         
         if(!wallet.connected) {
@@ -87,7 +102,6 @@ export function ConectWallet (){
     }
     , [wallet]);
 
-
     
     return (
         <div>
@@ -101,6 +115,7 @@ export function ConectWallet (){
                         <Message type={message.type} message={message.message} />
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
+                        <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
                     </div>
                 )
                 

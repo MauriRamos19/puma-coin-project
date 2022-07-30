@@ -43,7 +43,7 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'El usuario no esta activo, pongose en contacto con el administrador'
+                    message: 'El usuario no esta activo, contacte con un administrador'
                 }
             });
         }
@@ -273,7 +273,7 @@ const resetPassword = async (req, res = response) => {
         const { password, password2 } = req.body;
 
         const user = await User.findById(id);
-        
+
         console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");

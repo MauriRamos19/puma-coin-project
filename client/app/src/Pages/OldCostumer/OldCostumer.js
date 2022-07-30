@@ -29,7 +29,7 @@ const OldCostumer = ({cookies}) => {
             <div>
                 <div>
                     <h2 className='OldCostumer__h1'>Bienvenido {name}, es bueno verte de vuelta. </h2>
-                    <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA!</h3>
+                    <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA! <FontAwesomeIcon className='rebote' icon="fa-solid fa-rocket" /></h3>
                 </div>
                 {ConectWallet()}
                 <div>
