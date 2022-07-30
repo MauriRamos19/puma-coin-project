@@ -19,6 +19,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
   const [token,setToken] = useState(cookies.get('x_access_token'));
   const [user, setUser] = useState({
     name: "",
+    RTN:"",
     lastName: "",
     email: "",
     img: "",
@@ -32,6 +33,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     department: "",
     city: "",
     zipCode: "",
+    userType: ""
   });
 
 
@@ -66,12 +68,10 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     );
   };
 
-  const onClickHandler = (evt) => {
+  const onClickHandler = async (evt) => {
     evt.preventDefault();
-    editUser(user,token).then(data => {
-      console.log(user);
-    }
-    );
+    await editUser(user,token)
+   
     navigate('/');
   }
 
@@ -140,26 +140,61 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
         <div className="Settings__inputs">
           <WrapperDirection direction="vertical">
             <WrapperDirection direction="horizontal">
-              <InputWithLabel label="Nombre">
-                <input
-                  disabled={true}
-                  type="text"
-                  name="name"
-                  placeholder=""
-                  onChange={onChangeHandler}
-                  value={user.name}
-                />
-              </InputWithLabel>
-              <InputWithLabel label="Apellido">
-                <input
-                  disabled={true}
-                  type="text"
-                  name="lastName"
-                  placeholder=""
-                  onChange={onChangeHandler}
-                  value={user.lastName}
-                />
-              </InputWithLabel>
+              {
+                user.userType === "company" ? (
+                  <>
+                    <InputWithLabel label="Nombre de la empresa">
+                        <input
+                          disabled={true}
+                          type="text"
+                          name="name"
+                          placeholder=""
+                          onChange={onChangeHandler}
+                          value={user.name}
+                        />
+                    </InputWithLabel>
+                    <InputWithLabel label="RTN">
+                        <input
+                          disabled={true}
+                          type="text"
+                          name="RTN"
+                          placeholder=""
+                          onChange={onChangeHandler}
+                          value={user.RTN}
+                        />
+                    </InputWithLabel>
+                  </>
+                ) : (
+                  <>
+                  <InputWithLabel label="Nombre">
+                      <input
+                        disabled={true}
+                        type="text"
+                        name="name"
+                        placeholder=""
+                        onChange={onChangeHandler}
+                        value={user.name}
+                      />
+                  </InputWithLabel>
+                  <InputWithLabel label="Apellido">
+                    <input
+                      disabled={true}
+                      type="text"
+                      name="lastName"
+                      placeholder=""
+                      onChange={onChangeHandler}
+                      value={user.lastName}
+                    />
+                  </InputWithLabel>
+                  </>
+                    
+
+                )
+            
+            
+                
+              }
+              
               <InputWithLabel label="Correo Electronico">
                 <input
                   disabled={true}
