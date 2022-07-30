@@ -1,11 +1,14 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::entrypoint::ProgramResult;
 use anchor_spl::associated_token;
+use anchor_spl::token::TokenAccount;
 
 declare_id!("9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5");
 
 #[program]
 pub mod conect_wallet {
+    use anchor_lang::solana_program::instruction::Instruction;
+
     use super::*;
 
     pub fn create(ctx: Context<Create>) -> ProgramResult {
@@ -19,6 +22,12 @@ pub mod conect_wallet {
         base_account.count += 1;
         Ok(())
     }
+
+    pub fn create_associated_token_account(
+        funding_address: &Pubkey, 
+        wallet_address: &Pubkey, 
+        spl_token_mint_address: &Pubkey
+    ) -> Instruction
     
 }
 
