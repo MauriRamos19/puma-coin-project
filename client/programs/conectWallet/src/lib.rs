@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::entrypoint::ProgramResult;
-use solana_program::spl_token::spl_associated_token_account;
+
 declare_id!("9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5");
 
 #[program]
