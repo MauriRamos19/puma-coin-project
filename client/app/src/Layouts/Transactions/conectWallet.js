@@ -67,6 +67,11 @@ export function ConectWallet (){
         document.getElementById("trans").innerHTML = signatureTransactiones[0].signature
         document.getElementById("sol_bal").innerHTML = "Se agregó exitosamente 1 SOL a su billetera. SOL total: "+signature 
     }
+
+    async function createTokenAccount(){
+
+        
+    }
     
     useEffect(() => {
         
