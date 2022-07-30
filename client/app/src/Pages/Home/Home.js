@@ -45,7 +45,7 @@ const Home = (props) => {
             </div>
             <div className="Home__text_column_size">
               <p>
-                Haz diferentes transacciones en la plataforma descentralizada
+                Haz diferentes transacciones en la plataforma
                 más popular de la región
               </p>
             </div>
@@ -67,7 +67,7 @@ const Home = (props) => {
               <div className="Home__box_title">
                 <h1>
                   Comienza con la plataforma más fácil y segura para realizar
-                  transacciones, vender, comprar y ganar critomonedas
+                  transacciones, vender, comprar y ganar criptomonedas
                 </h1>
               </div>
               <div className="Home__first_column_button">
