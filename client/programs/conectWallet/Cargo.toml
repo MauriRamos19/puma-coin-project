@@ -17,7 +17,8 @@ default = []
 
 [dependencies]
 anchor-lang = "0.25.0"
-spl-associated-token-account = "1.0.5"
+anchor-spl = "0.25.0"
 spl-token = "3.3.0"
-solana-program = "1.11.4"
 borsh = "0.9.3"
+spl-associated-token-account = "1.0.5"
+

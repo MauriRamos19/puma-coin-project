@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::entrypoint::ProgramResult;
+use anchor_spl::associated_token;
 
 declare_id!("9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5");
 
@@ -18,17 +19,12 @@ pub mod conect_wallet {
         base_account.count += 1;
         Ok(())
     }
-
-    pub fn create_token_account(ctx: Context<CreateAccountToken>) -> ProgramResult {
-        let base_account = &mut ctx.accounts.base_account;
-        instruction::create_associated_token_account;
-        Ok(())
-    }
     
 }
 
 #[derive(Accounts)]
 pub struct Initialize {}
+
 #[derive(Accounts)]
 pub struct Create<'info> {
     #[account(init, payer = user, space = 16 + 16)]
@@ -36,14 +32,6 @@ pub struct Create<'info> {
     #[account(mut)]
     pub user: Signer<'info>,
     pub system_program: Program <'info, System>,
-}
-#[derive(Accounts)]
-pub struct  CreateAccountToken<'info>{
-#[account(init, payer = user, space = 16 + 16)]
-pub base_account: Account<'info, BaseAccount>,
-#[account(mut)]
-pub user: Signer<'info>,
-pub system_program: Program <'info, System>,
 }
 
 // Transaction instructions
