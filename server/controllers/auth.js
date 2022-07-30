@@ -43,7 +43,7 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'El usuario no esta activo, por favor verifique su correo'
+                    message: 'El usuario no esta activo, pongose en contacto con el administrador'
                 }
             });
         }
@@ -83,6 +83,7 @@ const register = async (req, res) => {
         const userDB = await User.findOne({ email });
 
 
+
         if (userDB) {
             return res.status(400).json({
                 ok: false,
@@ -91,6 +92,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
         if (password.length < 6) {
             return res.status(400).json({
@@ -118,6 +120,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
 
         const user = new User({ email, password });
@@ -270,7 +273,7 @@ const resetPassword = async (req, res = response) => {
         const { password, password2 } = req.body;
 
         const user = await User.findById(id);
-
+        
         console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");

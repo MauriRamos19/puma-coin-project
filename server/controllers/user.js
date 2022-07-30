@@ -63,7 +63,7 @@ const editUser = async (req, res) => {
         }
         
         const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
-
+        console.log(req.body);
         const emptyFields = (
             Object.entries(rest)
                 .reduce((emptyfields, [key, value]) => [...emptyfields, !value && key], [])
@@ -125,6 +125,7 @@ const editUser = async (req, res) => {
         user.country = rest.country;
         user.department = rest.department;
         user.city = rest.city
+        user.zipCode = rest.zipCode;
         
 
 
