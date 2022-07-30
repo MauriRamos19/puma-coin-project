@@ -1,4 +1,4 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction } from '@solana/web3.js';
 import {
     Program, AnchorProvider, web3, getProvider
 } from '@project-serum/anchor';
@@ -9,7 +9,9 @@ import { useEffect, useState } from 'react';
 import Button from "../../Components/Button/Button";
 import Message from '../../Components/Message/Message';
 import "./conectWallet.css"
-
+import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccount, getAssociatedTokenAddress, 
+    createAssociatedTokenAccountInstruction, 
+    createMint} from "@solana/spl-token";
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -67,10 +69,23 @@ export function ConectWallet (){
         document.getElementById("trans").innerHTML = signatureTransactiones[0].signature
         document.getElementById("sol_bal").innerHTML = "Se agregó exitosamente 1 SOL a su billetera. SOL total: "+signature 
     }
+    
+    
 
     async function createTokenAccount(){
+        const minted = await getMint(connection,tokenContract)
+        console.log(minted)
+        const generated = Keypair.generate()
+        const mint = await createMint(connection,generated,generated.publicKey)
+        const tx = new Transaction().add(
 
-        
+            SystemProgram.createAccount({
+                fromPubkey:  wallet.publicKey,
+                newAccountPubkey: minted.address
+            })
+        )
+        /*const createToken = await createAssociatedTokenAccount(connection,wallet,minted,wallet.publicKey)
+        console.log(createToken)*/
     }
     
     useEffect(() => {
@@ -107,6 +122,7 @@ export function ConectWallet (){
                         <Message type={message.type} message={message.message} />
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
+                        <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
                     </div>
                 )
                 
