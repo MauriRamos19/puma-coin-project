@@ -75,12 +75,12 @@ export function ConectWallet (){
     
     async function createTokenAccount(){
     const minted = await getMint(connection,tokenContract)
-    /*const tx = await getOrCreateAssociatedTokenAccount(
+    const tx = await getOrCreateAssociatedTokenAccount(
         connection,
         wallet,
         minted,
         wallet.publicKey);
-    console.log(tx)*/
+    console.log(tx)
     }
     
     useEffect(() => {
