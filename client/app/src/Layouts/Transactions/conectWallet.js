@@ -42,6 +42,7 @@ export function ConectWallet (){
 
 
     const wallet = useWallet();
+
     function getProviderWallet(){
         const provider = new AnchorProvider(
             connection, wallet, opts.preflightCommitment,
