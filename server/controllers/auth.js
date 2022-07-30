@@ -43,7 +43,16 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'El usuario no esta activo, por favor verifique su correo'
+                    message: 'El usuario no esta activo, pongose en contacto con el administrador'
+                }
+            });
+        }
+
+        if(!userDB.verified){
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'El usuario no ha verificado su correo, por favor verifique su correo'
                 }
             });
         }
@@ -74,6 +83,7 @@ const register = async (req, res) => {
         const userDB = await User.findOne({ email });
 
 
+
         if (userDB) {
             return res.status(400).json({
                 ok: false,
@@ -82,6 +92,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
         if (password.length < 6) {
             return res.status(400).json({
@@ -109,6 +120,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
 
         const user = new User({ email, password });
@@ -147,10 +159,6 @@ const register = async (req, res) => {
 
 }
 
-
-// const logout = (req, res=response) => {
-//     res.clearCookie("access_token").status(200).json({ message: "ok" });
-// }
 
 
 const forgotPassword = async (req, res) => {
@@ -202,12 +210,11 @@ const finishRegister = async (req, res) => {
 
     const { id } = req.params;
     const body = req.body;
-    console.log("FinishRegister: body - ", body)
-    console.log("FinishRegister: id - ", id)
+
 
     try {
         const userDB = await User.findById(id);
-        console.log("FinishRegister: userDB - ", userDB)
+       
 
         if (!userDB) {
             return res.status(400).json({
@@ -219,6 +226,8 @@ const finishRegister = async (req, res) => {
         }
 
         const { address2, img, wallet, ...rest } = body;
+
+     
 
         const emptyFields = (
             Object.entries(rest)
@@ -235,14 +244,14 @@ const finishRegister = async (req, res) => {
         }
 
 
-        const user = await User.findByIdAndUpdate(id, { ...body }, { new: true });
-        console.log("FinishRegister: user - ", user)
+        const user = await User.findByIdAndUpdate(id, { ...body, verified: true }, { new: true });
+        
 
         await user.save()
 
         return res.status(200).json({
             ok: true,
-            user: userDB
+            user: user
         });
 
 
@@ -264,7 +273,7 @@ const resetPassword = async (req, res = response) => {
         const { password, password2 } = req.body;
 
         const user = await User.findById(id);
-
+        
         console.log(id)
         if (!user)
             return res.status(400).send("Usuario no encontrado");
