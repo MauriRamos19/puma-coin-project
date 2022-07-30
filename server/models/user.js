@@ -75,6 +75,10 @@ const userSchema = Schema({
         type: Boolean,
         default: true
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
     wallet: {
         type: String,
     },

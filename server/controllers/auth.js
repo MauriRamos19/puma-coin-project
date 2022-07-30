@@ -48,6 +48,15 @@ const login = async (req = request, res = response) => {
             });
         }
 
+        if(!userDB.verified){
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'El usuario no ha verificado su correo, por favor verifique su correo'
+                }
+            });
+        }
+
         const token = await generateJWT(userDB.id);
 
         return res.
@@ -148,10 +157,6 @@ const register = async (req, res) => {
 }
 
 
-// const logout = (req, res=response) => {
-//     res.clearCookie("access_token").status(200).json({ message: "ok" });
-// }
-
 
 const forgotPassword = async (req, res) => {
 
@@ -202,12 +207,11 @@ const finishRegister = async (req, res) => {
 
     const { id } = req.params;
     const body = req.body;
-    console.log("FinishRegister: body - ", body)
-    console.log("FinishRegister: id - ", id)
+
 
     try {
         const userDB = await User.findById(id);
-        console.log("FinishRegister: userDB - ", userDB)
+       
 
         if (!userDB) {
             return res.status(400).json({
@@ -219,6 +223,8 @@ const finishRegister = async (req, res) => {
         }
 
         const { address2, img, wallet, ...rest } = body;
+
+     
 
         const emptyFields = (
             Object.entries(rest)
@@ -235,14 +241,14 @@ const finishRegister = async (req, res) => {
         }
 
 
-        const user = await User.findByIdAndUpdate(id, { ...body }, { new: true });
-        console.log("FinishRegister: user - ", user)
+        const user = await User.findByIdAndUpdate(id, { ...body, verified: true }, { new: true });
+        
 
         await user.save()
 
         return res.status(200).json({
             ok: true,
-            user: userDB
+            user: user
         });
 
 
