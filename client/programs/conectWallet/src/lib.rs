@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::entrypoint::ProgramResult;
-
+use solana_program::spl_token::spl_associated_token_account;
 declare_id!("9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5");
 
 #[program]
@@ -21,8 +21,10 @@ pub mod conect_wallet {
 
     pub fn create_token_account(ctx: Context<CreateAccountToken>) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
+        instruction::create_associated_token_account;
         Ok(())
     }
+    
 }
 
 #[derive(Accounts)]
