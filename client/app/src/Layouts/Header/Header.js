@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
@@ -8,20 +8,23 @@ import arrow from '../../Assets/arrow.svg'
 import user from '../../Assets/user.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { getUser } from '../../services/user';
 
 
 const Header = ({ cookies }) => {
 
     const navigate = useNavigate();
 
-
-    const isLoggedIn = () => {
+    const isLoggedIn =  () => {
 
 
         const token = cookies.get('x_access_token')
 
-        
-        if (token) return true
+        // const { user } = await getUser(token);
+
+
+
+        if ( token ) return true
 
         return false
     }
@@ -32,6 +35,8 @@ const Header = ({ cookies }) => {
 
         navigate("/");
     }
+
+    
 
     return (
         <div className='Header'>

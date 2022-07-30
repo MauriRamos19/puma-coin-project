@@ -7,6 +7,7 @@ import "./Login.css";
 import { login as loginService, requestResetPassword } from "../../services/auth";
 import Message from "../../Components/Message/Message";
 import { withCookies, Cookies } from "react-cookie";
+import { getUser } from "../../services/user";
 
 
 const Login = ({ withCookies, cookies, dispatchModal }) => {
@@ -24,6 +25,8 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 		const { token, error } = await loginService(form);
 
+		const { user } = await getUser(token);
+
 		if (error || !token) {
 			setMessage({
 				active: true,
@@ -32,10 +35,9 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 			});
 
 			return;
-		}
+		} 
 
-
-		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'lax' });
+		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
 
 		navigate("/");
 	};

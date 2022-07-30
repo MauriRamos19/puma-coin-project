@@ -79,6 +79,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     deleteAccount(token).then(data => {
       console.log(data)
       cookies.remove('x_access_token')
+      dispatchModal({ type:"close" })
       navigate('/login');
     });
   }
