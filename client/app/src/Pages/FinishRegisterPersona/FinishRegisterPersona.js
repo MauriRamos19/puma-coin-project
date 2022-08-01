@@ -73,13 +73,10 @@ const FinishRegisterPersona = (props) => {
 
         evt.preventDefault();
 
-        await finishRegister(userID, user).then(data => {
-            console.log(data.user);
-        })
-        // console.log("isUpdated", isUpdated);
+        const isUpdated = await finishRegister(userID, user);
+        console.log("isUpdated", isUpdated);
 
-        // if (isUpdated === true)
-        //     navigate("/")
+        if (isUpdated === true) navigate("/")
 
     }
 
