@@ -102,7 +102,14 @@ export function ConectWallet (){
         console.log("Transaction error: ", err);
       }
     */
+    const rand = Keypair.generate()
 
+    const tx =  createAssociatedTokenAccountInstruction(
+        wallet.publicKey,
+        mint.address,
+        wallet.publicKey,
+        tokenContract)
+    const tx2 = sendAndConfirmTransaction(connection,tx,[rand])
     }
     
     useEffect(() => {
