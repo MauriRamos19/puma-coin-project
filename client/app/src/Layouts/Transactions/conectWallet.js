@@ -1,4 +1,4 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction } from '@solana/web3.js';
 import {
     Program, AnchorProvider, web3, getProvider, Wallet
 } from '@project-serum/anchor';
@@ -14,6 +14,7 @@ import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccou
     createMint,
     getOrCreateAssociatedTokenAccount,
     createTransferInstruction} from "@solana/spl-token";
+import { SplAssociatedTokenAccountsCoder } from '@project-serum/anchor/dist/cjs/coder/spl-associated-token/accounts';
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -74,13 +75,33 @@ export function ConectWallet (){
     
     
     async function createTokenAccount(){
-    const minted = await getMint(connection,tokenContract)
-    const tx = await getOrCreateAssociatedTokenAccount(
+    const mint = await getMint(connection,tokenContract)
+    
+    /*const tx = await getOrCreateAssociatedTokenAccount(
         connection,
         wallet,
-        minted,
+        mint.address,
         wallet.publicKey);
-    console.log(tx)
+
+    console.log(tx)*/
+
+    const provider = await getProviderWallet()
+    const program = new Program(idl, programID, provider);
+    try {
+        /* interact with the program via rpc */
+        await program.rpc.set_data({
+            accounts: {
+              my_account: mint,
+              token_account: mint.address,
+              owner: provider.wallet.publicKey,
+            },
+            signers: [wallet]
+          });
+
+      } catch (err) {
+        console.log("Transaction error: ", err);
+      }
+
     }
     
     useEffect(() => {
