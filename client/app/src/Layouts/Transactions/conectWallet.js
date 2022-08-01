@@ -85,11 +85,11 @@ export function ConectWallet (){
 
     console.log(tx)*/
 
-    const provider = await getProviderWallet()
+    /*const provider = await getProviderWallet()
     const program = new Program(idl, programID, provider);
     try {
         /* interact with the program via rpc */
-        await program.rpc.set_data({
+    /*    await program.rpc.set_data({
             accounts: {
               my_account: mint,
               token_account: mint.address,
@@ -101,6 +101,7 @@ export function ConectWallet (){
       } catch (err) {
         console.log("Transaction error: ", err);
       }
+    */
 
     }
     
