@@ -88,10 +88,7 @@ export function ConectWallet (){
 
     const createToken = new Transaction().add(
 
-        createAssociatedTokenAccount(connection,
-            wallet,
-            tokenContract,
-            wallet.publicKey)
+        createAssociatedTokenAccount()
         /*createAssociatedTokenAccountInstruction(
         wallet.publicKey,
         mint.address,
