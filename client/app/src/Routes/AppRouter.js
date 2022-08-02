@@ -5,8 +5,6 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
     faRocket,faTriangleExclamation, faWallet,faBitcoinSign,faGithub,faLinkedin} from '@fortawesome/free-solid-svg-icons'
 
-import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons'
-
 import App from '../App';
 import Register from '../Pages/Register/Register';
 import Login from '../Pages/Login/Login';
