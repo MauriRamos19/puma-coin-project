@@ -1,4 +1,4 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction } from '@solana/web3.js';
 import {
     Program, AnchorProvider, web3, getProvider, Wallet
 } from '@project-serum/anchor';
@@ -14,6 +14,7 @@ import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccou
     createMint,
     getOrCreateAssociatedTokenAccount,
     createTransferInstruction} from "@solana/spl-token";
+import { SplAssociatedTokenAccountsCoder } from '@project-serum/anchor/dist/cjs/coder/spl-associated-token/accounts';
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -74,12 +75,41 @@ export function ConectWallet (){
     
     
     async function createTokenAccount(){
+    const mint = await getMint(connection,tokenContract)
     
-    const minted = await getMint(connection,tokenContract)
-    /*const tx = new Transaction.add(
-        connection.requestAirdrop(wallet.publicKey,LAMPORTS_PER_SOL)
-    );
-    await wallet.sendTransaction(tx,connection)*/
+    /*const tx = await getOrCreateAssociatedTokenAccount(
+        connection,
+        wallet,
+        mint.address,
+        wallet.publicKey);
+
+    console.log(tx)*/
+
+    /*const provider = await getProviderWallet()
+    const program = new Program(idl, programID, provider);
+    try {
+        /* interact with the program via rpc */
+    /*    await program.rpc.set_data({
+            accounts: {
+              my_account: mint,
+              token_account: mint.address,
+              owner: provider.wallet.publicKey,
+            },
+            signers: [wallet]
+          });
+
+      } catch (err) {
+        console.log("Transaction error: ", err);
+      }
+    */
+    const rand = Keypair.generate()
+
+    const tx =  createAssociatedTokenAccountInstruction(
+        wallet.publicKey,
+        mint.address,
+        wallet.publicKey,
+        tokenContract)
+    const tx2 = sendAndConfirmTransaction(connection,tx,[rand])
     }
     
     useEffect(() => {
@@ -115,7 +145,7 @@ export function ConectWallet (){
                         <Message type={message.type} message={message.message} />
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
-                        <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
+                       
                     </div>
                 )
                 
