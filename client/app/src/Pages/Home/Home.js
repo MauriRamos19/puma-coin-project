@@ -8,13 +8,41 @@ import logoIs from "../../Assets/images/logoIs.png";
 import tarjeta from "../../Assets/images/tarjetaUnah.png";
 import model2 from "../../Assets/images/model (2).png";
 import moneda3D from "../../Assets/moneda.glb";
+import coins from "../../Assets/images/coins.png";
+import ruly from "../../Assets/images/ruly.png";
+import henry from "../../Assets/images/henry.png";
+import bryan from "../../Assets/images/bryan.png";
+import mauri from "../../Assets/images/mauri.png";
+import denzell from "../../Assets/images/denzell.png";
 
 import rocket from "../../Assets/images/blue-rocket.png";
 import bitcoin from "../../Assets/images/bitcoin.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import {useEffect} from 'react';
 
 import "./Home.css";
 
-const Home = (props) => {
+const Home = (props, handleClick) => {
+  useEffect(() => {
+
+    const script = document.createElement('script');
+
+    script.src = "https://platform.linkedin.com/badges/js/profile.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    const handleClick = () => {
+      window.open("http://github.com/");
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    }
+  })
+  
+  
   return (
     <div className="Home">
       <div className="Home__first_column_wrapper">
@@ -27,12 +55,12 @@ const Home = (props) => {
             </div>
             <div className="Home__first_card">
               <div className="Home__box_title">
-                <h1>Bitcoin facil, rapido y seguro</h1>
+                <h1>Crypto facil, rapido y seguro</h1>
               </div>
             </div>
             <div className="Home__card_side">
-              <div className="Home__image rebote">
-                <img className="Home__img_bitcoin" src={bitcoin} />
+              <div className="Home__image">
+                <img className="Home__img_bitcoin rebote" src={bitcoin} />
               </div>
             </div>
           </div>
@@ -45,7 +73,7 @@ const Home = (props) => {
             </div>
             <div className="Home__text_column_size">
               <p>
-                Haz diferentes transacciones en la plataforma descentralizada
+                Haz diferentes transacciones en la plataforma
                 más popular de la región
               </p>
             </div>
@@ -67,7 +95,7 @@ const Home = (props) => {
               <div className="Home__box_title">
                 <h1>
                   Comienza con la plataforma más fácil y segura para realizar
-                  transacciones, vender, comprar y ganar critomonedas
+                  transacciones, vender, comprar y ganar criptomonedas
                 </h1>
               </div>
               <div className="Home__first_column_button">
@@ -123,41 +151,197 @@ const Home = (props) => {
         </div>
 
         <div className="Home__third_card">
-          <div className="Home__card_principal">
-            <div className="Home__card_side">
-              <div className="Home__title_column_size">
-                <div className="Home__card_secondary">
-                  <div className="Home__second_card_blue">
-                    <div className="Home__box_title">
-                      <h1>
+          <div className="Home__column_third_wrapper">
+            <div className="Home__card_secondary">
+              <div className="Home__third_card_blue">
+                  <div className="Home__box_title">
+                    <h1>
                         Unete a nosotros y conecta tu wallet para disfrutar de
                         los servicios PumaCoin en segundos
-                      </h1>
-                    </div>
-                    <div className="Home__first_column_button">
+                    </h1>
+                  </div>
+                  <div className="Home__first_column_button">
                       <a href="http://localhost:3000/login">
                         <ButtonWhite className="Home__first_column_buttonP">
                           Acceder
                         </ButtonWhite>
                       </a>
                     </div>
-                  </div>
                 </div>
+              </div>
+          </div>
+          <div className="Home__card_side">
+              <div className="Home__card_side">
+                <div className="Home__image">
+                  <img className="Home__img_model2 rebote" src={model2} />
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div className="Home__fourth_card">
+          <div className="Home__title_size_fourth_card">
+              <h1>Desarrolladores</h1>
+          </div>
+            <div class="grid-container">
+
+              <div className="Home__mini_cards">
+                <div className="Home__card_side_profile">
+                    <div className="Home__card_side_profile">
+                      <div className="Home__image">
+                        <img className="Home__img_profile" src={bryan} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Home__title_size_fourth_card">
+                      <p>Bryan Martinez</p>
+                    </div> 
+                    <div className="Home__content_size_fourth_card">
+                      <p>Backend Dev & Blockchain Master</p>
+                    </div>
+                    <div className="Home__content_size_fourth_card">
+                    <a className="icon" href="https://github.com/KinImoX">
+                        <FontAwesomeIcon icon="fa-brands fa-github" />
+                      </a>
+                      <a className="icon" href="https://hn.linkedin.com/in/-bryan-martinez?trk=profile-badge">
+                        <FontAwesomeIcon icon="fa-brands fa-linkedin"/>
+                      </a>
+                    </div> 
+              </div>  
+                <div className="Home__mini_cards">
+                  <div className="Home__card_side_profile">
+                    <div className="Home__card_side_profile">
+                      <div className="Home__image">
+                        <img className="Home__img_profile" src={denzell} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Home__title_size_fourth_card">
+                      <p>Denzell Griffith</p>
+                    </div> 
+                    <div className="Home__content_size_fourth_card">
+                      <p>Frontend Dev & Product Designer</p>
+                    </div>
+                    <div className="Home__content_size_fourth_card">
+                    <a className="icon" href="https://github.com/EnriqueDll">
+                        <FontAwesomeIcon icon="fa-brands fa-github" />
+                      </a>
+                      <a className="icon" href="https://github.com/EnriqueDll">
+                        <FontAwesomeIcon icon="fa-brands fa-linkedin"/>
+                      </a>
+                    </div> 
+                </div>
+
+                <div className="Home__mini_cards">
+                  <div className="Home__card_side_profile">
+                    <div className="Home__card_side_profile">
+                      <div className="Home__image">
+                        <img className="Home__img_profile" src={henry} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="Home__title_size_fourth_card">
+                      <p>Henry Espinoza</p>
+                    </div> 
+                    <div className="Home__content_size_fourth_card">
+                      <p>Full Stack Dev</p>
+                    </div> 
+                    <div className="Home__content_size_fourth_card">
+                    <a className="icon" href="https://github.com/Henry-MM">
+                        <FontAwesomeIcon icon="fa-brands fa-github" />
+                      </a>
+                      <a className="icon" href="https://hn.linkedin.com/in/henry-espinoza-moncada-42b3a61ba?trk=org-employees&original_referer=">
+                        <FontAwesomeIcon icon="fa-brands fa-linkedin"/>
+                      </a>
+                    </div> 
+                </div>
+
+            </div>
+
+            <div class="grid-second-container">
+              <div className="Home__mini_cards">
+                    <div className="Home__card_side_profile">
+                      <div className="Home__card_side_profile">
+                        <div className="Home__image">
+                          <img className="Home__img_profile" src={mauri} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="Home__title_size_fourth_card">
+                        <p>Olvin Ramos</p>
+                      </div> 
+                      <div className="Home__content_size_fourth_card">
+                        <p>Backend Dev & Database Manager</p>
+                      </div> 
+                      <div className="Home__content_size_fourth_card">
+                    <a className="icon" href="https://github.com/MauriRamos19">
+                        <FontAwesomeIcon icon="fa-brands fa-github" />
+                      </a>
+                      <a className="icon" href="https://www.linkedin.com/in/olvin-mauricio-ramos-zavala-a0278a212/">
+                        <FontAwesomeIcon icon="fa-brands fa-linkedin"/>
+                      </a>
+                    </div> 
+                  </div>
+                  <div className="Home__mini_cards">
+                    <div className="Home__card_side_profile">
+                      <div className="Home__card_side_profile">
+                        <div className="Home__image">
+                          <img className="Home__img_profile" src={ruly} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="Home__title_size_fourth_card">
+                        <p>Ruly Funez</p>
+                      </div> 
+                      <div className="Home__content_size_fourth_card">
+                        <p>Frontend Dev</p>
+                      </div> 
+                      <div className="Home__content_size_fourth_card">
+                    <a className="icon" href="https://github.com/Ruly16">
+                        <FontAwesomeIcon icon="fa-brands fa-github" />
+                      </a>
+                      <a className="icon" href="https://www.linkedin.com/in/ruly-funez-35a357233/">
+                        <FontAwesomeIcon icon="fa-brands fa-linkedin"/>
+                      </a>
+                    </div> 
+                  </div>
+            </div>
+
+            {/* <div class="grid-container">
+                  <div className="Home__card_side">
+                    <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
+                    </div>
+                  </div>
+                <div className="Home__card_side">
+                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
+                    </div>
+                </div>
+              <div className="Home__card_side">
+                <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
+                  </div>
               </div>
             </div>
 
-            <div className="Home__card_side">
+            <div class="grid-second-container">
               <div className="Home__card_side">
-                <div className="Home__image rebote">
-                  <img className="Home__img_coin" src={moneda} />
+                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
+                    </div>
                 </div>
-              </div>
-            </div>
+
+                <div className="Home__card_side">
+                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
+                    </div>
+                </div>
+
+            </div> */}
+        </div>
+
+        <div className="Home__card_side">
+          <div className="Home__img">
+            <img className="Home_img_card" src={moneda}/>
           </div>
         </div>
-        {/* <footer>
-          <div className="footer-content"></div>
-        </footer> */}
+
       </div>
     </div>
   );
