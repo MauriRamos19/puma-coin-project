@@ -41,7 +41,7 @@ const Register = ({ cookies ,dispatchModal }) => {
             return;
         }
 
-        cookies.set("x_access_token", token, {maxAge: 60*60, HttpOnly: true, secure: true, sameSite: 'strict' });
+        cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
         navigate('/');
 
         dispatchModal({ type: "completeRegister" });
@@ -88,19 +88,6 @@ const Register = ({ cookies ,dispatchModal }) => {
                             required />
                         <span className='error-field'>{form.email.errorMsg}</span>
                     </InputContainer>
-
-                    {/* <InputContainer>
-                        <label htmlFor='nickName'>Nombre de Usuario</label>
-                        <input
-                            type='text'
-                            name='nickName' 
-                            id='nickName'
-                            value={form.nickName.value}
-                            onChange={onChangeHanlder}
-                            required />
-                        <span className='error-field'>{form.email.errorMsg}</span>
-                    </InputContainer> */}
-
                     <InputContainer>
                         <label htmlFor='password'>Contraseña</label>
                         <input

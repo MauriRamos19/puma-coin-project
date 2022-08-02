@@ -4,7 +4,7 @@ const User = require('../models/user');
 const { generateJWT } = require("../helpers/generateJWT");
 const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
-const templatePasswordReset = require('../public/templates.js')
+const {templatePasswordReset } = require('../public/templates.js')
 
 const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
@@ -49,11 +49,6 @@ const login = async (req = request, res = response) => {
         }
 
         const token = await generateJWT(userDB.id);
-
-      
-
-        res.cookie('x_access_token',token, {maxAge: 3600000});
-        
 
         return res.
             status(200)

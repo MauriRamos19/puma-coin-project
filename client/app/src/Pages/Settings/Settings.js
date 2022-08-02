@@ -9,10 +9,11 @@ import InputFileWithPreview from "../../Components/InputFileWithPreview/InputFil
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 
 import "./Settings.css";
-import { getInfoAccount, putInfoAccount } from "../../services/settings";
+import { getUser, editUser } from "../../services/user";
 import { useNavigate } from "react-router-dom";
+import { withCookies, Cookies } from "react-cookie";
 
-const Settings = () => {
+const Settings = ({withCookies, cookies}) => {
   
   const navigate = useNavigate();
 
@@ -37,7 +38,8 @@ const Settings = () => {
 
   useEffect(  () => {
 
-    getInfoAccount().then(data => {
+    const token = cookies.get('x_access_token')
+    getUser(token).then(data => {
       setUser( (prev) => {
         return {
           ...prev,
@@ -47,7 +49,7 @@ const Settings = () => {
     });
 
   
-  }, [])
+  }, [cookies]);
   
 
   const onChangeHandler = (evt) => {
@@ -67,7 +69,7 @@ const Settings = () => {
 
   const onClickHandler = (evt) => {
     evt.preventDefault();
-    putInfoAccount(user).then(data => {
+    editUser(user).then(data => {
       console.log(user);
     }
     );
@@ -236,11 +238,16 @@ const Settings = () => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <Button type="submit" onClick={onClickHandler}>Actulizar</Button>
+          <WrapperDirection>
+            <Button type="submit" onClick={onClickHandler}>Actualizar</Button>
+            
+            <Button type="submit" onClick={onClickHandler}>Borrar</Button>         
+          </WrapperDirection>
+          
         </div>
       </form>
     </div>
   );
 };
 
-export default Settings;
+export default withCookies(Settings);

@@ -4,7 +4,14 @@
 /node_modules
 /.pnp
 .pnp.js
+<<<<<<<< HEAD:.gitignore
+client
+client/node_modules
+
+# testingcd 
+========
 # testing
+>>>>>>>> 49e08c092e1c1d8e5db572345ec7b8a506f73862:conectWallet/app/.gitignore
 /coverage
 
 # production
