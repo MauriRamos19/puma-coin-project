@@ -3,39 +3,49 @@
   "name": "conect_wallet",
   "instructions": [
     {
-      "name": "create",
+      "name": "setData",
       "accounts": [
         {
-          "name": "baseAccount",
+          "name": "myAccount",
           "isMut": true,
-          "isSigner": true
+          "isSigner": false
         },
         {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "systemProgram",
+          "name": "tokenAccount",
           "isMut": false,
           "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "increment",
-      "accounts": [
+        },
         {
-          "name": "baseAccount",
-          "isMut": true,
-          "isSigner": false
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "data",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
+    {
+      "name": "MyAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "u64"
+          },
+          {
+            "name": "mint",
+            "type": "publicKey"
+          }
+        ]
+      }
+    },
     {
       "name": "BaseAccount",
       "type": {
@@ -50,6 +60,6 @@
     }
   ],
   "metadata": {
-    "address": "9EhVATLEC3hiY7hkQiGmmNzhvciVHpmHr21fGQxdqii5"
+    "address": "AYXHBNV18aVrnffW5T4mbY3Vequ7WB9fLxV255g7DB45"
   }
 }

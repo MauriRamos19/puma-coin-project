@@ -98,7 +98,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               fontSize: "3rem"
             }} />
         ),
-        description: "Cuidado!, esta accion puede llegar hacer irreversible, estas seguro que quisieras eliminar tu cuenta?",
+        description: "Cuidado!, esta accion puede llegar hacer irreversible, ¿estas seguro que quisieras eliminar tu cuenta?",
         content:(
 
           <div style={{
@@ -316,11 +316,10 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <WrapperDirection direction="vertical">
+          <WrapperDirection className="userAccountOptions__wrapper">
             <Button type="submit" onClick={onClickHandler}>Actualizar</Button>
-            <Button type="button" onClick={onDeleteUserHandler}>Borrar</Button>         
-          </WrapperDirection>
-          
+            <Button className="deleteAccountBtn" type="button" onClick={onDeleteUserHandler}>Borrar Cuenta</Button>         
+          </WrapperDirection>          
         </div>
       </form>
     </div>
