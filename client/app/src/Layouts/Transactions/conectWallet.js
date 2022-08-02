@@ -1,4 +1,6 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction, TransactionInstruction
+, TransactionSignature,  
+SendTransactionError} from '@solana/web3.js';
 import {
     Program, AnchorProvider, web3, getProvider, Wallet
 } from '@project-serum/anchor';
@@ -15,7 +17,6 @@ import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccou
     getOrCreateAssociatedTokenAccount,
     createTransferInstruction} from "@solana/spl-token";
 import base58 from "bs58";
-import { SplAssociatedTokenAccountsCoder } from '@project-serum/anchor/dist/cjs/coder/spl-associated-token/accounts';
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -80,23 +81,27 @@ export function ConectWallet (){
     
     const sendTx = getProviderWallet()
     const pumakey = process.env.SECRET_KEY
-    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
+    console.log(pumaKey)
+
+    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey.toString()))
     console.log(pumaKeyGen)
-    
+
     const createToken = new Transaction().add(
-        getOrCreateAssociatedTokenAccount(
-            connection,
-            pumaKeyGen,
-            mint.address,
-            wallet.publicKey)
+       new TransactionInstruction({
+        data: Buffer.from(getOrCreateAssociatedTokenAccount(
+        connection,
+        pumaKeyGen,
+        mint.address,
+        wallet.publicKey)),
+        keys: [],
+        programId: TOKEN_PROGRAM_ID
+    }) 
     )
 
     
     
-    const sing = sendTx.wallet.signTransaction(createToken)
-    const sendTx2 = sendTx.sendAndConfirm(createToken,sing)
-   
-    console.log(tx)
+    const signature = sendTx.sendAndConfirm(createToken)
+    console.log(signature)
     }
     
     useEffect(() => {
