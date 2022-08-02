@@ -48,6 +48,7 @@ export function ConectWallet (){
     const [message, setMessage] = useState({ active: false });
 
 
+    const { sendTransaction} = useWallet();
     const wallet = useWallet();
 
     function getProviderWallet(){
@@ -80,28 +81,34 @@ export function ConectWallet (){
     const mint = await getMint(connection,tokenContract)
     
     const sendTx = getProviderWallet()
-    const pumakey = process.env.SECRET_KEY
-    console.log(pumaKey)
-
-    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey.toString()))
-    console.log(pumaKeyGen)
+    const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
+    console.log(pumakey)
+    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
+    
 
     const createToken = new Transaction().add(
-       new TransactionInstruction({
-        data: Buffer.from(getOrCreateAssociatedTokenAccount(
+
+        createAssociatedTokenAccount(connection,
+            wallet,
+            tokenContract,
+            wallet.publicKey)
+        /*createAssociatedTokenAccountInstruction(
+        wallet.publicKey,
+        mint.address,
+        wallet.publicKey,
+        mint.address,
+        TOKEN_PROGRAM_ID
+       )*/
+    )
+   /* const tx = getOrCreateAssociatedTokenAccount(
         connection,
         pumaKeyGen,
         mint.address,
-        wallet.publicKey)),
-        keys: [],
-        programId: TOKEN_PROGRAM_ID
-    }) 
-    )
-
+        wallet.publicKey)*/
     
     
-    const signature = sendTx.sendAndConfirm(createToken)
-    console.log(signature)
+    const signature = await sendTransaction(createToken,connection)
+ 
     }
     
     useEffect(() => {
