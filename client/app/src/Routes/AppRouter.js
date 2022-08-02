@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
-    faRocket,faTriangleExclamation, faWallet,faBitcoinSign,faGithub,faLinkedin} from '@fortawesome/free-solid-svg-icons'
+    faRocket,faTriangleExclamation, faWallet,faBitcoinSign} from '@fortawesome/free-solid-svg-icons'
+
+import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
