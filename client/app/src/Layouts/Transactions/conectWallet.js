@@ -82,29 +82,32 @@ export function ConectWallet (){
     
     const sendTx = getProviderWallet()
     const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
-    console.log(pumakey)
+  
     const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
     
-
+    
+    
+    
     const createToken = new Transaction().add(
-
-        createAssociatedTokenAccount()
-        /*createAssociatedTokenAccountInstruction(
+        createAssociatedTokenAccountInstruction(
         wallet.publicKey,
         mint.address,
         wallet.publicKey,
         mint.address,
         TOKEN_PROGRAM_ID
-       )*/
+       )
     )
+   
    /* const tx = getOrCreateAssociatedTokenAccount(
         connection,
         pumaKeyGen,
         mint.address,
         wallet.publicKey)*/
     
-    
     const signature = await sendTransaction(createToken,connection)
+    let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
+    createToken.recentBlockhash = blockhash;
+    const confirm = await connection.confirmTransaction(signature)
  
     }
     
