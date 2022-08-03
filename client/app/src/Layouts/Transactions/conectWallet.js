@@ -2,7 +2,7 @@ import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, se
 , TransactionSignature,  
 SendTransactionError} from '@solana/web3.js';
 import {
-    Program, AnchorProvider, web3, getProvider, Wallet
+    Program, AnchorProvider, web3, getProvider, Wallet, Spl
 } from '@project-serum/anchor';
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
@@ -15,7 +15,9 @@ import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccou
     createAssociatedTokenAccountInstruction, 
     createMint,
     getOrCreateAssociatedTokenAccount,
-    createTransferInstruction} from "@solana/spl-token";
+    createTransferInstruction,NATIVE_MINT, transfer,
+    TokenInstruction,
+    createTransferCheckedInstruction} from "@solana/spl-token";
 import base58 from "bs58";
 
 //Red de solana a conectar
@@ -79,36 +81,56 @@ export function ConectWallet (){
     
     async function createTokenAccount(){
     const mint = await getMint(connection,tokenContract)
+
+    /*const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
+    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))*/
     
-    const sendTx = getProviderWallet()
-    const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
-  
-    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
-    
-    
-    
-    
+    //Obtiene la cuenta del token creado
+    const associatedAccount = await getAssociatedTokenAddress(mint.address,
+        wallet.publicKey)
+
+    //crea la cuenta en la billetera
     const createToken = new Transaction().add(
         createAssociatedTokenAccountInstruction(
-        wallet.publicKey,
-        mint.address,
-        wallet.publicKey,
-        mint.address,
-        TOKEN_PROGRAM_ID
-       )
+            wallet.publicKey,
+            associatedAccount,
+            wallet.publicKey,
+            mint.address)
     )
-   
-   /* const tx = getOrCreateAssociatedTokenAccount(
-        connection,
-        pumaKeyGen,
-        mint.address,
-        wallet.publicKey)*/
-    
+
     const signature = await sendTransaction(createToken,connection)
     let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
     createToken.recentBlockhash = blockhash;
     const confirm = await connection.confirmTransaction(signature)
- 
+
+    }
+
+    async function transferTokenPuma(){
+        const mint = await getMint(connection,tokenContract)
+
+        const associatedAccount = await getAssociatedTokenAddress(mint.address,
+            wallet.publicKey)
+        
+        const associatedAccountMintAuth = await getAssociatedTokenAddress(mint.address,
+            mintAuth)
+            console.log(associatedAccountMintAuth)
+        const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
+        const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
+
+        
+        const transferToken = new Transaction().add(
+            /*transfer(connection,pumaKeyGen,associatedAccountMintAuth,associatedAccount,wallet.publicKey,10*LAMPORTS_PER_SOL)*/
+           createTransferInstruction(associatedAccountMintAuth,associatedAccount,mintAuth,10*LAMPORTS_PER_SOL)
+        )
+        
+       /* const transferencia = await transfer(connection,pumaKeyGen,associatedAccountMintAuth,associatedAccount,wallet.publicKey,10)*/
+    
+       /* console.log(transferencia)*/
+        const signature = await sendTransaction(transferToken,connection,{signers: [pumaKeyGen]})
+        let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
+        transferToken.recentBlockhash = blockhash;
+        const confirm = await connection.confirmTransaction(signature)
+        
     }
     
     useEffect(() => {
@@ -144,7 +166,8 @@ export function ConectWallet (){
                         <Message type={message.type} message={message.message} />
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
-                        
+                        <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
+                        <Button className='conectWallet__btn' onClick={transferTokenPuma}>Comprar</Button>
                     </div>
                 )
                 
