@@ -144,7 +144,7 @@ export function ConectWallet (){
                         <Message type={message.type} message={message.message} />
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
-                        <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
+                        
                     </div>
                 )
                 
