@@ -105,7 +105,7 @@ export function ConectWallet (){
 
     }
 
-    async function transferTokenPuma(){
+    async function buyTokenPuma(){
         const mint = await getMint(connection,tokenContract)
 
         const associatedAccount = await getAssociatedTokenAddress(mint.address,
@@ -131,6 +131,14 @@ export function ConectWallet (){
         transferToken.recentBlockhash = blockhash;
         const confirm = await connection.confirmTransaction(signature)
         
+    }
+
+    async function transferTokenPuma(){
+        const mint = await getMint(connection,tokenContract)
+        const fromAssociatedAccount = await getAssociatedTokenAddress(mint.address,
+            wallet.publicKey)
+        const toAssociatedAccount = await getAssociatedTokenAddress(mint.address,
+            wallet.publicKey)
     }
     
     useEffect(() => {
@@ -167,7 +175,7 @@ export function ConectWallet (){
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
                         <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
-                        <Button className='conectWallet__btn' onClick={transferTokenPuma}>Comprar</Button>
+                        <Button className='conectWallet__btn' onClick={buyTokenPuma}>Comprar</Button>
                     </div>
                 )
                 
