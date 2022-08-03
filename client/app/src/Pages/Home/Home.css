@@ -211,6 +211,7 @@
     align-content: center;
     padding: 23px;
     position: relative;
+
 }
 
 
@@ -438,7 +439,7 @@
 .Home__img_profile {
     display: flex;
     /* position: absolute; */
-    width: 355%;
+    width: 100%;
     top: -113%;
     left: -177%;
 }
