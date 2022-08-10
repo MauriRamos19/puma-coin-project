@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ConectWallet } from '../../Layouts/Transactions/conectWallet';
 import { Link, Outlet } from 'react-router-dom'
 
-const Trade = (props) => {
+const TradeOld = (props) => {
     return (
         <div className="Trade_Page">
             <Outlet/>
@@ -11,4 +11,4 @@ const Trade = (props) => {
     )
 }
 
-export default Trade
+export default TradeOld
