@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import cargando from "../../Assets/images/cargando.png";
-import puma from "../../Assets/images/puma.png";
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 import InputWithLabel from "../../Components/InputWithLabel/InputWithLabel";
 import { useNavigate, useParams } from "react-router-dom";
-import unah from "../../Assets/images/unah.png";
-import poli from "../../Assets/images/poli.png";
-import facultad from "../../Assets/images/facultad.png";
-import UNAH_1847 from "../../Assets/images/UNAH_1847(1).png";
-// import { getUser, editUser } from "../../services/user";
+
+import moneda from "../../Assets/images/moneda.png";
 
 import "./Support.css";
 import Button from "../../Components/Button/Button";
@@ -66,12 +62,8 @@ const Support = (props) => {
           <p>Pronto nuestro equipo PumaCoin se pondrá en contacto contigo</p>
         </div>
 
-        <div className="Unah__image">
-          <img className="Unah__img_password" src={facultad} />
-        </div>
-
-        <div className="Unah__image">
-          <img className="Unah__img_puma" src={puma} />
+        <div className="Support__image">
+          <img className="Support__img_coin" src={moneda} alt="" />
         </div>
 
         <form className="Support__form Support__first_column_wrapper">

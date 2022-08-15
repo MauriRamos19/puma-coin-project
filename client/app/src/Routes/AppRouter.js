@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
-    faBitcoinSign,faRocket} from '@fortawesome/free-solid-svg-icons'
+    faBitcoinSign,faRocket, faLocationDot} from '@fortawesome/free-solid-svg-icons'
 
-import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons'
+import {faGithub, faLinkedin, faTelegram, faTwitter, faGoogle} from '@fortawesome/free-brands-svg-icons'
 
 import App from '../App';
 import Register from '../Pages/Register/Register';
@@ -25,7 +25,7 @@ import NewCostumer from '../Pages/NewCostumer/NewCostumer';
 import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
 library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown,
-    faBitcoinSign, faRocket, faGithub, faLinkedin)
+    faBitcoinSign, faRocket, faLocationDot, faGithub, faLinkedin, faTelegram, faTwitter, faGoogle)
 
 
 const AppRouter = () => {
