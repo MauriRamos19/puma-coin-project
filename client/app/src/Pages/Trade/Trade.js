@@ -1,8 +1,9 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import AddPumaTokenBtn from '../../Components/AddPumaTokenBtn/AddPumaTokenBtn'
 import BuyPumaButton from '../../Components/BuyPumaButton/BuyPumaButton'
 import Card from '../../Components/Card/Card'
-// import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm'
+import ClaimPumasBtn from '../../Components/ClaimPumasBtn/ClaimPumasBtn'
 import CurrencyConversor from '../../Components/CurrencyConversor/CurrencyConversor'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
 import currencyConversorReducer from '../../Reducers/currencyConversor'
@@ -14,27 +15,28 @@ const conversions = [
 
 const MIN_FROM_VALUE = 10;
 
-const Trade = () => {
+const Trade = ({ dispatchModal }) => {
 
+    const { transactionID: paymentID } = useParams();
+    const [transactionID, setTransactionID] = useState(paymentID)
     const [currencies, currenciesDispatch] = useReducer(currencyConversorReducer, {
         fromAmount: MIN_FROM_VALUE,
         toAmount: MIN_FROM_VALUE * conversions[0]?.conversion,
         conversion: conversions[0]?.conversion,
         minFromValue: MIN_FROM_VALUE
-    })
+    });
 
-    const options = {
-        // passing the client secret obtained in step 2
-        clientSecret: process.env.STRIPE_SECRET_KEY,
-        // Fully customizable with appearance API.
-        appearance: {/*...*/ },
-    };
+    useEffect(() => {
+        setTransactionID(paymentID)
+    }, [paymentID])
+    
 
     return (
         <div className="Trade">
             <div className="Trade__container">
                 <Card className="curencyConversor__wrapper">
                     <h1>PumaCoin</h1>
+                    {/* <div>{message}</div> */}
                     <CurrencyConversor
                         conversions={conversions}
                         currencies={currencies}
@@ -48,15 +50,16 @@ const Trade = () => {
                         <BuyPumaButton
                             amountPuma={currencies.fromAmount}
                             amountMoney={currencies.toAmount}
+                            transactionID={transactionID}
                         >
                             Comprar Ahora
                         </BuyPumaButton>
                         <AddPumaTokenBtn>Agregar PumaCoin token a mi wallet</AddPumaTokenBtn>
                     </WrapperDirection>
+                    <ClaimPumasBtn
+                        dispatchModal={dispatchModal}
+                        transactionID={transactionID} />
                 </Card>
-
-                {/* <CheckoutForm /> */}
-
             </div>
         </div>
     )

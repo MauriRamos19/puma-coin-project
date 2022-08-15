@@ -31,11 +31,15 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com","https://pumacoin-backend.herokuapp.com"],
+            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com", "https://pumacoin-backend.herokuapp.com"],
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
         }));
-        this.app.use(express.json())
+        this.app.use(express.json({
+            verify: (req, res, buf) => {
+                req.rawBody = buf
+            }
+        }))
         this.app.use(express.urlencoded({ extended: false }))
         this.app.use(cookieParser());
     }

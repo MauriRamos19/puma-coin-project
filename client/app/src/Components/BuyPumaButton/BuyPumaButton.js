@@ -8,25 +8,25 @@ import Button from '../Button/Button'
 import './BuyPumaButton.css'
 
 
-const BuyPumaButton = ({ children, amountPuma, cookies }) => {
+const BuyPumaButton = ({ children, amountPuma, cookies, transactionID }) => {
 
-    const buyPumaCoin = useBuyPumaCoin();
     const [token, setToken] = useState(cookies.get("x_access_token"));
-    const { id } = useParams();
 
     useEffect(() => {
-        requestPaymentInfo(token, id)
-            .then(({ payment, pumaCoinAmount }) => payment && buyPumaCoin(pumaCoinAmount))
+
+        if (!transactionID) return;
+
+        requestPaymentInfo(token, transactionID)
             .then(result => { console.log(result); })
             .catch(error => { console.error("something went wrong: ", error); })
-    }, [id])
+
+    }, [transactionID])
 
 
     const onClickHandler = (evt) => {
 
         const pumaCoinAmount = Number(amountPuma);
         requestPayment(token, pumaCoinAmount);
-        console.log('s');
     }
 
     return (
