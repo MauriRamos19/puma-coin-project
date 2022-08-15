@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 
 import './InputFileWithPreview.css'
 
-const InputFileWithPreview = ({ alt, name, imagePlaceHolder, className }) => {
+const InputFileWithPreview = ({ alt, name, imagePlaceHolder, className, setProfileImage}) => {
 
+    
     const [photo, setPhoto] = useState(imagePlaceHolder)
 
-    const changePhotoHanlder = (src) => {
+    const changePhotoHandler = (src) => {
         setPhoto(src)
     }
 
@@ -14,10 +15,12 @@ const InputFileWithPreview = ({ alt, name, imagePlaceHolder, className }) => {
         
         const fileReader = new FileReader();
 
-        fileReader.addEventListener("load",
-            evt => changePhotoHanlder(fileReader.result))
-
         fileReader.readAsDataURL(evt.target.files[0])
+        setProfileImage(evt.target.files[0])
+        fileReader.onloadend = () => {
+            changePhotoHandler(fileReader.result)
+            
+        }
     }
 
     return (
@@ -26,7 +29,8 @@ const InputFileWithPreview = ({ alt, name, imagePlaceHolder, className }) => {
             <input
                 type="file"
                 name={name}
-                onChange={onChangeProfilePhotoHandler} />
+                onChange={onChangeProfilePhotoHandler}
+            />
         </label>
     )
 }

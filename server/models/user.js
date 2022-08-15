@@ -85,8 +85,15 @@ const userSchema = Schema({
     userType: {
         type: String,
         enum: ["natural", "company"]
+    },
+    google: {
+        type: Boolean,
+        default: false
+    },
+    userTransactions: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserTransactions'
     }
-
 });
 
 

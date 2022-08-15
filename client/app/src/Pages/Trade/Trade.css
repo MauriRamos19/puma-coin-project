@@ -1,0 +1,26 @@
+.Trade {
+    width: 100%;
+    height: 100%;
+}
+
+.Trade__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 40px auto;
+}
+
+.Trade .buttons__wrapper {
+    gap: 10px;
+    width: 100%;
+}
+
+.Trade .currencyConversor {
+    width: 100%;
+}
+
+.Trade .curencyConversor__wrapper {
+    padding: 30px 50px;
+    position: relative;
+}

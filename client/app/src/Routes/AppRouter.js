@@ -1,12 +1,6 @@
 import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
-    faRocket,faTriangleExclamation, faWallet,faBitcoinSign} from '@fortawesome/free-solid-svg-icons'
-
-import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons'
-
 import App from '../App';
 import Register from '../Pages/Register/Register';
 import Login from '../Pages/Login/Login';
@@ -20,13 +14,8 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
-import OldCostumer from '../Pages/OldCostumer/OldCostumer';
-import NewCostumer from '../Pages/NewCostumer/NewCostumer';
-import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
-library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown, 
-    faRocket,faTriangleExclamation, faWallet,faBitcoinSign,faGithub,faLinkedin)
-
+import '../helpers/fontAwesomeManager';
 
 
 const AppRouter = () => {
@@ -40,10 +29,9 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/trade" element={<Trade/>}>
-                        <Route path="/trade" element={<TradeMenu />} />
-                        <Route path="/trade/old-costumer" element={<OldCostumer />} />
-                        <Route path="/trade/new-costumer" element={<NewCostumer />} />
+                    <Route path="/trade">
+                        <Route path=":transactionID" element={<Trade dispatchModal={dispatchModal} />} />
+                        <Route index element={<Trade dispatchModal={dispatchModal} />} />
                     </Route>
                     <Route path="/support" element={<Support />} />
                     <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />

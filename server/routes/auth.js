@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { login, register, renewToken, logout, forgotPassword, finishRegister } = require("../controllers/auth");
+const { login, register, renewToken, logout, forgotPassword, finishRegister, googleSignIn } = require("../controllers/auth");
 const { check } = require('express-validator');
 const { isValidPassword, existEmail } = require("../helpers/db-validators");
 const { validateFields } = require("../middlewares/validate-fields");
@@ -7,11 +7,35 @@ const { validateJWT } = require("../middlewares/validate-JWT");
 const router = Router();
 const cors = require('cors');
 
+const multer = require('multer');
+
+
+
+const storage = multer.diskStorage({});
+
+
+var upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+});
+
 router.post('/login', [
     check('email', 'Email is required').isEmail(),
     check('password', 'La contraseña es obligatoria').not().isEmpty(),
     validateFields
 ], login);
+
+
+router.post('/googleSignIn', googleSignIn);
+
+
 
 
 router.post('/sendEmail', [
@@ -29,8 +53,9 @@ router.post('/register', [
 ], register);
 
 
-router.put('/finish-register/:id', finishRegister);
+router.put('/finish-register/:id',upload.single('img'), finishRegister);
 
+// router.post('/upload/image/:id', , uploadImageCloudinary)
 
 router.get('/', validateJWT, renewToken);
 
