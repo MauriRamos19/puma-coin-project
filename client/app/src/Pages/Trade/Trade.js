@@ -55,7 +55,7 @@ const Trade = () => {
                     </WrapperDirection>
                 </Card>
 
-                <CheckoutForm />
+                {/* <CheckoutForm /> */}
 
             </div>
         </div>

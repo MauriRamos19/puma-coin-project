@@ -1,6 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const userTransactions = require('../models/transactions');
+const UserTransactions = require('../models/transactions');
 
 const requestPayment = async (req, res) => {
 
@@ -76,7 +76,7 @@ const requestPaymentInfo = async (req, res) => {
 
         console.log(id);
 
-        const userTransactions = await userTransactions.findOne({ user: user.id });
+        const transactions = await UserTransactions.findOne({ user: user.id });
         
         const sessionInfo = await stripe.checkout.sessions.retrieve(id);
         const sessionLineItems = await stripe.checkout.sessions.listLineItems(id);
@@ -90,15 +90,15 @@ const requestPaymentInfo = async (req, res) => {
             pumaCoinAmount: lineItem.quantity
         }
 
-        if(userTransactions){
-            userTransactions.transactions.push(sessionInfo);
-            await userTransactions.save();
+        if(transactions){
+            transactions.transactions.push(JSON.stringify(sessionInfo));
+            await transactions.save();
         }else{
-            const newUserTransactions = new userTransactions({
+            const newtransactions = new UserTransactions({
                 user: user.id,
-                transactions: [sessionInfo]
+                transactions: [JSON.stringify(sessionInfo)]
             });
-            await newUserTransactions.save();
+            await newtransactions.save();
         }
         
         res.status(200).json({

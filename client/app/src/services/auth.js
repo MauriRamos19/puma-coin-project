@@ -1,6 +1,6 @@
 const axios = require("axios").default;
-
-const uri = 'http://localhost:8899/api/auth';
+const uri = 'https://pumacoin-backend.herokuapp.com/api/auth';
+// const uri = 'http://localhost:8899/api/auth';
 
 
 const register = async (user) => {

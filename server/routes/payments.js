@@ -5,7 +5,7 @@ const router = require('express').Router();
 
 
 router.post('/request-payment', validateJWT, requestPayment);
-router.get('/custome-request-payment',  customeRequestPayment);
+router.get('/custome-request-payment', validateJWT, customeRequestPayment);
 router.get('/request-payment/:id', validateJWT, requestPaymentInfo);
 
 
