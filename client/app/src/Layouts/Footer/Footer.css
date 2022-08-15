@@ -52,8 +52,8 @@
 .Footer__img_parrot {
     display: flex;
     position: relative;
-    width: 39%;
-    left: 28%;
+    width: 216px;
+    /* left: 28%; */
 
 }
 
