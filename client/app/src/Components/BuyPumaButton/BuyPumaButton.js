@@ -15,17 +15,17 @@ const BuyPumaButton = ({ children, amountPuma, cookies }) => {
     const { id } = useParams();
 
     useEffect(() => {
-        requestPaymentInfo(token, id)
-            .then(({ payment, pumaCoinAmount }) => payment && buyPumaCoin(pumaCoinAmount))
-            .then(result => { console.log(result); })
-            .catch(error => { console.error("something went wrong: ", error); })
+        // requestPaymentInfo(token, id)
+        //     .then(({ payment, pumaCoinAmount }) => payment && buyPumaCoin(pumaCoinAmount))
+        //     .then(result => { console.log(result); })
+        //     .catch(error => { console.error("something went wrong: ", error); })
     }, [id])
 
 
     const onClickHandler = (evt) => {
 
         const pumaCoinAmount = Number(amountPuma);
-        requestPayment(token, pumaCoinAmount);
+        // requestPayment(token, pumaCoinAmount);
     }
 
     return (

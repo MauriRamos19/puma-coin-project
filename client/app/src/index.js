@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { clusterApiUrl } from '@solana/web3.js';
 import { PhantomWalletAdapter, SolflareWalletAdapter, CoinbaseWalletAdapter, TorusWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { WalletProvider, ConnectionProvider } from '@solana/wallet-adapter-react';
-import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import AppRouter from './Routes/AppRouter';
-
 
 
 
@@ -24,26 +25,27 @@ const wallets = [
 	new TorusWalletAdapter()
 ]
 
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY || "pk_test_51LTvlHJhtZE9NlSGYxTqzVwolpqH3tPhl3IAFkQjRBtMA12483NZbMdBNXW86o6oach1qnXQlStgXK64HzqeOMWJ001MtiaAtd");
+const stripeOptions = {
+	// passing the client secret obtained in step 2
+	clientSecret: "pi_3LWyvdJhtZE9NlSG1jtmg648_secret_v9rKO3MfdgEamRQNRDoZrZdRS",
+	// Fully customizable with appearance API.
+	appearance: {/*...*/ },
+};
 
+console.log(process.env)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<ConnectionProvider endpoint={network}>
-			{/* {document.cookie.includes("x_access_token") ? */}
-				{/* (<WalletProvider wallets={wallets} autoConnect>
-					<WalletModalProvider>
+			<WalletProvider wallets={wallets}>
+				<WalletModalProvider>
+					<Elements stripe={stripePromise} options={stripeOptions}>
 						<AppRouter />
-					</WalletModalProvider>
-				</WalletProvider>) */}
-				{/* : */}
-				<WalletProvider wallets={wallets}>
-					<WalletModalProvider>
-						<AppRouter />
-					</WalletModalProvider>
-				</WalletProvider>
-			{/* } */}
-
+					</Elements>
+				</WalletModalProvider>
+			</WalletProvider>
 		</ConnectionProvider>
 	</React.StrictMode>
 

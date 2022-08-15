@@ -2,6 +2,7 @@ import React, { useReducer } from 'react'
 import AddPumaTokenBtn from '../../Components/AddPumaTokenBtn/AddPumaTokenBtn'
 import BuyPumaButton from '../../Components/BuyPumaButton/BuyPumaButton'
 import Card from '../../Components/Card/Card'
+import CheckoutForm from '../../Components/CheckoutForm/CheckoutForm'
 import CurrencyConversor from '../../Components/CurrencyConversor/CurrencyConversor'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
 import currencyConversorReducer from '../../Reducers/currencyConversor'
@@ -21,6 +22,13 @@ const Trade = () => {
         conversion: conversions[0]?.conversion,
         minFromValue: MIN_FROM_VALUE
     })
+
+    const options = {
+        // passing the client secret obtained in step 2
+        clientSecret: process.env.STRIPE_SECRET_KEY,
+        // Fully customizable with appearance API.
+        appearance: {/*...*/ },
+    };
 
     return (
         <div className="Trade">
@@ -46,6 +54,9 @@ const Trade = () => {
                         <AddPumaTokenBtn>Agregar PumaCoin token a mi wallet</AddPumaTokenBtn>
                     </WrapperDirection>
                 </Card>
+
+                <CheckoutForm />
+
             </div>
         </div>
     )

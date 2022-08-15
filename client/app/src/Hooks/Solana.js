@@ -3,7 +3,13 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { createAssociatedTokenAccountInstruction, createTransferInstruction, getAssociatedTokenAddress, getMint } from "@solana/spl-token";
 import base58 from "bs58";
 
-const solanaInit = async () => {
+const solanaInit = () => {
+
+}
+
+const useSolanaInit = () => {
+
+    const wallet = useWallet();
 
     //Red de solana a conectar
     const network = clusterApiUrl('devnet');
@@ -19,12 +25,14 @@ const solanaInit = async () => {
     //direccion del token
     const tokenContract = new PublicKey("ND8Hje1MuZUqMYbxSh8gQCooMSuddky1NBwmX5NpsM9")
 
-    const mint = await getMint(connection, tokenContract);
+    // const mint = await getMint(connection, tokenContract);
 
     return {
         connection,
         mintAuth,
-        mint
+        tokenContract,
+        // mint,
+        wallet
     }
 }
 
@@ -71,7 +79,7 @@ const useAddPumaTokenToWallet = () => {
 
 const useBuyPumaCoin = () => {
 
-    const wallet = useWallet();
+    const { connection, mintAuth, wallet, tokenContract } = useSolanaInit();
     const { sendTransaction } = wallet;
 
     const buyPumacoin = async (amount) => {
@@ -82,16 +90,16 @@ const useBuyPumaCoin = () => {
         ) throw new Error("Cantidad solicitada invalida");
 
         if (!wallet.connected) {
-            console.log('hola')
-            console.log(wallet.autoConnect.valueOf());
-            console.log(wallet);
-            
+            console.log('intentando conectar')
+            await wallet.wallets[0].adapter.connect();
+            // console.log(wallet.publicKey.toString());        
         }
 
-        console.log('adios')
+        console.log('continuando con la transaction')
 
-        const { connection, mint, mintAuth } = await solanaInit();
-
+        // const { connection, mint, mintAuth } = await solanaInit();
+        const mint = await getMint(connection, tokenContract);
+        
         const associatedAccount = await getAssociatedTokenAddress(mint.address, wallet.publicKey)
 
         const associatedAccountMintAuth = await getAssociatedTokenAddress(mint.address, mintAuth)
