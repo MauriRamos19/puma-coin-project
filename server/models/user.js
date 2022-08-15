@@ -75,14 +75,25 @@ const userSchema = Schema({
         type: Boolean,
         default: true
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
     wallet: {
         type: String,
     },
     userType: {
         type: String,
         enum: ["natural", "company"]
+    },
+    google: {
+        type: Boolean,
+        default: false
+    },
+    userTransactions: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserTransactions'
     }
-
 });
 
 

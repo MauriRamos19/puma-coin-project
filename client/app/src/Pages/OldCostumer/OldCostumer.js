@@ -10,12 +10,13 @@ const OldCostumer = ({cookies}) => {
     const [name, setName] = useState("")
 
     useEffect(()=>{
-        const token = cookies.get("x_access_token")
-
-        getUser(token).then(respuesta=>{
-            setName(respuesta.user.name)
+        const token = cookies.get('x_access_token')
+       
+        getUser(token).then(resp=>{
+            setName(resp.user.name || resp.user.email) 
+          
         })
-    },[name])
+    },[name,cookies])
 
     if (!cookies.get("x_access_token"))
     {
@@ -31,6 +32,11 @@ const OldCostumer = ({cookies}) => {
                     <h3 className='OldCostumer__h3'>Verifica que todo es correcto, proximo viaje hacia ¡LA LUNA! <FontAwesomeIcon className='rebote' icon="fa-solid fa-rocket" /></h3>
                 </div>
                 {ConectWallet()}
+                <div>
+                    <p className="OldCostumer__tr" id="head_trans"></p>
+                    <p className="OldCostumer__tr" id="trans"></p>
+                    <p className="OldCostumer__tr" id="sol_bal"></p>
+                </div>
             </div>
         )
     }

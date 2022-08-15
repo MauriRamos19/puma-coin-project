@@ -1,12 +1,6 @@
 import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLandmark, faArrowLeftLong, faCookie, faCookieBite, faAngleDown, 
-    faBitcoinSign,faRocket, faLocationDot} from '@fortawesome/free-solid-svg-icons'
-
-import {faGithub, faLinkedin, faTelegram, faTwitter, faGoogle} from '@fortawesome/free-brands-svg-icons'
-
 import App from '../App';
 import Register from '../Pages/Register/Register';
 import Login from '../Pages/Login/Login';
@@ -20,12 +14,8 @@ import ModalManagment from '../Components/ModalManagment/ModalManagment';
 import modalReducer from '../Reducers/modal';
 import FinishRegisterPersona from '../Pages/FinishRegisterPersona/FinishRegisterPersona';
 import FinishRegisterCompany from '../Pages/FinishRegisterCompany/FinishRegisterCompany';
-import OldCostumer from '../Pages/OldCostumer/OldCostumer';
-import NewCostumer from '../Pages/NewCostumer/NewCostumer';
-import TradeMenu from '../Pages/TradeMenu/TradeMenu';
 
-library.add(faUser, faLandmark, faArrowLeftLong,faCookie,faCookieBite,faAngleDown,
-    faBitcoinSign, faRocket, faLocationDot, faGithub, faLinkedin, faTelegram, faTwitter, faGoogle)
+import '../helpers/fontAwesomeManager';
 
 
 const AppRouter = () => {
@@ -39,18 +29,17 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/trade" element={<Trade/>}>
-                        <Route path="/trade" element={<TradeMenu />} />
-                        <Route path="/trade/old-costumer" element={<OldCostumer />} />
-                        <Route path="/trade/new-costumer" element={<NewCostumer />} />
+                    <Route path="/trade" element={<Trade />} >
+                        <Route path=":id" element={<Trade />} />
+                        <Route index element={<Trade />} />
                     </Route>
                     <Route path="/support" element={<Support />} />
-                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />
                 </Route>
                 <Route path="/register" element={<Register dispatchModal={dispatchModal} />} />
                 <Route path="/login" element={<Login dispatchModal={dispatchModal} />} />
-                {/* <Route path="/settings" element={<Settings />} /> */}
-                <Route path="passWord-reset/:userID/:token" element={<PasswordReset />} />
+                <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />
+                <Route path="password-reset/:userID/:token" element={<PasswordReset />} />
                 <Route path="/finish-register/:userID" element={<FinishRegister />} />
                 <Route path="/finish-register-persona/:userID" element={<FinishRegisterPersona />} />
                 <Route path="/finish-register-company/:userID" element={<FinishRegisterCompany />} />

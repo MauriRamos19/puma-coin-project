@@ -30,15 +30,24 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<ConnectionProvider endpoint={network}>
-			<WalletProvider wallets={wallets}>
-				<WalletModalProvider>
-					<AppRouter />
-				</WalletModalProvider>
-			</WalletProvider>
+			{/* {document.cookie.includes("x_access_token") ? */}
+				{/* (<WalletProvider wallets={wallets} autoConnect>
+					<WalletModalProvider>
+						<AppRouter />
+					</WalletModalProvider>
+				</WalletProvider>) */}
+				{/* : */}
+				<WalletProvider wallets={wallets}>
+					<WalletModalProvider>
+						<AppRouter />
+					</WalletModalProvider>
+				</WalletProvider>
+			{/* } */}
+
 		</ConnectionProvider>
 	</React.StrictMode>
-		
-	
+
+
 );
 
 // If you want to start measuring performance in your app, pass a function

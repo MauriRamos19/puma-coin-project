@@ -9,16 +9,18 @@ import InputFileWithPreview from "../../Components/InputFileWithPreview/InputFil
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 
 import "./Settings.css";
-import { getUser, editUser } from "../../services/user";
+import { getUser, editUser, deleteAccount } from "../../services/user";
 import { useNavigate } from "react-router-dom";
 import { withCookies, Cookies } from "react-cookie";
 
-const Settings = ({withCookies, cookies}) => {
+const Settings = ({withCookies, cookies, dispatchModal}) => {
   
   const navigate = useNavigate();
-
+  
+  const [token,setToken] = useState(cookies.get('x_access_token'));
   const [user, setUser] = useState({
     name: "",
+    RTN:"",
     lastName: "",
     email: "",
     img: "",
@@ -32,13 +34,15 @@ const Settings = ({withCookies, cookies}) => {
     department: "",
     city: "",
     zipCode: "",
+    userType: "",
+    verified: false
   });
-
+  const [profileImage, setProfileImage] = useState({});  
+  const [disabled, setDisabled] = useState(true)
 
 
   useEffect(  () => {
 
-    const token = cookies.get('x_access_token')
     getUser(token).then(data => {
       setUser( (prev) => {
         return {
@@ -46,11 +50,11 @@ const Settings = ({withCookies, cookies}) => {
           ...data.user
         };
       });
+      data.user.verified === true ? setDisabled(false) : setDisabled(true);
+      setProfileImage(data.user.img)
     });
 
-  
-  }, [cookies]);
-  
+  }, [token]); 
 
   const onChangeHandler = (evt) => {
     const propery = evt.target.name;
@@ -67,15 +71,92 @@ const Settings = ({withCookies, cookies}) => {
     );
   };
 
-  const onClickHandler = (evt) => {
+  const onClickHandler = async (evt) => {
     evt.preventDefault();
-    editUser(user).then(data => {
-      console.log(user);
-    }
-    );
+
+    const formData = new FormData()
+        // 
+ 
+      Object.entries(user).forEach(atributte => {
+          formData.append(atributte[0].toString(),atributte[1])
+      })
+
+    await editUser(formData,token)
+   
     navigate('/');
   }
 
+  const handleDeleteUser = () =>  {
+    deleteAccount(token).then(data => {
+      console.log(data)
+      cookies.remove('x_access_token')
+      dispatchModal({ type:"close" })
+      navigate('/login');
+    });
+  }
+
+  const onDeleteUserHandler = (evt) => {
+    console.log(dispatchModal)
+    dispatchModal({ 
+      type: "deleteUser",
+      data:{
+        title: "Borrar cuenta",
+        headingIcon: (
+          <FontAwesomeIcon 
+            icon="fa-solid fa-triangle-exclamation" 
+            style={{
+              color: "rgb(237, 70, 70)",
+              fontSize: "3rem"
+            }} />
+        ),
+        description: "Cuidado!, esta accion puede llegar hacer irreversible, ¿estas seguro que quisieras eliminar tu cuenta?",
+        content:(
+
+          <div style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "1rem"
+          }}>
+
+            <Button onClick={() => dispatchModal({ type:"close" })}>Cerrar</Button>
+            <button onClick={handleDeleteUser} className="deleteAccountBtn">Eliminar</button>
+
+          </div>
+        )
+      }
+    });
+  }
+
+ 
+  const changePhotoHandler = (src) => {
+        setProfileImage(src)
+    }
+
+    const onChangeProfilePhotoHandler = (evt) => {
+        
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(evt.target.files[0])
+        setProfileImage(evt.target.files[0])
+        setUser((prev) =>
+          Object.assign(
+            {},
+            {
+              ...prev,
+              img: evt.target.files[0]
+            }
+          )
+        );
+        fileReader.onloadend = () => {
+            changePhotoHandler(fileReader.result)
+            
+        }
+    }
+ 
+  //pasar este archivo a imagen para renderizarlo
 
   return (
   
@@ -86,40 +167,78 @@ const Settings = ({withCookies, cookies}) => {
           <p>Permitenos ayudarte a mantener actualizado tu perfil</p>
         </div>
         <div className="Settings__photo">
-          <InputFileWithPreview
-            name="img"
-            alt="img"
-            imagePlaceHolder={imagePlaceHolder}
-            onChange={onChangeHandler}
-            value={user.img}
-          />
+         
+        <label className={`InputFileWithPreview`}>
+            <img src={ profileImage === "" ? imagePlaceHolder : profileImage} alt={'img'} />
+            <input
+                type="file"
+                name={'img'}
+                onChange={onChangeProfilePhotoHandler}
+            />
+        </label>
+    
         </div>
         <div className="Settings__inputs">
           <WrapperDirection direction="vertical">
             <WrapperDirection direction="horizontal">
-              <InputWithLabel label="Nombre">
-                <input
-                  disabled={true}
-                  type="text"
-                  name="name"
-                  placeholder=""
-                  onChange={onChangeHandler}
-                  value={user.name}
-                />
-              </InputWithLabel>
-              <InputWithLabel label="Apellido">
-                <input
-                  disabled={true}
-                  type="text"
-                  name="lastName"
-                  placeholder=""
-                  onChange={onChangeHandler}
-                  value={user.lastName}
-                />
-              </InputWithLabel>
+              {
+                user.userType === "company" ? (
+                  <>
+                    <InputWithLabel label="Nombre de la empresa">
+                        <input
+                          disabled="disabled"
+                          type="text"
+                          name="name"
+                          placeholder=""
+                          onChange={onChangeHandler}
+                          value={user.name}
+                        />
+                    </InputWithLabel>
+                    <InputWithLabel label="RTN">
+                        <input
+                          disabled="disabled"
+                          type="text"
+                          name="RTN"
+                          placeholder=""
+                          onChange={onChangeHandler}
+                          value={user.RTN}
+                        />
+                    </InputWithLabel>
+                  </>
+                ) : (
+                  <>
+                  <InputWithLabel label="Nombre">
+                      <input
+                        disabled="disabled"
+                        type="text"
+                        name="name"
+                        placeholder=""
+                        onChange={onChangeHandler}
+                        value={user.name}
+                      />
+                  </InputWithLabel>
+                  <InputWithLabel label="Apellido">
+                    <input
+                      disabled="disabled"
+                      type="text"
+                      name="lastName"
+                      placeholder=""
+                      onChange={onChangeHandler}
+                      value={user.lastName}
+                    />
+                  </InputWithLabel>
+                  </>
+                    
+
+                )
+            
+            
+                
+              }
+              
               <InputWithLabel label="Correo Electronico">
                 <input
-                  disabled={true}
+                  disabled="disabled"
                   type="text"
                   name="email"
                   placeholder=""
@@ -132,6 +251,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Contraseña Actual">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="currentPassword"
                   placeholder=""
@@ -141,6 +261,7 @@ const Settings = ({withCookies, cookies}) => {
               </InputWithLabel>
               <InputWithLabel label="Nueva Contraseña">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="newPassword"
                   placeholder=""
@@ -150,6 +271,7 @@ const Settings = ({withCookies, cookies}) => {
               </InputWithLabel>
               <InputWithLabel label="Confirmar Contraseña">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="newPassword2"
                   placeholder=""
@@ -162,6 +284,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Telefono">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="phone"
                   placeholder=""
@@ -173,6 +296,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Direccion 1">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="address"
                   placeholder=""
@@ -184,6 +308,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Direccion 2">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="address2"
                   placeholder=""
@@ -196,6 +321,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Pais">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="country"
                   placeholder=""
@@ -206,6 +332,7 @@ const Settings = ({withCookies, cookies}) => {
 
               <InputWithLabel label="Departamento">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="department"
                   placeholder=""
@@ -218,6 +345,7 @@ const Settings = ({withCookies, cookies}) => {
             <WrapperDirection>
               <InputWithLabel label="Ciudad">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="city"
                   placeholder=""
@@ -227,6 +355,7 @@ const Settings = ({withCookies, cookies}) => {
               </InputWithLabel>
               <InputWithLabel label="Codigo Postal">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="zipCode"
                   placeholder=""
@@ -238,12 +367,10 @@ const Settings = ({withCookies, cookies}) => {
           </WrapperDirection>
         </div>
         <div className="Settings__submit-button">
-          <WrapperDirection>
+          <WrapperDirection className="userAccountOptions__wrapper">
             <Button type="submit" onClick={onClickHandler}>Actualizar</Button>
-            
-            <Button type="submit" onClick={onClickHandler}>Borrar</Button>         
-          </WrapperDirection>
-          
+            <Button className="deleteAccountBtn" type="button" onClick={onDeleteUserHandler}>Borrar Cuenta</Button>         
+          </WrapperDirection>          
         </div>
       </form>
     </div>

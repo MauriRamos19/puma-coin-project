@@ -6,6 +6,7 @@ import Footer from './Layouts/Footer/Footer';
 
 
 function App() {
+	
 	return (
 		<div className="App">
 			<Header />

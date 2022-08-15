@@ -18,7 +18,7 @@ const sendEmail = async (user, subject, html) => {
 );
 
     const mailOptions = {
-        from: `Puma Anonimo <${process.env.PUMACOIN_EMAIL}>`,
+        from: `Equipo PumaCoin <${process.env.PUMACOIN_EMAIL}>`,
         to: user.email,
         subject: subject,
         html: html

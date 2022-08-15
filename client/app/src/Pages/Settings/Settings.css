@@ -73,11 +73,6 @@
     align-items: center;
     justify-content: center;
 }
-
-.Settings__submit-button button {
-    width: 100%;
-    max-width: 220px;
-}
 /**/
 
 /* ====== Back button ====== */
@@ -97,6 +92,28 @@
 }
 
 .Settings__back:hover {
+    cursor: pointer;
+}
+/**/
+
+/* ====== user account options ====== */
+.deleteAccountBtn {
+    background-color: rgb(250, 119, 119);
+    max-width: unset;
+    width: fit-content;
+}
+
+.deleteAccountBtn:hover {
+    background-color: rgb(248, 74, 74);
+}
+
+.deleteAccountModalBtn {
+    all: unset;
+    font-size: 0.8rem;
+    color: rgb(161, 0, 0);
+}
+
+.deleteAccountModalBtn:hover {
     cursor: pointer;
 }
 /**/

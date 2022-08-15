@@ -1,18 +1,23 @@
-
+const { Response, Request } = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { generateJWT } = require("../helpers/generateJWT");
 const { isValidPassword, isValidEmail } = require('../helpers/db-validators');
 
-const {templatePasswordReset } = require('../public/templates.js')
+const { templatePasswordReset } = require('../public/templates.js')
 
 const { request, response } = require('express');
 const { sendEmail } = require('../utils/sendEmail');
 
+const { cloudinary } = require('../utils/cloudinary');
+
+
+const googleVerify = require('../helpers/googleVerify');
+
 
 const login = async (req = request, res = response) => {
     const { email, password } = req.body;
-
+    console.log("Envio a heroku")
     try {
 
 
@@ -43,10 +48,19 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'El usuario no esta activo, por favor verifique su correo'
+                    message: 'El usuario no esta activo, contacte con un administrador'
                 }
             });
         }
+
+        // if(!userDB.verified){
+        //     return res.status(400).json({
+        //         ok: false,
+        //         err: {
+        //             message: 'El usuario no ha verificado su correo, por favor verifique su correo'
+        //         }
+        //     });
+        // }
 
         const token = await generateJWT(userDB.id);
 
@@ -74,6 +88,7 @@ const register = async (req, res) => {
         const userDB = await User.findOne({ email });
 
 
+
         if (userDB) {
             return res.status(400).json({
                 ok: false,
@@ -82,6 +97,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
         if (password.length < 6) {
             return res.status(400).json({
@@ -109,6 +125,7 @@ const register = async (req, res) => {
                 }
             });
         }
+
 
 
         const user = new User({ email, password });
@@ -147,10 +164,81 @@ const register = async (req, res) => {
 
 }
 
+const googleSignIn = async (req, res) => {
+    const { id_google } = req.body;
 
-// const logout = (req, res=response) => {
-//     res.clearCookie("access_token").status(200).json({ message: "ok" });
-// }
+    try {
+        
+        const { email, name, picture } = await googleVerify(id_google);
+
+
+
+        const userDB = await User.findOne({ email });
+
+        if (userDB) {
+
+            if (!userDB.status) {
+                return res.status(400).json({
+                    ok: false,
+                    err: {
+                        message: 'El usuario no esta activo, contacte con un administrador'
+                    }
+                });
+            }
+
+            if(!userDB.verified){
+
+                const user = new User({ email, name, img: picture , password: "google", google: true });
+
+                const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
+
+                const hmtl = `<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
+                    <p>Entra al siguiente enlace para completar tu registro:</p>
+                    <a href="${link}">${link}</a>`;
+
+                await sendEmail(user, "Bienvenido a Puma Coin", hmtl);
+
+            }
+
+            const token = await generateJWT(userDB.id);
+            return res.status(200).json({
+                ok: true,
+                user: userDB,
+                token
+            });
+        }
+
+        
+
+        const user = new User({ email, name, img: picture , password: "google", google: true });
+
+        const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
+
+        const hmtl = `<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
+            <p>Entra al siguiente enlace para completar tu registro:</p>
+            <a href="${link}">${link}</a>`;
+
+        await sendEmail(user, "Bienvenido a Puma Coin", hmtl);
+
+        const token = await generateJWT(user.id);
+
+        await user.save();
+
+        res.status(200).json({
+            ok: true,
+            user,
+            token
+        });
+
+
+    } catch (error) {
+        res.status(500).json({
+            ok: false,
+            err: error
+        });
+    }
+}
+
 
 
 const forgotPassword = async (req, res) => {
@@ -198,16 +286,18 @@ const forgotPassword = async (req, res) => {
 }
 
 
-const finishRegister = async (req, res) => {
+const finishRegister = async (req=Request, res) => {
 
     const { id } = req.params;
     const body = req.body;
-    console.log("FinishRegister: body - ", body)
-    console.log("FinishRegister: id - ", id)
+    const file = req.file;
+    
+    // Segui trabajando en esta parte
 
+  
     try {
         const userDB = await User.findById(id);
-        console.log("FinishRegister: userDB - ", userDB)
+       
 
         if (!userDB) {
             return res.status(400).json({
@@ -218,7 +308,15 @@ const finishRegister = async (req, res) => {
             });
         }
 
-        const { address2, img, wallet, ...rest } = body;
+        const { address2, wallet, ...rest } = body;
+
+        
+        if(userDB.img) {
+            const nameArr = userDB.img.split('/');
+            const name    = nameArr[ nameArr.length - 1]
+            const [ public_id ] = name.split('.')
+            cloudinary.uploader.destroy( public_id )
+        }
 
         const emptyFields = (
             Object.entries(rest)
@@ -234,15 +332,22 @@ const finishRegister = async (req, res) => {
             })
         }
 
+        
+        
+        const { secure_url } = await cloudinary.uploader.upload(file.path, {
+            uploader: 'profileImages'
+        })
 
-        const user = await User.findByIdAndUpdate(id, { ...body }, { new: true });
-        console.log("FinishRegister: user - ", user)
+
+        const user = await User.findByIdAndUpdate(id, { ...body, verified: true, img: secure_url}, { new: true });
+        
+        
 
         await user.save()
 
         return res.status(200).json({
             ok: true,
-            user: userDB
+            user: user
         });
 
 
@@ -256,6 +361,8 @@ const finishRegister = async (req, res) => {
         });
     }
 }
+
+
 
 
 const resetPassword = async (req, res = response) => {
@@ -325,5 +432,6 @@ module.exports = {
     renewToken,
     forgotPassword,
     resetPassword,
-    finishRegister
+    finishRegister,
+    googleSignIn
 }

@@ -43,9 +43,17 @@ const Support = (props) => {
     try {
       const data = await sendEmail(form);
 
+      
       if (data) {
         alert("Mensaje enviado");
       }
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
       console.log(error);
     }
