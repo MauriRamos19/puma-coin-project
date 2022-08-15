@@ -6,6 +6,7 @@
     padding: 10px 18px;
     font-family: inherit;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .UI-button:hover {
