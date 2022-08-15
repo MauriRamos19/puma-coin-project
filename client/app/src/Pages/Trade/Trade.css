@@ -7,6 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: column;
+    gap: 1rem;
 
     margin: 40px auto;
 }
@@ -23,4 +25,13 @@
 .Trade .curencyConversor__wrapper {
     padding: 30px 50px;
     position: relative;
+}
+
+.Trade__table {
+    margin: 40px 0 10px;
+    text-align: center;
+}
+
+.Trade__table > :first-child {
+    margin-bottom: 10px;
 }

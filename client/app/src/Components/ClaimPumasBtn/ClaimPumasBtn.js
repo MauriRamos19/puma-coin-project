@@ -15,18 +15,22 @@ const ClaimPumasBtn = ({ dispatchModal, cookies, transactionID }) => {
     const [aux, setAux] = useState(0)
 
     useEffect(() => {
+
         getUnclaimedTokens(token)
             .then((tokensToClaim) => setUnclaimedTokens(tokensToClaim))
             .then(() => console.log(unclaimedTokens))
             .catch(err => console.log(err));
+
     }, [transactionID, token, aux])
 
     const onClaimTokens = () => {
+
         buyPumaCoin(unclaimedTokens.amount)
             .then(result => result && claimTokens(token, unclaimedTokens.tokens))
             .then(({ isUpdated }) => isUpdated && setAux(prev => prev + 1))
             .then(result => dispatchModal({ type: "close" }))
             .catch(error => console.error("something went wrong: ", error))
+            
     }
 
     const onClickHandler = (evt) => {

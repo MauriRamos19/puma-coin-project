@@ -5,6 +5,7 @@ import BuyPumaButton from '../../Components/BuyPumaButton/BuyPumaButton'
 import Card from '../../Components/Card/Card'
 import ClaimPumasBtn from '../../Components/ClaimPumasBtn/ClaimPumasBtn'
 import CurrencyConversor from '../../Components/CurrencyConversor/CurrencyConversor'
+import TradeTable from '../../Components/TadreTable/TradeTable'
 import WrapperDirection from '../../Components/WrapperDirection/WrapperDirection'
 import currencyConversorReducer from '../../Reducers/currencyConversor'
 import './Trade.css'
@@ -29,7 +30,7 @@ const Trade = ({ dispatchModal }) => {
     useEffect(() => {
         setTransactionID(paymentID)
     }, [paymentID])
-    
+
 
     return (
         <div className="Trade">
@@ -60,6 +61,10 @@ const Trade = ({ dispatchModal }) => {
                         dispatchModal={dispatchModal}
                         transactionID={transactionID} />
                 </Card>
+                <div className="Trade__table">
+                    <h2>Historial de transacciones</h2>
+                    <TradeTable />
+                </div>
             </div>
         </div>
     )

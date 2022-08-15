@@ -113,7 +113,25 @@ const useBuyPumaCoin = () => {
 
 }
 
+const useGetTransactionHistory = () => {
+
+    const wallet = useWallet();
+
+    const getTransactionHistory = async () => {
+
+        const { connection } = await solanaInit();
+        
+        const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey);
+
+        return signatureTransactiones ?? [];
+    }
+
+    return getTransactionHistory;
+
+}
+
 export {
     useAddPumaTokenToWallet,
-    useBuyPumaCoin
+    useBuyPumaCoin,
+    useGetTransactionHistory
 }
