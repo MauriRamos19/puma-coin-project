@@ -82,11 +82,8 @@ const useBuyPumaCoin = () => {
             !amount
             || isNaN(amount)
         ) throw new Error("Cantidad solicitada invalida");
-
-        if (!publicKey) throw new WalletNotConnectedError();
-
         
-        console.log('adios')
+        if (!publicKey) throw new WalletNotConnectedError();
 
         const { connection, mint, mintAuth } = await solanaInit();
 

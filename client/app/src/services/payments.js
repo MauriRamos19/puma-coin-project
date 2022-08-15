@@ -17,7 +17,7 @@ export const requestPayment = async (token, pumaCoinAmount) => {
         });
 
         const dataResponse = response.data;
-
+        console.log(dataResponse)
         if (!dataResponse.ok || !dataResponse.request || !dataResponse.request?.url) {
             throw new Error("server response with a corrupted data");
         }
