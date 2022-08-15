@@ -85,6 +85,10 @@ const userSchema = Schema({
     userType: {
         type: String,
         enum: ["natural", "company"]
+    },
+    google: {
+        type: Boolean,
+        default: false
     }
 
 });

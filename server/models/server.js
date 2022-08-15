@@ -3,6 +3,8 @@ var cors = require('cors')
 const { dbConnection } = require('../database/config')
 
 var cookieParser = require('cookie-parser')
+
+const multer = require('multer')
 class Server {
 
     constructor() {
@@ -33,6 +35,7 @@ class Server {
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
         }));
         this.app.use(express.json())
+        this.app.use(express.urlencoded({ extended: false }))
         this.app.use(cookieParser());
     }
 

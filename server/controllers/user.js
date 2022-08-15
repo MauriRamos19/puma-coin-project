@@ -179,6 +179,34 @@ const deleteAccount = async(req, res=response) => {
 }
 
 
+const uploadImageCloudinary = async (req, res) => {
+    try {
+       console.log(req.file);
+        const { id }  = req.params
+        
+        const userDB = await User.findById(id)
+
+        // if(userDB.img) {
+        //     const nameArr = userDB.img.split('/');
+        //     const name    = nameArr[ nameArr.length - 1]
+        //     const [ public_id ] = name.split('.')
+        //     cloudinary.uploader.destroy( public_id )
+        // }
+        
+        // const { secure_url } = await cloudinary.uploader.upload(profileImage)
+
+    
+        // await User.findByIdAndUpdate(id, {img: secure_url}, {new: true})
+        // res.json(secure_url)
+        
+        // const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+        //     upload_preset: 'dev_setups',
+        // });
+
+    } catch (err) {
+        res.status(500).json({ err: 'Algo salio mal' });
+    }
+}
 
 
 
@@ -189,5 +217,6 @@ const deleteAccount = async(req, res=response) => {
 module.exports = {
     getUser,
     editUser,
-    deleteAccount
+    deleteAccount,
+    uploadImageCloudinary
 };
