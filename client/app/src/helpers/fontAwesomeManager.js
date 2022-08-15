@@ -1,5 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { faGithub, faLinkedin, faTelegram, faTwitter, faGoogle} from '@fortawesome/free-brands-svg-icons'
 import {
     faUser,
     faLandmark,
@@ -10,7 +10,8 @@ import {
     faRocket,
     faTriangleExclamation,
     faWallet,
-    faBitcoinSign
+    faBitcoinSign,
+    faLocationDot
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -24,6 +25,10 @@ library.add(
     faTriangleExclamation,
     faWallet,
     faBitcoinSign,
+    faLocationDot,
     faGithub,
-    faLinkedin
+    faLinkedin,
+    faTelegram, 
+    faTwitter, 
+    faGoogle
 );
