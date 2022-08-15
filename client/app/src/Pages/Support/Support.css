@@ -105,17 +105,10 @@
 
 .Support__image {
     display: flex;
-    /* position: fixed; */
     align-items: center;
 }
 
 .Support__img_coin {
-    /* position: fixed;
-    display: flex;
-    width: auto;
-    height: 300px;
-    top: 20%;
-    left: 50%; */
     position: absolute;
     display: flex;
     width: 138%;
