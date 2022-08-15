@@ -144,6 +144,7 @@ export function ConectWallet (){
     useEffect(() => {
         
         if(!wallet.connected) {
+            
             setMessage({
                 active: false,
                 type: "error",
