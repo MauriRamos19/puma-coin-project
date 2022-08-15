@@ -2,6 +2,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const UserTransactions = require('../models/transactions');
 
+
 const requestPayment = async (req, res) => {
 
     try {
@@ -92,7 +93,7 @@ const requestPaymentInfo = async (req, res) => {
 
         if(transactions){
             transactions.transactions.push(JSON.stringify(sessionInfo));
-            await transactions.save();
+            await UserTransactions.findOneAndUpdate({user: user.id}, { transactions: transactions.transactions }, { new: true });
         }else{
             const newtransactions = new UserTransactions({
                 user: user.id,
@@ -100,7 +101,7 @@ const requestPaymentInfo = async (req, res) => {
             });
             await newtransactions.save();
         }
-        
+
         res.status(200).json({
             ok: true,
             request: data,
@@ -117,8 +118,39 @@ const requestPaymentInfo = async (req, res) => {
     }
 }
 
+const getPaymentsInfo = async (req, res) => {
+    
+        try {
+    
+            const user = req.user;
+            const { id } = req.params;
+    
+            const transactions = await UserTransactions.findOne({ user: user.id });
+            
+            const data = transactions.transactions.filter(transaction => { 
+                JSON.parse(transaction).id === id ;
+            });
+
+            res.status(200).json({
+                ok: true,
+                request: data,
+            })
+
+        } catch (error) {
+                
+                console.log("something went wrong during the fetch info of stripe session: ", error);
+    
+                res.status(200).json({
+                    ok: false,
+                    request: null,
+                })
+            }
+                    
+}
+
 module.exports = {
     requestPayment,
     requestPaymentInfo,
-    customeRequestPayment
+    customeRequestPayment,
+    getPaymentsInfo
 }
