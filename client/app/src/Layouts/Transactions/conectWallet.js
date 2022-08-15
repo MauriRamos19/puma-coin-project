@@ -154,6 +154,7 @@ export function ConectWallet (){
         
        /* const transferencia = await transfer(connection,pumaKeyGen,associatedAccountMintAuth,associatedAccount,wallet.publicKey,10)*/
     
+
        /* console.log(transferencia)*/
         const signature = await sendTransaction(transferToken,connection,{signers: [pumaKeyGen]})
         let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
@@ -182,6 +183,7 @@ export function ConectWallet (){
         let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
         transferToken.recentBlockhash = blockhash;
         const confirm = await connection.confirmTransaction(signature)
+
     }
     
     useEffect(() => {

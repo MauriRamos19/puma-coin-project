@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAddPumaTokenToWallet } from '../../Hooks/Solana';
+import { useAddPumaTokenToWallet } from '../../hooks/Solana';
 import Button from '../Button/Button';
 
 import pumaImg from '../../Assets/images/puma.png'

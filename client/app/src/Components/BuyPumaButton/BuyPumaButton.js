@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { withCookies } from 'react-cookie'
 import { useParams } from 'react-router-dom'
-import { useBuyPumaCoin } from '../../Hooks/Solana'
+import { useBuyPumaCoin } from '../../hooks/Solana'
 import { requestPayment, requestPaymentInfo } from '../../services/payments'
 import Button from '../Button/Button'
 

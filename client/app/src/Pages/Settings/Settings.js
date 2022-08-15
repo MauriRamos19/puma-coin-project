@@ -16,6 +16,7 @@ import { withCookies, Cookies } from "react-cookie";
 const Settings = ({withCookies, cookies, dispatchModal}) => {
   
   const navigate = useNavigate();
+  
   const [token,setToken] = useState(cookies.get('x_access_token'));
   const [user, setUser] = useState({
     name: "",
@@ -33,9 +34,11 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     department: "",
     city: "",
     zipCode: "",
-    userType: ""
+    userType: "",
+    verified: false
   });
-
+  const [profileImage, setProfileImage] = useState({});  
+  const [disabled, setDisabled] = useState(true)
 
 
   useEffect(  () => {
@@ -47,11 +50,11 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
           ...data.user
         };
       });
+      data.user.verified === true ? setDisabled(false) : setDisabled(true);
+      setProfileImage(data.user.img)
     });
 
-  
-  }, [token]);
-  
+  }, [token]); 
 
   const onChangeHandler = (evt) => {
     const propery = evt.target.name;
@@ -70,7 +73,15 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
 
   const onClickHandler = async (evt) => {
     evt.preventDefault();
-    await editUser(user,token)
+
+    const formData = new FormData()
+        // 
+ 
+      Object.entries(user).forEach(atributte => {
+          formData.append(atributte[0].toString(),atributte[1])
+      })
+
+    await editUser(formData,token)
    
     navigate('/');
   }
@@ -119,6 +130,33 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
     });
   }
 
+ 
+  const changePhotoHandler = (src) => {
+        setProfileImage(src)
+    }
+
+    const onChangeProfilePhotoHandler = (evt) => {
+        
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(evt.target.files[0])
+        setProfileImage(evt.target.files[0])
+        setUser((prev) =>
+          Object.assign(
+            {},
+            {
+              ...prev,
+              img: evt.target.files[0]
+            }
+          )
+        );
+        fileReader.onloadend = () => {
+            changePhotoHandler(fileReader.result)
+            
+        }
+    }
+ 
+  //pasar este archivo a imagen para renderizarlo
 
   return (
   
@@ -129,13 +167,16 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
           <p>Permitenos ayudarte a mantener actualizado tu perfil</p>
         </div>
         <div className="Settings__photo">
-          <InputFileWithPreview
-            name="img"
-            alt="img"
-            imagePlaceHolder={imagePlaceHolder}
-            onChange={onChangeHandler}
-            value={user.img}
-          />
+         
+        <label className={`InputFileWithPreview`}>
+            <img src={ profileImage === "" ? imagePlaceHolder : profileImage} alt={'img'} />
+            <input
+                type="file"
+                name={'img'}
+                onChange={onChangeProfilePhotoHandler}
+            />
+        </label>
+    
         </div>
         <div className="Settings__inputs">
           <WrapperDirection direction="vertical">
@@ -145,7 +186,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
                   <>
                     <InputWithLabel label="Nombre de la empresa">
                         <input
-                          disabled={true}
+                          disabled="disabled"
                           type="text"
                           name="name"
                           placeholder=""
@@ -155,7 +196,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
                     </InputWithLabel>
                     <InputWithLabel label="RTN">
                         <input
-                          disabled={true}
+                          disabled="disabled"
                           type="text"
                           name="RTN"
                           placeholder=""
@@ -168,7 +209,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
                   <>
                   <InputWithLabel label="Nombre">
                       <input
-                        disabled={true}
+                        disabled="disabled"
                         type="text"
                         name="name"
                         placeholder=""
@@ -178,7 +219,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
                   </InputWithLabel>
                   <InputWithLabel label="Apellido">
                     <input
-                      disabled={true}
+                      disabled="disabled"
                       type="text"
                       name="lastName"
                       placeholder=""
@@ -197,7 +238,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               
               <InputWithLabel label="Correo Electronico">
                 <input
-                  disabled={true}
+                  disabled="disabled"
                   type="text"
                   name="email"
                   placeholder=""
@@ -210,6 +251,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Contraseña Actual">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="currentPassword"
                   placeholder=""
@@ -219,6 +261,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               </InputWithLabel>
               <InputWithLabel label="Nueva Contraseña">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="newPassword"
                   placeholder=""
@@ -228,6 +271,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               </InputWithLabel>
               <InputWithLabel label="Confirmar Contraseña">
                 <input
+                  disabled={disabled}
                   type="password"
                   name="newPassword2"
                   placeholder=""
@@ -240,6 +284,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Telefono">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="phone"
                   placeholder=""
@@ -251,6 +296,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Direccion 1">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="address"
                   placeholder=""
@@ -262,6 +308,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Direccion 2">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="address2"
                   placeholder=""
@@ -274,6 +321,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection direction="horizontal">
               <InputWithLabel label="Pais">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="country"
                   placeholder=""
@@ -284,6 +332,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
 
               <InputWithLabel label="Departamento">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="department"
                   placeholder=""
@@ -296,6 +345,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
             <WrapperDirection>
               <InputWithLabel label="Ciudad">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="city"
                   placeholder=""
@@ -305,6 +355,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               </InputWithLabel>
               <InputWithLabel label="Codigo Postal">
                 <input
+                  disabled={disabled}
                   type="text"
                   name="zipCode"
                   placeholder=""
