@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import Button from "../../Components/Button/Button";
-import { useCookies, withCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
 import parrot from "../../Assets/images/parrot.png";
 import "./Footer.css";
 
