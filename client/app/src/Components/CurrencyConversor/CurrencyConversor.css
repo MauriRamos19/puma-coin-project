@@ -1,0 +1,16 @@
+.CurrencyConversor > * {
+    align-items: center;
+}
+
+.CurrencyConversor > label{
+    align-items: flex-start;
+}
+
+.CurrencyConversor > label > div{
+    gap: 0.6rem;
+    width: 100%;
+}
+
+.CurrencyConversor select {
+    flex-basis: 40%;
+}
