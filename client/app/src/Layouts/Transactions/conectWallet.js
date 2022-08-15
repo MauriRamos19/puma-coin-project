@@ -1,6 +1,8 @@
-import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction } from '@solana/web3.js';
+import { Connection, PublicKey, clusterApiUrl, LAMPORTS_PER_SOL, Transaction, sendAndConfirmTransaction, sendAndConfirmRawTransaction, TransactionInstruction
+, TransactionSignature,  
+SendTransactionError} from '@solana/web3.js';
 import {
-    Program, AnchorProvider, web3, getProvider, Wallet
+    Program, AnchorProvider, web3, getProvider, Wallet, Spl
 } from '@project-serum/anchor';
 import idl from '../../idl.json';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
@@ -13,9 +15,11 @@ import {Token, TOKEN_PROGRAM_ID, MintLayout, getMint, createAssociatedTokenAccou
     createAssociatedTokenAccountInstruction, 
     createMint,
     getOrCreateAssociatedTokenAccount,
-    createTransferInstruction} from "@solana/spl-token";
+    createTransferInstruction,NATIVE_MINT, transfer,
+    TokenInstruction,
+    createTransferCheckedInstruction,
+    getAccount} from "@solana/spl-token";
 import base58 from "bs58";
-import { SplAssociatedTokenAccountsCoder } from '@project-serum/anchor/dist/cjs/coder/spl-associated-token/accounts';
 
 //Red de solana a conectar
 const network = clusterApiUrl('devnet');
@@ -47,6 +51,7 @@ export function ConectWallet (){
     const [message, setMessage] = useState({ active: false });
 
 
+    const { sendTransaction} = useWallet();
     const wallet = useWallet();
 
     function getProviderWallet(){
@@ -56,17 +61,28 @@ export function ConectWallet (){
         return provider;
     }
 
+    async function buyOneSol () {
+        const transactionID = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
+        return transactionID;
+    }
+
     async function airdropSol() {    
-        const airdrop = await connection.requestAirdrop( wallet.publicKey,LAMPORTS_PER_SOL);
+        await buyOneSol();
         console.log('Solicitando un AIRDROP en la DevNet, para la cuenta: '+ wallet.publicKey);
         document.getElementById("head_trans").innerHTML = 'Solicitando un AIRDROP en la DevNet, para la billetera: '+ wallet.publicKey
         document.getElementById("trans").innerHTML = "Se agregó exitosamente 1 SOL a su billetera."
         document.getElementById("sol_bal").innerHTML = ""
     }
 
+    async function getSolBalance () {
+        const balance = await connection.getBalance(wallet.publicKey)/LAMPORTS_PER_SOL;
+        return balance;
+    }   
+
     async function transacciones(){
         const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey)
-        const signature = await connection.getBalance(wallet.publicKey)/1000000000
+        const signature = await getSolBalance();
+        console.log(signatureTransactiones)
         console.log(signatureTransactiones[0].signature)
         console.log(signature)
         document.getElementById("head_trans").innerHTML = 'Se ha confirmado la transacción, la dirección es:'
@@ -76,27 +92,98 @@ export function ConectWallet (){
     
     
     async function createTokenAccount(){
-    const mint = await getMint(connection,tokenContract)
-    
-    const sendTx = getProviderWallet()
-    const pumakey = process.env.SECRET_KEY
-    const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
-    console.log(pumaKeyGen)
-    
-    const createToken = new Transaction().add(
-        getOrCreateAssociatedTokenAccount(
-            connection,
-            pumaKeyGen,
-            mint.address,
-            wallet.publicKey)
-    )
 
+        // const solBalance = await getSolBalance();
+
+        // if (solBalance === 0) {
+        //     await airdropSol();
+        // }
+
+        // Mint == obtener direccion del token (contrato de puma)
+        const mint = await getMint(connection,tokenContract)
+
+        /*const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
+        const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))*/
+        
+        //Obtiene la cuenta del token creado
+        const associatedAccount = await getAssociatedTokenAddress(
+            mint.address,
+            wallet.publicKey
+        )
+
+        console.log(associatedAccount.toString());
+
+        //crea la cuenta en la billetera
+        const createToken = new Transaction().add(
+            createAssociatedTokenAccountInstruction(
+                wallet.publicKey,
+                associatedAccount,
+                wallet.publicKey,
+                mint.address
+            )
+        );
+
+        const signature = await sendTransaction(createToken,connection)
+        let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
+        createToken.recentBlockhash = blockhash;
+        const confirm = await connection.confirmTransaction(signature)
+    }
+
+    async function buyTokenPuma(){
+        const mint = await getMint(connection,tokenContract)
+
+        const associatedAccount = await getAssociatedTokenAddress(mint.address,
+            wallet.publicKey)
+        
+        const associatedAccountMintAuth = await getAssociatedTokenAddress(mint.address,
+            mintAuth)
+            console.log(associatedAccountMintAuth)
+        const pumakey = "5gh3uz14myUo2bf2rc7EmpKzAAGQZi34CKy4m9xzbN9v65mTHny5XfLms7pWt46HdztXdQtxKg9AQnn52DbJ8rAc" 
+        const pumaKeyGen =  Keypair.fromSecretKey(base58.decode(pumakey))
+
+        const solBalance = await getSolBalance();
+
+        if (solBalance === 0) {
+            await airdropSol();
+        }
+        
+        const transferToken = new Transaction().add(
+            /*transfer(connection,pumaKeyGen,associatedAccountMintAuth,associatedAccount,wallet.publicKey,10*LAMPORTS_PER_SOL)*/
+           createTransferInstruction(associatedAccountMintAuth,associatedAccount,mintAuth,10*LAMPORTS_PER_SOL)
+        )
+        
+       /* const transferencia = await transfer(connection,pumaKeyGen,associatedAccountMintAuth,associatedAccount,wallet.publicKey,10)*/
     
-    
-    const sing = sendTx.wallet.signTransaction(createToken)
-    const sendTx2 = sendTx.sendAndConfirm(createToken,sing)
-   
-   
+
+       /* console.log(transferencia)*/
+        const signature = await sendTransaction(transferToken,connection,{signers: [pumaKeyGen]})
+        let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
+        transferToken.recentBlockhash = blockhash;
+        const confirm = await connection.confirmTransaction(signature)
+        
+    }
+
+    async function transferTokenPuma(toAddress2, amount2){
+        let toAddress = new PublicKey("3zdTrDSCqYijvShHcH6Mfy6icBt2T724wKx5ZRxo3unh");
+        let amount = 5*LAMPORTS_PER_SOL;
+        const mint = await getMint(connection,tokenContract)
+        const fromAssociatedAccount = await getAssociatedTokenAddress(mint.address,wallet.publicKey)
+        const toAssociatedAccount = await getAssociatedTokenAddress(mint.address,toAddress);
+
+        const transferToken = new Transaction().add(
+           createTransferInstruction(
+                fromAssociatedAccount,
+                toAssociatedAccount,
+                wallet.publicKey,
+                amount
+           )
+        )
+        console.log(transferToken)
+        const signature = await sendTransaction(transferToken,connection)
+        let blockhash = await connection.getLatestBlockhash('finalized').blockhash;
+        transferToken.recentBlockhash = blockhash;
+        const confirm = await connection.confirmTransaction(signature)
+
     }
     
     useEffect(() => {
@@ -133,6 +220,8 @@ export function ConectWallet (){
                         <Button className='conectWallet__btn' onClick={airdropSol}>Pide Solana</Button>
                         <Button className='conectWallet__btn' onClick={transacciones}>Ver la Transaccion</Button>
                         <Button className='conectWallet__btn' onClick={createTokenAccount}>Token</Button>
+                        <Button className='conectWallet__btn' onClick={buyTokenPuma}>Comprar</Button>
+                        <Button className='conectWallet__btn' onClick={transferTokenPuma}>hola</Button>
                     </div>
                 )
                 
@@ -148,3 +237,8 @@ export function ConectWallet (){
 
 
 
+/* to save in DB after payment
+ID DB Local
+Wallet address
+Info pago en HNL 
+*/

@@ -62,7 +62,7 @@ const editUser = async (req, res) => {
             });
         }
         
-        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName, google,...rest } = req.body;
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName, google, userTransactions,...rest } = req.body;
 
         const userDB = await User.findById(user._id);
 

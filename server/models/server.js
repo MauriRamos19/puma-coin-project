@@ -14,7 +14,8 @@ class Server {
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
             user: "/api/user",
-            support: "/api/support"
+            support: "/api/support",
+            payments: "/api/payments"
         }
 
         this.dbConnect();
@@ -44,6 +45,7 @@ class Server {
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
         this.app.use(this.paths.user, require('../routes/user'));
         this.app.use(this.paths.support, require('../routes/support'));
+        this.app.use(this.paths.payments, require('../routes/payments'));
     }
 
     listen() {

@@ -89,8 +89,11 @@ const userSchema = Schema({
     google: {
         type: Boolean,
         default: false
+    },
+    userTransactions: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserTransactions'
     }
-
 });
 
 
