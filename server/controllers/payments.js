@@ -1,6 +1,8 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const userTransactions = require('../models/transactions');
+const UserTransactions = require('../models/transactions');
+
+
 
 const requestPayment = async (req, res) => {
 
@@ -49,7 +51,7 @@ const requestPaymentInfo = async (req, res) => {
         console.log(id);
 
 
-        const userTransactions = await userTransactions.findOne({ user: user.id });
+        const transactions = await userTransactions.findOne({ user: user.id });
         
     
         const sessionInfo = await stripe.checkout.sessions.retrieve(id);
@@ -65,17 +67,17 @@ const requestPaymentInfo = async (req, res) => {
         }
         
 
-        if(userTransactions){
-            userTransactions.transactions.push(sessionInfo);
-            await userTransactions.save();
+        if(transactions){
+            transactions.transactions.push(JSON.stringify(sessionInfo));
+            await UserTransactions.findOneAndUpdate({user: user.id}, { transactions: transactions.transactions }, { new: true });
         }else{
             const newUserTransactions = new userTransactions({
                 user: user.id,
-                transactions: [sessionInfo]
+                transactions: [JSON.stringify(sessionInfo)]
             });
             await newUserTransactions.save();
         }
-        
+
         res.status(200).json({
             ok: true,
             request: data,
@@ -92,7 +94,38 @@ const requestPaymentInfo = async (req, res) => {
     }
 }
 
+const getPaymentsInfo = async (req, res) => {
+    
+        try {
+    
+            const user = req.user;
+            const { id } = req.params;
+    
+            const transactions = await UserTransactions.findOne({ user: user.id });
+            
+            const data = transactions.transactions.filter(transaction => { 
+                JSON.parse(transaction).id === id ;
+            });
+
+            res.status(200).json({
+                ok: true,
+                request: data,
+            })
+
+        } catch (error) {
+                
+                console.log("something went wrong during the fetch info of stripe session: ", error);
+    
+                res.status(200).json({
+                    ok: false,
+                    request: null,
+                })
+            }
+                    
+}
+
 module.exports = {
     requestPayment,
-    requestPaymentInfo
+    requestPaymentInfo,
+    getPaymentsInfo
 }
