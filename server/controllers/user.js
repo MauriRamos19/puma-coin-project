@@ -3,8 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { isValidPassword } = require('../helpers/db-validators');
 const User = require('../models/user');
-
-
+const { cloudinary } = require('../utils/cloudinary');
 
 const getUser = async(req,res=response) => {
     
@@ -50,8 +49,9 @@ const editUser = async (req, res) => {
 
         try {
             const user = req.user;
+            const file = req.file;
 
- 
+
 
         if (!user) {
             return res.status(400).json({
@@ -62,8 +62,18 @@ const editUser = async (req, res) => {
             });
         }
         
-        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName,...rest } = req.body;
-        console.log(req.body);
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName, google,...rest } = req.body;
+
+        const userDB = await User.findById(user._id);
+
+        if(userDB.img) {
+            const nameArr = userDB.img.split('/');
+            const name    = nameArr[ nameArr.length - 1]
+            const [ public_id ] = name.split('.')
+            cloudinary.uploader.destroy( public_id )
+        }
+
+        
         const emptyFields = (
             Object.entries(rest)
                 .reduce((emptyfields, [key, value]) => [...emptyfields, !value && key], [])
@@ -116,19 +126,21 @@ const editUser = async (req, res) => {
         
     
 
-
+        const { secure_url } = await cloudinary.uploader.upload(file.path, {
+            uploader: 'profileImages'
+        })
 
         user.phone = rest.phone;
         user.address = rest.address;
         user.address2 = address2;
-        user.img = img;
+        user.img = secure_url;
         user.country = rest.country;
         user.department = rest.department;
         user.city = rest.city
         user.zipCode = rest.zipCode;
         
 
-
+        
 
         await user.save()
 

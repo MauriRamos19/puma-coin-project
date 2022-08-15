@@ -20,7 +20,8 @@ const Header = ({ cookies }) => {
 
         const token = cookies.get('x_access_token')
 
-        // const { user } = await getUser(token);
+        
+        //const { user } = await getUser(token);
 
 
 

@@ -6,9 +6,9 @@ const { validateFields } = require("../middlewares/validate-fields");
 const { validateJWT } = require("../middlewares/validate-JWT");
 const router = Router();
 const cors = require('cors');
-const { uploadImageCloudinary } = require("../controllers/user");
+
 const multer = require('multer');
-const { v4: uuidv4 } = require('uuid');
+
 
 
 const storage = multer.diskStorage({});

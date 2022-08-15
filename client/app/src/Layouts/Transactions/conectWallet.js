@@ -96,7 +96,7 @@ export function ConectWallet (){
     const sing = sendTx.wallet.signTransaction(createToken)
     const sendTx2 = sendTx.sendAndConfirm(createToken,sing)
    
-    console.log(tx)
+   
     }
     
     useEffect(() => {

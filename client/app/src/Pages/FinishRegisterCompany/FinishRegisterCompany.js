@@ -34,6 +34,8 @@ const departmentsOptions = [
 const FinishRegisterCompany = (props) => {
 
     const navigate = useNavigate();
+    const [profileImage, setProfileImage] = useState({});
+
     let { userID } = useParams();
     const [user, setUser] = useState({
         name: '',
@@ -64,17 +66,29 @@ const FinishRegisterCompany = (props) => {
 
         evt.preventDefault();
 
-        const isUpdated = await finishRegister(userID, user);
+      
+        const formData = new FormData()
+        // 
+ 
+        Object.entries(user).forEach(atributte => {
+            formData.append(atributte[0].toString(),atributte[1])
+        })
+       
+     
+        
+        const isUpdated = await finishRegister(userID, formData);
+
         console.log("isUpdated", isUpdated);
 
         if (isUpdated === true) navigate("/")
     }
+    
 
     const goBack = () => {
         navigate(-1);
     }
 
-
+   
     return (
         <div className="FinishRegisterCompany">
             <form className="FinishRegisterCompany__form" onSubmit={onSubmitForm}>
@@ -88,7 +102,8 @@ const FinishRegisterCompany = (props) => {
                         alt="img"
                         imagePlaceHolder={imagePlaceHolder}
                         onChange={onChangeHandler}
-                        value={user.img}
+                        setProfileImage={setProfileImage}
+                        value={user.img = profileImage}
                     />
                 </div>
                 <div className="FinishRegisterCompany__inputs">

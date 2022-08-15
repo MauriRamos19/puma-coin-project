@@ -166,7 +166,7 @@ const register = async (req, res) => {
 
 const googleSignIn = async (req, res) => {
     const { id_google } = req.body;
-    
+
     try {
         
         const { email, name, picture } = await googleVerify(id_google);
@@ -186,14 +186,19 @@ const googleSignIn = async (req, res) => {
                 });
             }
 
-            // if(!userDB.verified){
-            //     return res.status(400).json({
-            //         ok: false,
-            //         err: {
-            //             message: 'El usuario no ha verificado su correo, por favor verifique su correo'
-            //         }
-            //     });
-            // }
+            if(!userDB.verified){
+
+                const user = new User({ email, name, img: picture , password: "google", google: true });
+
+                const link = `${process.env.BASE_URL}/finish-register/${user.id}`;
+
+                const hmtl = `<img src="https://res.cloudinary.com/dzv5rmys1/image/upload/v1656498767/Verifica_tu_email_kxrbb4.png">
+                    <p>Entra al siguiente enlace para completar tu registro:</p>
+                    <a href="${link}">${link}</a>`;
+
+                await sendEmail(user, "Bienvenido a Puma Coin", hmtl);
+
+            }
 
             const token = await generateJWT(userDB.id);
             return res.status(200).json({
@@ -286,9 +291,10 @@ const finishRegister = async (req=Request, res) => {
     const { id } = req.params;
     const body = req.body;
     const file = req.file;
+    
     // Segui trabajando en esta parte
 
-    // console.log(body)
+  
     try {
         const userDB = await User.findById(id);
        

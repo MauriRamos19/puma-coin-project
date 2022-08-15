@@ -1,6 +1,6 @@
 
 const axios = require("axios").default;
-const uri = 'https://pumacoin-backend.herokuapp.com/api';
+const uri = 'http://localhost:8899/api';
 
 
 
@@ -25,12 +25,12 @@ export const getUser = async (token) => {
 
 
 
-export const editUser = async (user,token) => {
+export const editUser = async (data,token) => {
         
         try {
             
 
-            await axios.put(uri + '/user', user ,{withCredentials:true, headers:{
+            await axios.put(uri + '/user', data ,{withCredentials:true, headers:{
                 'Authorization': `Bearer ${token}`
             }}).then(res => res.data);
 
