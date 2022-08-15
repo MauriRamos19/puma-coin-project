@@ -2,6 +2,7 @@ import { clusterApiUrl, Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, Transa
 import { useWallet } from '@solana/wallet-adapter-react';
 import { createAssociatedTokenAccountInstruction, createTransferInstruction, getAssociatedTokenAddress, getMint } from "@solana/spl-token";
 import base58 from "bs58";
+import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 
 const solanaInit = async () => {
 
@@ -72,7 +73,8 @@ const useAddPumaTokenToWallet = () => {
 const useBuyPumaCoin = () => {
 
     const wallet = useWallet();
-    const { sendTransaction } = wallet;
+    const { sendTransaction } = useWallet();
+    const {publicKey } = useWallet();
 
     const buyPumacoin = async (amount) => {
 
@@ -81,13 +83,9 @@ const useBuyPumaCoin = () => {
             || isNaN(amount)
         ) throw new Error("Cantidad solicitada invalida");
 
-        if (!wallet.connected) {
-            console.log('hola')
-            console.log(wallet.autoConnect.valueOf());
-            console.log(wallet);
-            
-        }
+        if (!publicKey) throw new WalletNotConnectedError();
 
+        
         console.log('adios')
 
         const { connection, mint, mintAuth } = await solanaInit();
