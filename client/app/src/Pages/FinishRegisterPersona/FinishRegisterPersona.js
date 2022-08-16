@@ -40,7 +40,7 @@ const departmentsOptions = [
 
 const FinishRegisterPersona = (props) => {
 
-
+     const [profileImage, setProfileImage] = useState({});
     let { userID } = useParams();
     const navigate = useNavigate()
     const [user, setUser] = useState({
@@ -73,11 +73,20 @@ const FinishRegisterPersona = (props) => {
 
         evt.preventDefault();
 
-        const isUpdated = await finishRegister(userID, user);
+        const formData = new FormData()
+        // 
+ 
+        Object.entries(user).forEach(atributte => {
+            formData.append(atributte[0].toString(),atributte[1])
+        })
+       
+     
+        
+        const isUpdated = await finishRegister(userID, formData);
         console.log("isUpdated", isUpdated);
 
-        if (isUpdated === true)
-            navigate("/")
+        if (isUpdated === true) navigate("/")
+
     }
 
     const goBack = () => {
@@ -98,7 +107,8 @@ const FinishRegisterPersona = (props) => {
                         alt="img"
                         imagePlaceHolder={imagePlaceHolder}
                         onChange={onChangeHandler}
-                        value={user.img}
+                        setProfileImage={setProfileImage}
+                        value={user.img = profileImage}
                     />
                 </div>
                 <div className="FinishRegisterPersona__inputs">

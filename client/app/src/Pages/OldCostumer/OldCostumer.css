@@ -14,3 +14,8 @@
 .rebote {
     animation: 3s ease-in-out 0.66s infinite normal none running rebote
 }
+
+.OldCostumer__tr{
+    padding-top: 20px;
+    padding-left: 30px;
+}

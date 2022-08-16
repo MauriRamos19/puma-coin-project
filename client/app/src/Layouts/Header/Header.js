@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logoImg from '../../Assets/images/pumaCoinLogo.png'
 import Button from '../../Components/Button/Button'
-import { useCookies, withCookies } from 'react-cookie';
+import { withCookies } from 'react-cookie';
 import './Header.css'
-import arrow from '../../Assets/arrow.svg'
-import user from '../../Assets/user.svg'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
@@ -14,13 +13,11 @@ const Header = ({ cookies }) => {
 
     const navigate = useNavigate();
 
-
     const isLoggedIn = () => {
 
 
-        const token = cookies.get('x_access_token')
+        const token = cookies.get('x_access_token');
 
-        
         if (token) return true
 
         return false
@@ -32,6 +29,8 @@ const Header = ({ cookies }) => {
 
         navigate("/");
     }
+
+
 
     return (
         <div className='Header'>
@@ -55,34 +54,26 @@ const Header = ({ cookies }) => {
                     <div className='Header__account'>
                         <WalletMultiButton />
                         <nav className="Header__Menu__navigation">
-                            <ul className = "Header__Menu__desplegable">                             
-                                <li className ="Header__menu__item menu__item--show">
-                                <a href="#" className="Header__menu__link">
-                                    <FontAwesomeIcon className="icon" icon="fa-solid fa-user" />
-                                    <FontAwesomeIcon className="Header__menu__arrow" icon="fa-solid fa-angle-down" />
-                                </a>
+                            <ul className="Header__Menu__desplegable">
+                                <li className="Header__menu__item menu__item--show">
+                                    <a href="#" className="Header__menu__link">
+                                        <FontAwesomeIcon className="icon" icon="fa-solid fa-user" />
+                                        <FontAwesomeIcon className="Header__menu__arrow" icon="fa-solid fa-angle-down" />
+                                    </a>
                                     <div className="Header__div__menu">
-                                    <ul className = "Header__menu__nesting">
-                                        <li className ="Header__menu__inside">
-                                            <Link to='/settings' className='Header__account__login'> Perfil </Link>
-                                        </li>
-                                        <hr/>
-                                        <li className = "Header__menu__inside">
-                                                <Button
-                                                className='Header__account__logout'
-                                                onClick={logout}>
-                                                Salir
-                                                </Button>
-                                        </li>
-                                    </ul>        
-                                    </div>                           
+                                        <ul className="Header__menu__nesting" style={{ 'zIndex' : 2}}>
+                                            <li className="Header__menu__inside">
+                                                <Link to='/settings' className='Header__account__login'> Mi Perfil </Link>
+                                            </li>
+                                            <hr />
+                                            <li className="Header__menu__inside">
+                                                <Link to='/' className='Header__account__login' onClick={logout} style={{color:'red'}}> Cerrar Sesión </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                
-                                
-
-                            </ul>                      
+                            </ul>
                         </nav>
-                        
                     </div>
                     :
                     <div className='Header__account'>

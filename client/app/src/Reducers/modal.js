@@ -2,7 +2,7 @@ import "./modal.css";
 import logoImg from '../Assets/images/pumaCoinLogo.png'
 
 const modalReducer = function (prev, action) {
-	
+
 	const dynamicCustomData = {
 		isActive: true,
 		...action.data,
@@ -39,6 +39,7 @@ const modalReducer = function (prev, action) {
 				description: "",
 				...dynamicCustomData,
 			};
+
 		case "deleteUser":
 			return {
 				isActive: true,
@@ -47,13 +48,22 @@ const modalReducer = function (prev, action) {
 				description: "",
 				...dynamicCustomData,
 			}
+
+		case "claimTokens":
+			return {
+				isActive: true,
+				type: "info",
+				title: "",
+				description: "",
+				...dynamicCustomData,
+			};
+
 		case "close":
 			return {
 				isActive: false,
 				type: "",
 				title: "",
 				description: "",
-				// headingIcon: "fa-circle-check",
 			};
 
 		default:

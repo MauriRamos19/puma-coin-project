@@ -1,0 +1,40 @@
+.AddPumaTokenBtn__wrapper {
+    width: 100%;
+    align-items: center;
+}
+
+.AddPumaTokenBtn__wrapper img {
+    width: auto;
+    height: 68px;
+}
+
+.AddPumaTokenBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 10px 10px;
+    background-color: rgba(222, 222, 222, 0.445);
+    color: rgb(41, 41, 41);
+}
+
+.AddPumaTokenBtn:hover {
+    background-color: rgba(190, 190, 190, 0.445);
+}
+
+.AddPumaTokenBtn span {
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.AddPumaTokenBtn.error {
+    background-color: #feecf0;
+    color: #f14668;
+}
+
+.AddPumaTokenBtn.success {
+    background-color: #effaf5;
+    color: #48c78e;
+}

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import InputContainer from "../../Components/InputContainer/InputContainer";
 import AuthBlueSquare from "../../Layouts/AuthBlueSquare/AuthBlueSquare";
 import "./Login.css";
-import { login as loginService, requestResetPassword } from "../../services/auth";
+import { googleSignIn, login as loginService, requestResetPassword } from "../../services/auth";
 import Message from "../../Components/Message/Message";
-import { withCookies, Cookies } from "react-cookie";
+import { withCookies } from "react-cookie";
 
 
 const Login = ({ withCookies, cookies, dispatchModal }) => {
@@ -19,10 +19,34 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		password: "",
 	});
 
+	
+	
+	
+	useEffect(() => {
+		/* global google */
+		google.accounts.id.initialize({
+			client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+			callback: async(response) => {
+				const { token } = await googleSignIn(response.credential)
+
+					cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
+
+					navigate("/");
+			}
+		});
+
+		google.accounts.id.renderButton(
+			document.getElementById("google-signin"),
+			{ theme: "outline", size: "large"}
+		);
+	}, [cookies,navigate])
+	
 	const onSubmitHandler = async (evt) => {
 		evt.preventDefault();
 
 		const { token, error } = await loginService(form);
+
+		
 
 		if (error || !token) {
 			setMessage({
@@ -32,13 +56,12 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 			});
 
 			return;
-		}
-
+		} 
 
 		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
 
 		navigate("/");
-	}; 
+	};
 
 	const onChangeHanlder = (evt) => {
 		setForm((prev) =>
@@ -131,7 +154,11 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 						/>
 					</InputContainer>
 					<Button type="submit">Ingresa</Button>
+					
+					
 				</form>
+				<hr style={{ 'width' : '50%'}}/>
+				<div id="google-signin"></div>
 				<Link className=" Change__password" to="" onClick={openModal}>
 					¿Has olvidado tu contraseña?
 				</Link>

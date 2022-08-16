@@ -1,7 +1,8 @@
 const axios = require("axios").default;
-const uri = "https://pumacoin-backend.herokuapp.com/api/auth";
-/* const uri = "http://localhost:3000/api";
- */
+// const uri = 'https://pumacoin-backend.herokuapp.com/api/auth';
+const uri = 'http://localhost:8899/api/auth';
+
+
 const register = async (user) => {
     try {
 
@@ -36,6 +37,25 @@ const login = async (user) => {
     }
 }
 
+const googleSignIn = async (id_google) => {
+    try {
+
+        const response = await axios.post(uri + '/googleSignIn', { id_google });
+        return response.data;
+
+
+    } catch (error) {
+
+        console.error(`Algo salio mal en la funcion googleSignIn, aqui esta el error: `, error);
+
+        const { response: { data: {  err } } } = error;
+
+        return {
+            error: err.message
+        };
+
+    }
+}
 
 const requestResetPassword = async (email) => {
 
@@ -61,8 +81,7 @@ const requestResetPassword = async (email) => {
 const finishRegister = async (id, data) => {
 
     try {
-
-        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`,data);
+        const { data: responseData } = await axios.put(uri + `/finish-register/${id}`, data);
         const { ok, user } = responseData;
 
         if (ok && user?.status)
@@ -81,5 +100,6 @@ export {
     register,
     login,
     requestResetPassword,
-    finishRegister
+    finishRegister,
+    googleSignIn
 };

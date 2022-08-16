@@ -43,7 +43,7 @@ const Home = (props, handleClick) => {
           <div className="Home__card_principal">
             <div className="Home__card_side">
               <div className="Home__image">
-                <img className="Home__img_rocket rebote" src={rocket} />
+                <img className="Home__img_rocket rebote" src={rocket} alt="rocket"/>
               </div>
             </div>
             <div className="Home__first_card">
@@ -176,7 +176,7 @@ const Home = (props, handleClick) => {
           <div className="Home__title_size_fourth_card">
             <h1>Desarrolladores</h1>
           </div>
-          <div class="grid-container">
+          <div className="grid-container">
             <div className="Home__mini_cards">
               <div className="Home__card_side_profile">
                 <div className="Home__card_side_profile">
@@ -291,7 +291,7 @@ const Home = (props, handleClick) => {
             </div>
           </div>
 
-          <div class="grid-second-container">
+          <div className="grid-second-container">
             <div className="Home__mini_cards">
               <div className="Home__card_side_profile">
                 <div className="Home__card_side_profile">

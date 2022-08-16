@@ -3,6 +3,8 @@ var cors = require('cors')
 const { dbConnection } = require('../database/config')
 
 var cookieParser = require('cookie-parser')
+
+const multer = require('multer')
 class Server {
 
     constructor() {
@@ -12,7 +14,8 @@ class Server {
             auth: "/api/auth",
             passwordReset: "/api/password-reset",
             user: "/api/user",
-            support: "/api/support"
+            support: "/api/support",
+            payments: "/api/payments"
         }
 
         this.dbConnect();
@@ -28,24 +31,16 @@ class Server {
 
     middlewares() {
         this.app.use(cors({
-            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com",
-        "https://pumacoin-backend.herokuapp.com"],
+            origin: ["http://localhost:3000", "https://pumacoin-finance.web.app", "https://api.devnet.solana.com", "https://pumacoin-backend.herokuapp.com"],
             credentials: true,
-            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-            allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            exposedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-            optionsSuccessStatus: 200
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
         }));
-        this.app.use(function (req, res) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
-            res.header(
-              "Access-Control-Allow-Headers",
-              "Origin, X-Requested-With, Content-Type, Accept"
-            );
-
-          });
-        this.app.use(express.json())
+        this.app.use(express.json({
+            verify: (req, res, buf) => {
+                req.rawBody = buf
+            }
+        }))
+        this.app.use(express.urlencoded({ extended: false }))
         this.app.use(cookieParser());
     }
 
@@ -54,10 +49,11 @@ class Server {
         this.app.use(this.paths.passwordReset, require('../routes/passwordReset'));
         this.app.use(this.paths.user, require('../routes/user'));
         this.app.use(this.paths.support, require('../routes/support'));
+        this.app.use(this.paths.payments, require('../routes/payments'));
     }
 
     listen() {
-        this.app.listen(this.port, () => {
+        this.app.listen(this.port || 3000, () => {
             console.log("Server up on port: ", this.port)
         });
     }
