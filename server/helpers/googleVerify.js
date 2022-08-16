@@ -9,9 +9,10 @@ const googleVerify = async( id_token = '') => {
       // Or, if multiple clients access the backend:
       //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
   });
-  const { name, email, photo } = ticket.getPayload();
+  const { name, email, picture } = ticket.getPayload();
   
-  return { name, email, photo };
+  
+  return { name, email, picture };
   // If request specified a G Suite domain:
   // const domain = payload['hd'];
 }

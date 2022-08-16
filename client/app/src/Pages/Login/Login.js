@@ -22,7 +22,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 
 	const handleCallbackResponse = async(response) => {
       const {token, error } = await googleSignIn(response.credential)
-		console.log(token)
+
 		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
 
 		navigate("/");
@@ -158,6 +158,7 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 					
 					
 				</form>
+				<hr style={{ 'width' : '50%'}}/>
 				<div id="google-signin"></div>
 				<Link className=" Change__password" to="" onClick={openModal}>
 					¿Has olvidado tu contraseña?

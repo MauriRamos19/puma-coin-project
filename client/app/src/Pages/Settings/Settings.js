@@ -18,6 +18,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
   const navigate = useNavigate();
   
   const [token,setToken] = useState(cookies.get('x_access_token'));
+
   const [user, setUser] = useState({
     name: "",
     RTN:"",
@@ -73,6 +74,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
 
   const onClickHandler = async (evt) => {
     evt.preventDefault();
+    evt.target.disabled = true;
 
     const formData = new FormData()
         // 
@@ -368,7 +370,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
         </div>
         <div className="Settings__submit-button">
           <WrapperDirection className="userAccountOptions__wrapper">
-            <Button type="submit" onClick={onClickHandler}>Actualizar</Button>
+            <Button type="submit" onClick={onClickHandler} disabled={disabled}>Actualizar</Button>
             <Button className="deleteAccountBtn" type="button" onClick={onDeleteUserHandler}>Borrar Cuenta</Button>         
           </WrapperDirection>          
         </div>
