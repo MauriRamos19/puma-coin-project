@@ -43,7 +43,7 @@ const Home = (props, handleClick) => {
           <div className="Home__card_principal">
             <div className="Home__card_side">
               <div className="Home__image">
-                <img className="Home__img_rocket rebote" src={rocket} />
+                <img className="Home__img_rocket rebote" src={rocket} alt="rocket"/>
               </div>
             </div>
             <div className="Home__first_card">

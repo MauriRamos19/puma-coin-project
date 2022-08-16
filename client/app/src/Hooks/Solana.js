@@ -81,15 +81,6 @@ const useBuyPumaCoin = () => {
             || isNaN(amount)
         ) throw new Error("Cantidad solicitada invalida");
 
-        if (!wallet.connected) {
-            console.log('hola')
-            console.log(wallet.autoConnect.valueOf());
-            console.log(wallet);
-            
-        }
-
-        console.log('adios')
-
         const { connection, mint, mintAuth } = await solanaInit();
 
         const associatedAccount = await getAssociatedTokenAddress(mint.address, wallet.publicKey)
@@ -122,7 +113,25 @@ const useBuyPumaCoin = () => {
 
 }
 
+const useGetTransactionHistory = () => {
+
+    const wallet = useWallet();
+
+    const getTransactionHistory = async () => {
+
+        const { connection } = await solanaInit();
+        
+        const signatureTransactiones= await connection.getSignaturesForAddress(wallet.publicKey);
+
+        return signatureTransactiones ?? [];
+    }
+
+    return getTransactionHistory;
+
+}
+
 export {
     useAddPumaTokenToWallet,
-    useBuyPumaCoin
+    useBuyPumaCoin,
+    useGetTransactionHistory
 }

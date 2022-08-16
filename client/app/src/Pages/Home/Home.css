@@ -444,7 +444,7 @@
     left: -177%;
 }
 
-.rebote img {
+.rebote {
     animation: 3s ease-in-out 0.66s infinite normal none running rebote
 }
 
