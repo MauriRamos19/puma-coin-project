@@ -17,7 +17,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
   
   const navigate = useNavigate();
   
-  const [token,setToken] = useState(cookies.get('x_access_token'));
+  const token =cookies.get('x_access_token');
 
   const [user, setUser] = useState({
     name: "",

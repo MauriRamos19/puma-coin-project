@@ -48,7 +48,7 @@ const googleSignIn = async (id_google) => {
 
         console.error(`Algo salio mal en la funcion googleSignIn, aqui esta el error: `, error);
 
-        const { response: { data: { ok, err } } } = error;
+        const { response: { data: {  err } } } = error;
 
         return {
             error: err.message

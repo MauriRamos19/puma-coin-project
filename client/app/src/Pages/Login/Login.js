@@ -6,8 +6,7 @@ import AuthBlueSquare from "../../Layouts/AuthBlueSquare/AuthBlueSquare";
 import "./Login.css";
 import { googleSignIn, login as loginService, requestResetPassword } from "../../services/auth";
 import Message from "../../Components/Message/Message";
-import { withCookies, Cookies } from "react-cookie";
-import { getUser } from "../../services/user";
+import { withCookies } from "react-cookie";
 
 
 const Login = ({ withCookies, cookies, dispatchModal }) => {
@@ -20,27 +19,27 @@ const Login = ({ withCookies, cookies, dispatchModal }) => {
 		password: "",
 	});
 
-	const handleCallbackResponse = async(response) => {
-      const {token, error } = await googleSignIn(response.credential)
-
-		cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
-
-		navigate("/");
-	}
+	
 	
 	
 	useEffect(() => {
 		/* global google */
 		google.accounts.id.initialize({
 			client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-			callback: handleCallbackResponse
+			callback: async(response) => {
+				const { token } = await googleSignIn(response.credential)
+
+					cookies.set("x_access_token", token, {maxAge: 60*60, secure: true, sameSite: 'strict' });
+
+					navigate("/");
+			}
 		});
 
 		google.accounts.id.renderButton(
 			document.getElementById("google-signin"),
 			{ theme: "outline", size: "large"}
 		);
-	}, [])
+	}, [cookies,navigate])
 	
 	const onSubmitHandler = async (evt) => {
 		evt.preventDefault();

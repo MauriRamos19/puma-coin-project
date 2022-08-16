@@ -82,16 +82,16 @@ const Support = (props) => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Nombre"
+                    placeholder="nombre"
                     onChange={onChangeHandler}
                     value={form.name}
                   />
                 </InputWithLabel>
-                <InputWithLabel label="Correo electronico">
+                <InputWithLabel label="correo electronico">
                   <input
                     type="text"
                     name="email"
-                    placeholder="correo electronico"
+                    placeholder="correo electrónico"
                     onChange={onChangeHandler}
                     value={form.email}
                   />
