@@ -105,15 +105,15 @@
 
 .Support__image {
     display: flex;
-    position: fixed;
     align-items: center;
 }
 
-.Support__img_Puma {
-    position: fixed;
+.Support__img_coin {
+    position: absolute;
     display: flex;
-    width: auto;
-    height: 300px;
-    top: 20%;
-    left: 50%;
+    width: 138%;
+    top: 9%;
+    left: -166%;
+    opacity: 0.3;
+    max-width: 1000%;
 }
