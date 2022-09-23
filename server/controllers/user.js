@@ -70,7 +70,7 @@ const editUser = async (req, res) => {
             const nameArr = userDB.img.split('/');
             const name    = nameArr[ nameArr.length - 1]
             const [ public_id ] = name.split('.')
-            cloudinary.uploader.destroy( public_id )
+            await cloudinary.uploader.destroy( `profileImages/${public_id}` )
         }
 
         
@@ -127,7 +127,8 @@ const editUser = async (req, res) => {
     
 
         const { secure_url } = await cloudinary.uploader.upload(file.path, {
-            uploader: 'profileImages'
+            upload_preset: 'ml_default',
+            folder: 'profileImages'
         })
 
         user.phone = rest.phone;
@@ -174,6 +175,7 @@ const deleteAccount = async(req, res=response) => {
                 }
             });
         }
+
 
         await User.findByIdAndUpdate(user._id, { status: false }, { new: true });
 
