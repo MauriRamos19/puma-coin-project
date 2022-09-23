@@ -111,7 +111,7 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
               fontSize: "3rem"
             }} />
         ),
-        description: "Cuidado!, esta accion puede llegar hacer irreversible, ¿estas seguro que quisieras eliminar tu cuenta?",
+        description: "Cuidado!, esta accion puede llegar a ser irreversible, ¿estas seguro que quisieras eliminar tu cuenta?",
         content:(
 
           <div style={{
@@ -158,8 +158,6 @@ const Settings = ({withCookies, cookies, dispatchModal}) => {
         }
     }
  
-  //pasar este archivo a imagen para renderizarlo
-
   return (
   
     <div className="Settings__pag">
