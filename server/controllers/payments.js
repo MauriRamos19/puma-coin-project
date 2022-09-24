@@ -16,8 +16,8 @@ const requestPayment = async (req, res) => {
                 },
             ],
             mode: "payment",
-            success_url: "http://localhost:3000/trade/{CHECKOUT_SESSION_ID}",
-            cancel_url: "http://localhost:3000/trade/{CHECKOUT_SESSION_ID}",
+            success_url: "http://pumacoin-finance.web.app/trade/{CHECKOUT_SESSION_ID}",
+            cancel_url: "http://pumacoin-finance.web.app/trade/{CHECKOUT_SESSION_ID}",
         });
 
         res.status(200).json({

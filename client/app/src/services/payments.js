@@ -1,6 +1,6 @@
 const axios = require("axios").default;
-// const uri = "https://pumacoin-backend.herokuapp.com/api/payments";
-const uri = "http://localhost:8899/api/payments";
+const uri = "https://pumacoin-backend.herokuapp.com/api/payments";
+//const uri = "http://localhost:8899/api/payments";
 
 export const requestPayment = async (token, pumaCoinAmount) => {
 
