@@ -47,6 +47,7 @@ const getUser = async(req,res=response) => {
 
 const editUser = async (req, res) => {
 
+       
         try {
             const user = req.user;
             const file = req.file;
@@ -61,9 +62,16 @@ const editUser = async (req, res) => {
                 }
             });
         }
-        
-        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName, google, userTransactions,...rest } = req.body;
 
+
+       
+        
+        const { address2, img, wallet, currentPassword, newPassword, newPassword2, name, lastName, google, userTransactions, ...rest } = req.body;
+
+        if(user.userType === 'natural') {
+            delete rest.RTN
+        }
+        
         const userDB = await User.findById(user._id);
 
         if(userDB.img) {
@@ -79,6 +87,7 @@ const editUser = async (req, res) => {
                 .reduce((emptyfields, [key, value]) => [...emptyfields, !value && key], [])
                 .filter(field => typeof field === 'string')
         );
+   
 
         if (emptyFields.length > 0) {
             res.status(400).json({
@@ -123,24 +132,27 @@ const editUser = async (req, res) => {
                     user.password = bcrypt.hashSync(newPassword, salt);;
             }
         }
+
+        if( file ) {
+            const { secure_url } = await cloudinary.uploader.upload(file.path, {
+                upload_preset: 'ml_default',
+                folder: 'profileImages'
+            })
+
+            user.img = secure_url;
+        }
         
     
-
-        const { secure_url } = await cloudinary.uploader.upload(file.path, {
-            upload_preset: 'ml_default',
-            folder: 'profileImages'
-        })
-
+        
         user.phone = rest.phone;
         user.address = rest.address;
         user.address2 = address2;
-        user.img = secure_url;
+        
         user.country = rest.country;
         user.department = rest.department;
         user.city = rest.city
         user.zipCode = rest.zipCode;
         
-
         
 
         await user.save()

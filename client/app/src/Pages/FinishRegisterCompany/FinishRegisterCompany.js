@@ -39,7 +39,7 @@ const FinishRegisterCompany = (props) => {
     let { userID } = useParams();
     const [user, setUser] = useState({
         name: '',
-        img: '',
+        img: 'https://res.cloudinary.com/dzv5rmys1/image/upload/v1663977621/userImagePlaceHolder_dj1cqf.png',
         RTN: '',
         phone: '',
         address: '',
@@ -88,6 +88,30 @@ const FinishRegisterCompany = (props) => {
         navigate(-1);
     }
 
+    const changePhotoHandler = (src) => {
+        setProfileImage(src)
+    }
+
+    const onChangeProfilePhotoHandler = (evt) => {
+
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(evt.target.files[0])
+        setProfileImage(evt.target.files[0])
+        setUser((prev) =>
+            Object.assign(
+                {},
+                {
+                    ...prev,
+                    img: evt.target.files[0]
+                }
+            )
+        );
+        fileReader.onloadend = () => {
+            changePhotoHandler(fileReader.result)
+
+        }
+    }
    
     return (
         <div className="FinishRegisterCompany">
@@ -97,14 +121,14 @@ const FinishRegisterCompany = (props) => {
                     <p>Necesitamos un poco más de información sobre su empresa, para proteger su cuenta.</p>
                 </div>
                 <div className="FinishRegisterCompany__photo">
-                    <InputFileWithPreview
-                        name="img"
-                        alt="img"
-                        imagePlaceHolder={imagePlaceHolder}
-                        onChange={onChangeHandler}
-                        setProfileImage={setProfileImage}
-                        value={user.img = profileImage}
-                    />
+                    <label className={`InputFileWithPreview`}>
+                        <img src={Object.keys(profileImage).length === 0 ? "https://res.cloudinary.com/dzv5rmys1/image/upload/v1663977621/userImagePlaceHolder_dj1cqf.png" : profileImage} alt={'img'} />
+                        <input
+                            type="file"
+                            name={'img'}
+                            onChange={onChangeProfilePhotoHandler}
+                        />
+                    </label>
                 </div>
                 <div className="FinishRegisterCompany__inputs">
                     <WrapperDirection direction="vertical">
