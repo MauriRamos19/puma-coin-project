@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { withCookies } from 'react-cookie'
 import { useParams } from 'react-router-dom'
-import { useBuyPumaCoin } from '../../hooks/Solana'
+import { useBuyPumaCoin } from '../../Hooks/Solana'
 import { requestPayment, requestPaymentInfo } from '../../services/payments'
 import Button from '../Button/Button'
 
 import './BuyPumaButton.css'
 
 
-const BuyPumaButton = ({ children, amountPuma, cookies }) => {
+const BuyPumaButton = ({ children, amountPuma, cookies, transactionID }) => {
 
-    const buyPumaCoin = useBuyPumaCoin();
     const [token, setToken] = useState(cookies.get("x_access_token"));
-    const { id } = useParams();
 
     useEffect(() => {
-        requestPaymentInfo(token, id)
-            .then(({ payment, pumaCoinAmount }) => payment && buyPumaCoin(pumaCoinAmount))
+
+        if (!transactionID) return;
+
+        requestPaymentInfo(token, transactionID)
             .then(result => { console.log(result); })
             .catch(error => { console.error("something went wrong: ", error); })
-    }, [id])
+
+    }, [transactionID])
 
 
     const onClickHandler = (evt) => {

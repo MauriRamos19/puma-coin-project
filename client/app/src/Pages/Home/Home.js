@@ -3,7 +3,12 @@ import Button from "../../Components/Button/Button";
 import ButtonWhite from "../../Components/ButtonWhite/ButtonWhite";
 import InputWithLabel from "../../Components/InputWithLabel/InputWithLabel";
 import WrapperDirection from "../../Components/WrapperDirection/WrapperDirection";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
+
 import moneda from "../../Assets/images/moneda.png";
+import rocket from "../../Assets/images/nave.png";
+import bitcoin from "../../Assets/images/bitcoin.png";
 import logoIs from "../../Assets/images/logoIs.png";
 import tarjeta from "../../Assets/images/tarjetaUnah.png";
 import model2 from "../../Assets/images/model (2).png";
@@ -14,12 +19,6 @@ import henry from "../../Assets/images/henry.png";
 import bryan from "../../Assets/images/bryan.png";
 import mauri from "../../Assets/images/mauri.png";
 import denzell from "../../Assets/images/denzell.png";
-
-import rocket from "../../Assets/images/blue-rocket.png";
-import bitcoin from "../../Assets/images/bitcoin.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { useEffect } from "react";
 
 import "./Home.css";
 
@@ -44,7 +43,7 @@ const Home = (props, handleClick) => {
           <div className="Home__card_principal">
             <div className="Home__card_side">
               <div className="Home__image">
-                <img className="Home__img_rocket" src={rocket} />
+                <img className="Home__img_rocket rebote" src={rocket} alt="rocket"/>
               </div>
             </div>
             <div className="Home__first_card">
@@ -372,38 +371,10 @@ const Home = (props, handleClick) => {
 
         <div className="Home__card_side">
           <div className="Home__img">
-            <img className="Home_img_card" src={moneda} alt="coin" />
+            <img className="Home_img_card" src={coins} alt="coin" />
           </div>
         </div>
       </div>
-
-      {/* <div class="grid-container">
-                  <div className="Home__card_side">
-                    <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
-                    </div>
-                  </div>
-                <div className="Home__card_side">
-                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
-                    </div>
-                </div>
-              <div className="Home__card_side">
-                <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
-                  </div>
-              </div>
-            </div>
-
-            <div class="grid-second-container">
-              <div className="Home__card_side">
-                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
-                    </div>
-                </div>
-
-                <div className="Home__card_side">
-                  <div class="badge-base LI-profile-badge" data-locale="es_ES" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="-bryan-martinez" data-version="v1">
-                    </div>
-                </div>
-
-            </div> */}
     </div>
   );
 };

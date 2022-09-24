@@ -27,10 +27,20 @@ const login = async (req = request, res = response) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Correo/contraseña incorrectas'
+                    message: 'Ocurrio un problema al iniciar sesion, compruebe su informacion o registre su cuenta'
                 }
             });
         }
+        
+        if(userDB.google === true){
+            return res.status(400).json({
+                ok: false,
+                err: {
+                    message: 'Ocurrio un problema al iniciar sesion, compruebe su informacion. O registre su cuenta'
+                }
+            });
+        }
+
 
         const validPassword = bcrypt.compareSync(password, userDB.password);
 
@@ -172,7 +182,6 @@ const googleSignIn = async (req, res) => {
         const { email, name, picture } = await googleVerify(id_google);
 
 
-
         const userDB = await User.findOne({ email });
 
         if (userDB) {
@@ -208,6 +217,7 @@ const googleSignIn = async (req, res) => {
             });
         }
 
+        
         
 
         const user = new User({ email, name, img: picture , password: "google", google: true });
@@ -308,6 +318,7 @@ const finishRegister = async (req=Request, res) => {
             });
         }
 
+
         const { address2, wallet, ...rest } = body;
 
         
@@ -335,7 +346,8 @@ const finishRegister = async (req=Request, res) => {
         
         
         const { secure_url } = await cloudinary.uploader.upload(file.path, {
-            uploader: 'profileImages'
+            upload_preset: 'ml_default',
+            folder: 'profileImages'
         })
 
 

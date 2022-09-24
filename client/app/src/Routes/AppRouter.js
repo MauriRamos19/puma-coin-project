@@ -29,9 +29,9 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route path="/" element={<Home />} />
-                    <Route path="/trade" element={<Trade />} >
-                        <Route path=":id" element={<Trade />} />
-                        <Route index element={<Trade />} />
+                    <Route path="/trade">
+                        <Route path=":transactionID" element={<Trade dispatchModal={dispatchModal} />} />
+                        <Route index element={<Trade dispatchModal={dispatchModal} />} />
                     </Route>
                     <Route path="/support" element={<Support />} />
                     <Route path="/settings" element={<Settings dispatchModal={dispatchModal} />} />

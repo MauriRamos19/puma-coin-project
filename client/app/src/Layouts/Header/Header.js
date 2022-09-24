@@ -16,12 +16,7 @@ const Header = ({ cookies }) => {
     const isLoggedIn = () => {
 
 
-        const token = cookies.get('x_access_token')
-
-        
-        //const { user } = await getUser(token);
-
-
+        const token = cookies.get('x_access_token');
 
         if (token) return true
 
@@ -66,17 +61,13 @@ const Header = ({ cookies }) => {
                                         <FontAwesomeIcon className="Header__menu__arrow" icon="fa-solid fa-angle-down" />
                                     </a>
                                     <div className="Header__div__menu">
-                                        <ul className="Header__menu__nesting">
+                                        <ul className="Header__menu__nesting" style={{ 'zIndex' : 2}}>
                                             <li className="Header__menu__inside">
                                                 <Link to='/settings' className='Header__account__login'> Mi Perfil </Link>
                                             </li>
                                             <hr />
                                             <li className="Header__menu__inside">
-                                                <Button
-                                                    className='Header__account__logout'
-                                                    onClick={logout}>
-                                                    Salir
-                                                </Button>
+                                                <Link to='/' className='Header__account__login' onClick={logout} style={{color:'red'}}> Cerrar Sesión </Link>
                                             </li>
                                         </ul>
                                     </div>
