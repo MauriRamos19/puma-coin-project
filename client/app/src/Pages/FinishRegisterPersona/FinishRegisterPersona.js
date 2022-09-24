@@ -46,7 +46,7 @@ const FinishRegisterPersona = (props) => {
     const [user, setUser] = useState({
         name: '',
         lastName: '',
-        img: '',
+        img: 'https://res.cloudinary.com/dzv5rmys1/image/upload/v1663977621/userImagePlaceHolder_dj1cqf.png',
         gender: sexOptions[0].value,
         phone: '',
         address: '',
@@ -93,7 +93,30 @@ const FinishRegisterPersona = (props) => {
         navigate(-1);
     }
 
+    const changePhotoHandler = (src) => {
+        setProfileImage(src)
+    }
 
+    const onChangeProfilePhotoHandler = (evt) => {
+
+        const fileReader = new FileReader();
+
+        fileReader.readAsDataURL(evt.target.files[0])
+        setProfileImage(evt.target.files[0])
+        setUser((prev) =>
+            Object.assign(
+                {},
+                {
+                    ...prev,
+                    img: evt.target.files[0]
+                }
+            )
+        );
+        fileReader.onloadend = () => {
+            changePhotoHandler(fileReader.result)
+
+        }
+    }
     return (
         <div className="FinishRegisterPersona">
             <form className="FinishRegisterPersona__form" onSubmit={onSubmitForm}>
@@ -102,14 +125,14 @@ const FinishRegisterPersona = (props) => {
                     <p>Necesitamos un poco más de información sobre usted solo para proteger su cuenta.</p>
                 </div>
                 <div className="FinishRegisterPersona__photo">
-                    <InputFileWithPreview
-                        name="img"
-                        alt="img"
-                        imagePlaceHolder={imagePlaceHolder}
-                        onChange={onChangeHandler}
-                        setProfileImage={setProfileImage}
-                        value={user.img = profileImage}
-                    />
+                    <label className={`InputFileWithPreview`}>
+                        <img src={Object.keys(profileImage).length === 0 ? "https://res.cloudinary.com/dzv5rmys1/image/upload/v1663977621/userImagePlaceHolder_dj1cqf.png" : profileImage} alt={'img'} />
+                        <input
+                            type="file"
+                            name={'img'}
+                            onChange={onChangeProfilePhotoHandler}
+                        />
+                    </label>
                 </div>
                 <div className="FinishRegisterPersona__inputs">
                     <WrapperDirection direction="vertical">

@@ -345,16 +345,16 @@ const finishRegister = async (req=Request, res) => {
 
         
         
-        const { secure_url } = await cloudinary.uploader.upload(file.path, {
-            upload_preset: 'ml_default',
-            folder: 'profileImages'
-        })
+        const user = await User.findByIdAndUpdate(id, { ...body, verified: true }, { new: true });
 
-
-        const user = await User.findByIdAndUpdate(id, { ...body, verified: true, img: secure_url}, { new: true });
+        if( file ) {
+            const { secure_url } = await cloudinary.uploader.upload(file.path, {
+                upload_preset: 'ml_default',
+                folder: 'profileImages'
+            })
+            user.img = secure_url
+        }
         
-        
-
         await user.save()
 
         return res.status(200).json({
