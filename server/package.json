@@ -24,7 +24,7 @@
     "firebase-admin": "^11.0.0",
     "firebase-functions": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.8",
+    "mongoose": "^6.11.3",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.7.5",
     "uuid": "^8.3.2",
